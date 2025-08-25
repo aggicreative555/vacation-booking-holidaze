@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
+
+@import '@glidejs/glide/dist/css/glide.core.min.css';
+@import '@glidejs/glide/dist/css/glide.theme.min.css';
+
+@import 'tailwindcss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* remove browser icon appearence */
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+/* frame cutout */
+
+.tv {
+  position: relative;
+  margin: 20px 0;
+  border-radius: 50% / 10%;
+}
+
+.tv:before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  right: -5%;
+  left: -5%;
+  background: inherit;
+  border-radius: 5% / 50%;
+}
+
+@theme {
+  --font-garamond: 'EB Garamond', 'serif';
+  --font-caslon: 'Libre Caslon Text', 'serif';
+  --font-button: 'Fahkwang', 'sans-serif';
+  --font-ballet: 'Ballet', 'serif';
+}
+
+@layer components {
+  .btn-l {
+    @apply flex items-center justify-center px-4 py-2 my-1 border-2 border-black outline-black outline-1 outline-offset-2 font-button uppercase text-xs font-light transition-all duration-300 ease-in-out hover:font-medium hover:border-4 hover:tracking-wider cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply bg-green-950 text-white hover:border-4 hover:font-medium cursor-pointer;
+  }
+
+  .btn-s {
+    @apply flex items-center justify-center px-4 py-2 my-4 rounded-full shadow-md font-button uppercase text-xs font-light transition-all duration-300 ease-in-out hover:font-medium hover:shadow-lg cursor-pointer;
+  }
+
+  .input-base {
+    @apply border-gray-300 group-hover:border-black py-2 px-2;
+  }
+
+  .label-base {
+    @apply flex flex-col p-2 w-full font-garamond uppercase text-black text-sm focus:tracking-wider gap-2;
+  }
+
+  .error-message {
+    @apply py-4 mb-2 text-red-800 italic font-caslon normal-case transition-all duration-300 ease-in-out;
+  }
+}
