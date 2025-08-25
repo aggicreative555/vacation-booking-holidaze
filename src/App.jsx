@@ -1,20 +1,8 @@
-import React from 'react';
 import { Routes, Route } from 'react-router';
 import Layout from './layout/Layout';
-import { Slide, ToastContainer } from 'react-toastify';
+import { BookingId, Bookings, Contact, Home, Login, MyBooking, NotFound, Profile, Register } from './pages';
+// import { Slide, ToastContainer } from 'react-toastify';
 // import ScrollToTop from './hooks/useScrollToTop';
-import {
-  Home,
-  Contact,
-  NotFound,
-  Bookings,
-  BookingId,
-  MyBooking,
-  Register,
-  Login,
-  Profile,
-  
-} from './pages/index';
 
 function App() {
   return (
