@@ -1,6 +1,16 @@
 import { Routes, Route } from 'react-router';
 import Layout from './layout/Layout';
-import { BookingId, Bookings, Contact, Home, Login, MyBooking, NotFound, Profile, Register } from './pages';
+import {
+  BookingId,
+  Bookings,
+  Contact,
+  Home,
+  Login,
+  MyBooking,
+  NotFound,
+  Profile,
+  Register,
+} from './pages';
 // import { Slide, ToastContainer } from 'react-toastify';
 // import ScrollToTop from './hooks/useScrollToTop';
 
