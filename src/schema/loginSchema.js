@@ -1,15 +1,7 @@
 import * as yup from 'yup';
 
-export const registerSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required('Please enter your full name')
-      .min(3, 'Your full name must include at least 3 characters')
-      .matches(
-      /^[A-Za-z_]+$/,
-      'Name can only contain uppercase or lowercase letters and underscores'
-    ),
-    emailNoroff: yup
+export const loginSchema = yup.object().shape({
+    email: yup
     .string()
     .required('Email is required.')
     .matches(/@stud\.noroff\.no$/, 'Must be a valid stud.noroff.no email'),
@@ -21,8 +13,5 @@ export const registerSchema = yup.object().shape({
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,30}$/,
       'Password must contain both letters and numbers'),
-    venueManager: yup
-    .boolean()
-    .typeError('Please select an account type')
 
 })
