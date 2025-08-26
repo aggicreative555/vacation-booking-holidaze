@@ -32,7 +32,10 @@ export const apiClient = async (endpoint, options = {}, requireAuth = false) =>{
     const data = await response.json();
 
     if (!response.ok) {
-        throw new Error(data.errors?.[0]?.message || 'API request failed. Try again');
+        const error = new Error('API request failed. Try again');
+        error.status = response.status;
+        error.data = data;
+        throw error;
     }
 
     return data;
