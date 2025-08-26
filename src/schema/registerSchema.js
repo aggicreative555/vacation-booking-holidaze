@@ -9,7 +9,7 @@ export const registerSchema = yup.object().shape({
       /^[A-Za-z_]+$/,
       'Name can only contain uppercase or lowercase letters and underscores'
     ),
-    emailNoroff: yup
+    email: yup
     .string()
     .required('Email is required.')
     .matches(/@stud\.noroff\.no$/, 'Must be a valid stud.noroff.no email'),
