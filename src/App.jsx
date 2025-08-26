@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router';
 import Layout from './layout/Layout';
+import { ToastContainer, Slide } from 'react-toastify';
 import {
   BookingId,
   Bookings,
@@ -11,13 +12,12 @@ import {
   Profile,
   Register,
 } from './pages';
-// import { Slide, ToastContainer } from 'react-toastify';
-// import ScrollToTop from './hooks/useScrollToTop';
+
+
 
 function App() {
   return (
     <>
-      {/* <ScrollToTop />
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -29,7 +29,7 @@ function App() {
         closeButton={true}
         transition={Slide}
         className="transition-all duration-150 ease-in-out"
-      /> */}
+      />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
