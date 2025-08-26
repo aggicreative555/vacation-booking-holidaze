@@ -10,6 +10,15 @@ export const showToast = {
         progressClassName: 'bg-green-800 rounded',
     }),
 
+    logoutSuccess: (username) =>
+    toast.success(`${username} is logged out.` || 'You are logged out.', {
+        className:
+            'p-6 shadow-md bg-green-100 border border-green-800 text-green-800 font-garamond italic normal-case text-base rounded-none',
+        hideProgressBar: false,
+        autoClose: 1000,
+        progressClassName: 'bg-green-800 rounded',
+    }),
+
     registerSuccess: (username, accountType) =>
     toast.success(`${username} has been usccessfully registered as a ${accountType} `, {
        className:
