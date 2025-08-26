@@ -1,5 +1,11 @@
+import RegisterForm from "../forms/RegisterForm";
+
 const Register = () => {
-  return <div>Register</div>;
+  return (
+    <main className="container mx-auto px-8 flex flex-col items-center">
+      <RegisterForm />
+    </main>
+  );
 };
 
 export default Register;
