@@ -21,11 +21,9 @@ function RegisterForm() {
     });
 
     const onSubmit = async (data) => {
-        console.log('submitting');
         const toastId = showToast.registering();
         const username = data.name;
         const accountType = data.venueManager ? 'Venue Manager' : 'Customer';
-        console.log(data)
         try {
           await apiClient('/auth/register', {
             method: 'POST',
