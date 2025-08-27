@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { showToast } from '../../utils/toast';
 import { apiClient } from '../../utils/apiClient';
 import { loginSchema } from '../../schema/loginSchema';
+import { useAuthStore } from '../../stores/useAuthStore';
 
 
 function LoginForm() {
@@ -35,8 +36,8 @@ function LoginForm() {
           toast.dismiss(toastId);
 
           const username = result.data?.name || 'User';
-          sessionStorage.setItem('user', JSON.stringify(result.data));
-          
+          const login = useAuthStore((state) => state.login);
+          login(result.data);
           await new Promise((res) => setTimeout(res, 500));
           showToast.loginSuccess(username);
     

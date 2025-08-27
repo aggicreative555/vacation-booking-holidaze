@@ -1,20 +1,23 @@
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../utils/toast";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 const LogoutButton = () => {
     const navigate = useNavigate();
+    const {user, logout } = useAuthStore();
 
     const onLogout =  () => {
         try {
-            const user = JSON.parse(sessionStorage.getItem('user'));
             const username = user?.name || 'User';
             showToast.logoutSuccess(username);
-            sessionStorage.clear();
+
+            logout();
+
             setTimeout(() => {
                 navigate('/');
             }, 2000);
-            toast.dismiss(logoutSuccess);
+            toast.dismiss();
 
         } catch (error) {
             console.error('Error parsing user from session storage', error);
