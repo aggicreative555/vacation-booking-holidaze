@@ -46,7 +46,7 @@ function VenueList({ venues: propVenue, itemsPerPage = 6 }) {
               className="h-[600px] w-60 md:w-80 shadow-md flex flex-col justify-between transition-all ease-in-out duration-300 hover:shadow-xl group"
               key={venue.id}
             >
-              <Link to={`/venues/${venue.id}`} className="cursor-pointer">
+              <Link to={`/booking/${venue.id}`} className="cursor-pointer">
                 <div className="h-64 w-fit overflow-clip">
                   <img
                     className="h-64 w-100"

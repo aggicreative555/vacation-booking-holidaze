@@ -1,0 +1,92 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import StarRating from "../rating/StarRating";
+import { useVenueStore } from "../../stores/useVenueStore";
+import { NotFound } from "../../pages";
+
+function SingleVenue() {
+  const { id } = useParams();
+  const { singleVenue, isLoading, isError, fetchVenueById } = useVenueStore();
+  
+  useEffect(() => {
+      if (!singleVenue || singleVenue.id !== id) {
+          fetchVenueById(id);
+        }
+        console.log(singleVenue)
+    }, [id, singleVenue, fetchVenueById]);
+
+  if (isLoading) return <p>Loading Content...</p>;
+  if (isError) return <p>Error loading venues, please refresh the page...</p>;
+  if (!singleVenue) return <NotFound/>;
+
+
+  return (
+    <>
+      <div className="flex flex-col transition-all duration-500 ease-in-out">
+        <div className="w-full h-auto group overflow-hidden max-h-80 flex md:max-h-96 justify-center items-center ">
+          <img
+            src={singleVenue.media?.[0]?.url}
+            alt={singleVenue.media?.[0]?.alt}
+            className="transition-transform duration-300 ease-in-out object-cover aspect-auto group-hover:scale-110 w-full"
+          />
+        </div>
+        <div className="flex flex-col md:flex-row gap-10 container mx-auto px-8 lg:px-8 py-4 justify-center items-center relative">
+            <div className="flex flex-col gap-1 h-ful items-center justify-center lg:justify-between lg:gap-4">
+                <h1 className="text-3xl md:text-5xl text-center font-garamond uppercase tracking-tighter text-red-800 transition-all duration-300 ease-in-out">
+                {singleVenue.name}
+                </h1>
+                <p className="text-center text-xs font-caslon text-black mt-4 lg:px-20 ">
+                {singleVenue.description}
+                </p>
+                <p className="text-center text-xs font-caslon text-black mt-4 lg:px-20 ">
+                {singleVenue.created}
+                </p>
+                <p className="text-center text-xs font-caslon text-black mt-4 lg:px-20 ">
+                {singleVenue.updated}
+                </p>
+                <div className="flex flex-col py-5">
+                    <p className="text-lg font-button text-black">
+                        {singleVenue.price}
+                        <span className="text-xs">NOK</span>
+                    </p>
+                    <p className="text-lg font-button text-black">
+                        {singleVenue.maxGuests}
+                        <span className="text-xs">Guests</span>
+                    </p>
+                    <p className="text-lg font-button text-black">
+                        {singleVenue._count.bookings}
+                        <span className="text-xs">Bookings</span>
+                    </p>
+                    <p className="text-md font-button text-black">
+                        {singleVenue.location.city}
+                    </p>
+                    <p className="text-md font-button text-black">
+                        {singleVenue.location.address}
+                    </p>
+                    <p className="text-md font-button text-black">
+                        {singleVenue.location.country}
+                    </p>
+                </div>
+                <button
+                className="btn-l btn-primary w-full"
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
+                >
+                Book Venue
+                </button>
+            </div>
+        </div>
+      </div>
+        <div className="mt-10 flex flex-col text-lg items-center gap-2 lg:w-full border-[1px] pb-10 border-gray-200 cursor-default container mx-auto">
+            <StarRating/>
+        </div>
+        <div className="flex gap-2 items-end">
+            <span className="text-4xl font-button text-bold">{singleVenue.rating}</span>
+            <span className="text-gray-400 font-button">/ 5</span>
+        </div>
+    </>
+  );
+}
+
+export default SingleVenue;
