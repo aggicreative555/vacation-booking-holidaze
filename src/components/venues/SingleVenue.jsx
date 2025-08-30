@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import StarRating from "../rating/StarRating";
 import { useVenueStore } from "../../stores/useVenueStore";
 import { NotFound } from "../../pages";
+import { formatDate } from "../../utils/dataFormatter";
 
 function SingleVenue() {
   const { id } = useParams();
@@ -39,10 +40,10 @@ function SingleVenue() {
                 {singleVenue.description}
                 </p>
                 <p className="text-center text-xs font-caslon text-black mt-4 lg:px-20 ">
-                {singleVenue.created}
+                {formatDate(singleVenue.created)}
                 </p>
                 <p className="text-center text-xs font-caslon text-black mt-4 lg:px-20 ">
-                {singleVenue.updated}
+                {formatDate(singleVenue.updated)}
                 </p>
                 <div className="flex flex-col py-5">
                     <p className="text-lg font-button text-black">
