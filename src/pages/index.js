@@ -3,7 +3,6 @@ export { default as Login } from './Login';
 export { default as Register } from './Register';
 export { default as BookingId } from './BookingId';
 export { default as Bookings } from './Bookings';
-export { default as MyBooking } from './MyBooking';
 export { default as Contact } from './Contact';
 export { default as Profile } from './Profile';
 export { default as NotFound } from './NotFound';

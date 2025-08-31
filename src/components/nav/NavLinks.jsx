@@ -18,7 +18,6 @@ function NavLinks() {
         { to: '/bookings', label: 'Explore'},
         { to: '/contact', label: 'Contact'},
         { to: '/profile', label: 'Profile'},
-        { to: '/my-bookings', label: 'My Bookings'},
     ];
 
     const links = user ? userLinks : visitorLinks;

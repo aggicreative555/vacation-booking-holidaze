@@ -10,6 +10,8 @@ import { useAuthStore } from '../../stores/useAuthStore';
 
 function LoginForm() {
     const navigate = useNavigate();
+    const login = useAuthStore((state) => state.login);
+    
     const {
         register,
         handleSubmit,
@@ -36,7 +38,6 @@ function LoginForm() {
           toast.dismiss(toastId);
 
           const username = result.data?.name || 'User';
-          const login = useAuthStore((state) => state.login);
           login(result.data);
           await new Promise((res) => setTimeout(res, 500));
           showToast.loginSuccess(username);

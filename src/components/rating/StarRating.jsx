@@ -8,14 +8,12 @@ function StarRating({ venue: propVenue }) {
   const { id } = useParams();
   const { venue: storeVenue, fetchVenue, isLoading } = useVenueStore();
 
-  // If no prop was passed, we’ll look up in the store
   useEffect(() => {
     if (!propVenue && (!storeVenue || storeVenue.length === 0)) {
       fetchVenue();
     }
   }, [propVenue, storeVenue, fetchVenue]);
 
-  // Choose which venue source to use
   const venueToUse =
     propVenue ||
     storeVenue?.find((v) => String(v.id) === String(id));
