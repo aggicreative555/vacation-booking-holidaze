@@ -7,15 +7,14 @@ import {
   Contact,
   Home,
   Login,
-  MyBooking,
   NotFound,
   Profile,
   Register,
 } from './pages';
-
-
+import AuthRequired from './components/auth/AuthRequired';
 
 function App() {
+  const ProtectedProfile = AuthRequired(Profile);
   return (
     <>
       <ToastContainer
@@ -36,10 +35,9 @@ function App() {
           <Route path="bookings" element={<Bookings />} />
           <Route path="booking/:id" element={<BookingId />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="my-booking" element={<MyBooking />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={<Profile/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
