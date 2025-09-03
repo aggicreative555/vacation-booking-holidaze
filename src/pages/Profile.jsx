@@ -1,21 +1,64 @@
-import { useEffect } from "react";
-import LogoutButton from "../components/buttons/LogoutButton";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "../stores/useAuthStore";
 import { useVenueStore } from "../stores/useVenueStore";
 import { Link } from "react-router-dom";
 import ProfileVenues from "../components/venues/ProfileVenues";
 import ProfileBookings from "../components/venues/ProfileBookings";
 import { Pencil } from "lucide-react";
+import { apiClient } from "../utils/apiClient";
+
 
 function Profile() {
   const { user } = useAuthStore();
   const { venue, fetchVenue } = useVenueStore();
+  const [bookings, setBookings] = useState([]);
+  const [loadingBookings, setLoadingBookings] = useState(true);
   
   useEffect(() => {
     if (user?.venueManager) {
       fetchVenue();
     }
   }, [user, fetchVenue]);
+
+
+  useEffect(() => {
+    if (!user) return;
+    const fetchBookings = async () => {
+      
+      try {
+        setLoadingBookings(true);
+
+        const data = await apiClient(`/holidaze/profiles/${user.name}/bookings?_venue=true`, {}, true, true)
+
+        setBookings(data.data || []);
+
+        console.log(data)
+      } catch (error) {
+        console.error('Failed to fetch bookings', error);
+      } finally {
+        setLoadingBookings(false);
+      }
+    };
+
+    fetchBookings();
+  }, [user]);
+
+
+  if(!user) {
+    return (
+      <main>
+        <div className="flex flex-col gap-4 itemscenter justify-center">
+          <h1 className="uppercase font-garamond w-full text-center max-w-[400px] md:max-w-[500px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
+          You must be logged in to view this page
+          </h1>
+          <Link to='/login' className="btn-l btn-primary">
+            Log In
+          </Link>
+        </div>
+      </main>
+
+    )
+  }
 
   return (
     <main className="">
@@ -58,10 +101,17 @@ function Profile() {
             </>
           ) : (
             <>
-            <ProfileBookings bookings={user.bookings}/>
-            <Link to='/bookings' className="btn-l btn-primary">
-              Explore venues
-            </Link>
+              {loadingBookings ? (
+                <p>Loading your bookings...</p>
+              ) : (
+                <ProfileBookings 
+                  bookings={bookings}
+                  onDeleted={(id) => setBookings((prev) => prev.filter((b) => b.id !== id))}
+                />
+              )}
+              <Link to='/bookings' className="btn-l btn-primary">
+                Explore venues
+              </Link>
             </>
           )}
         </div>
