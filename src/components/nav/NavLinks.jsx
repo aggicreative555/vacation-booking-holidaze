@@ -1,9 +1,26 @@
 import { NavLink } from "react-router-dom";
 import { useAuthStore } from "../../stores/useAuthStore";
+import useBookingStore from "../../stores/useBookingStore";
+import { CircleUserRound } from "lucide-react";
+import { useEffect, useState } from "react";
 
 
 function NavLinks() {
     const { user } = useAuthStore();
+    const itemCount = useBookingStore((state) => state.getItems());
+    const [animate, setAnimate] = useState(false);
+
+    // animation when cart amount increases
+    useEffect(() => {
+      if (itemCount > 0) {
+        setAnimate(true);
+        const timeout = setTimeout(() => {
+          setAnimate(false);
+        }, 1500);
+        return () => clearTimeout(timeout);
+      }
+    }, [itemCount]);
+
 
     const visitorLinks = [
         { to: '/', label: 'Home'},
@@ -14,10 +31,14 @@ function NavLinks() {
     ];
 
     const userLinks = [
-        { to: '/', label: 'Home'},
-        { to: '/bookings', label: 'Explore'},
-        { to: '/contact', label: 'Contact'},
-        { to: '/profile', label: 'Profile'},
+        { to: '/', label: 'Home', isCart: false},
+        { to: '/bookings', label: 'Explore', isCart: false},
+        { to: '/contact', label: 'Contact', isCart: false},
+        {
+          to: '/profile',
+          icon: <CircleUserRound />,
+          isCart: true,
+        },
     ];
 
     const links = user ? userLinks : visitorLinks;
@@ -25,7 +46,7 @@ function NavLinks() {
 
   return (
      <>
-      {links.map(({ to, label, icon }) => (
+      {links.map(({ to, label, icon, isCart }) => (
         <li key={to} className="relative bg-white ">
           <NavLink
             to={to}
@@ -38,7 +59,20 @@ function NavLinks() {
             }
           >
             {icon}
-            <span>{label}</span>
+            {label}
+            {isCart && (
+              <span
+                aria-label="Cart booking count"
+                className={`
+                  absolute -top-2 -right-3 bg-red-900 text-white font-button text-xs w-5 h-5 flex items-center justify-center rounded-full
+                  transition-all duration-300
+                  ${itemCount > 0 ? 'block' : 'hidden'}
+                  ${animate ? 'animate-bounce' : ''}
+                `}
+              >
+                {itemCount}
+              </span>
+            )}
           </NavLink>
         </li>
       ))}

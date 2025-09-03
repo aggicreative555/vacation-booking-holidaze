@@ -4,16 +4,30 @@ import StarRating from "../rating/StarRating";
 import { useVenueStore } from "../../stores/useVenueStore";
 import { NotFound } from "../../pages";
 import { formatDate } from "../../utils/dataFormatter";
+import useBookingStore from "../../stores/useBookingStore";
+import CheckoutButton from "../buttons/CheckoutButton";
 
 function SingleVenue() {
   const { id } = useParams();
   const { singleVenue, isLoading, isError, fetchVenueById } = useVenueStore();
+  const { addToBookings } = useBookingStore();
+
+
+  const handleAddBooking = () => {
+    addToBookings(
+        singleVenue,
+        {
+            dateFrom: new Date().toISOString(),
+            dateTo: new Date(Date.now() + 86400000).toISOString(),
+            guests: 1,
+        }
+    );
+  };
   
   useEffect(() => {
       if (!singleVenue || singleVenue.id !== id) {
           fetchVenueById(id);
         }
-        console.log(singleVenue)
     }, [id, singleVenue, fetchVenueById]);
 
   if (isLoading) return <p>Loading Content...</p>;
@@ -72,10 +86,12 @@ function SingleVenue() {
                 className="btn-l btn-primary w-full"
                 onClick={(e) => {
                     e.stopPropagation();
+                    handleAddBooking();
                 }}
                 >
-                Book Venue
+                Book Now
                 </button>
+                <CheckoutButton/>
             </div>
         </div>
       </div>
