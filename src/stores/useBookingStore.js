@@ -11,8 +11,6 @@ const useBookingStore = create(
       addToBookings: async (venue, bookingDetails) => {
         const newBooking = { ...venue, ...bookingDetails }
         set({ bookings: [...get().bookings, newBooking] });
-
-        console.log(bookingDetails)
         
         try {
             const data = await apiClient(
@@ -41,14 +39,14 @@ const useBookingStore = create(
             })
         }
 
-        showToast.bookingAdded(venue.name);
+        showToast.bookingAdded(venue?.name);
       },
 
       removeFromBookings: (id) => {
         set({
           bookings: get().bookings.filter((b) => b.id !== id),
         });
-        showToast.bookingRemoved(venue.id, venue.name);
+        showToast.bookingRemoved(venue?.name);
       },
 
       clearBookings: () => {

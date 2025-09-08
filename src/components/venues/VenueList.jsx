@@ -83,7 +83,7 @@ function VenueList({ venues: propVenue, itemsPerPage = 6 }) {
                     e.stopPropagation();
                   }}
                 >
-                  Book Now
+                  See Venue
                 </button>
               </div>
             </div>
