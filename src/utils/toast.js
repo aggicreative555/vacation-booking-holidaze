@@ -52,10 +52,10 @@ export const showToast = {
       hideProgressBar: true,
       autoClose: 300,
       closeButton: false,
-      toastId: `item-removed-${productId}`,
+      toastId: `item-removed-${bookingId}`,
     }),
 
-    bookingsEmpty: (message = 'There are no upcoming bookings') =>
+    bookingsEmpty: (message = 'Your bookings are empty.') =>
     toast.error(message, {
       className:
         'p-6 shadow-md bg-red-100 border border-red-800 text-red-800 font-garamond italic normal-case text-base rounded-none',

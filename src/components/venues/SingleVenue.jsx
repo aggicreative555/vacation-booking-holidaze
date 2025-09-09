@@ -6,11 +6,13 @@ import { NotFound } from "../../pages";
 import { formatDate } from "../../utils/dataFormatter";
 import useBookingStore from "../../stores/useBookingStore";
 import CheckoutButton from "../buttons/CheckoutButton";
+import { useAuthStore } from "../../stores/useAuthStore";
 
 function SingleVenue() {
   const { id } = useParams();
   const { singleVenue, isLoading, isError, fetchVenueById } = useVenueStore();
   const { addToBookings } = useBookingStore();
+  const { user } = useAuthStore();
 
 
   const handleAddBooking = () => {
@@ -20,7 +22,8 @@ function SingleVenue() {
             dateFrom: new Date().toISOString(),
             dateTo: new Date(Date.now() + 86400000).toISOString(),
             guests: 1,
-        }
+        },
+        user?.name
     );
   };
   

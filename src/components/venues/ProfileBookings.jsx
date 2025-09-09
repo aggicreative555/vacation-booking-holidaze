@@ -3,31 +3,18 @@ import { Link } from "react-router-dom"
 import { apiClient } from "../../utils/apiClient"
 import useBookingStore from "../../stores/useBookingStore";
 
-function ProfileBookings({ bookings, onDeleted }) {
-     const { clearBookings } = useBookingStore();
+function ProfileBookings() {
+    const { bookings, clearBookings, removeFromBookings } = useBookingStore();
 
     if (!bookings || bookings.length === 0) {
         return <p className="text-gray-400 uppercase font-button text-2xl pb-2 mb-5 mt-5 transition-all duration-300 ease-in-out"> You have not booked any venues yet </p>
     }
 
-    const handleDelete = async (id) => {
-        try {
-            await apiClient(`/holidaze/bookings/${id}`,{ method: 'DELETE' }, true, true );
-            onDeleted(id);
-        } catch (error) {
-            console.error('Failed to delete booking', error);
-        }
-    }
-
-    const handleClearBookings = () => {
-        clearBookings();
-    };
-
     return (
         <div>
             <button 
             className="btn-l btn-secondary"
-            onClick={() => handleClearBookings()}>
+            onClick={() => clearBookings()}>
             Clear all bookings
             </button>
 
@@ -58,7 +45,7 @@ function ProfileBookings({ bookings, onDeleted }) {
                             </div>
                         </Link>
                         <button className="btn-l btn-primary"
-                        onClick={() => handleDelete(booking.id)}>
+                        onClick={() => removeFromBookings(booking.id)}>
                             Cancel booking
                         </button>
                     </div>

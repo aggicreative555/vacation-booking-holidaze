@@ -6,13 +6,14 @@ import ProfileVenues from "../components/venues/ProfileVenues";
 import ProfileBookings from "../components/venues/ProfileBookings";
 import { Pencil } from "lucide-react";
 import { apiClient } from "../utils/apiClient";
+import useBookingStore from "../stores/useBookingStore";
 
 
 function Profile() {
   const { user } = useAuthStore();
   const { venue, fetchVenue } = useVenueStore();
-  const [bookings, setBookings] = useState([]);
-  const [loadingBookings, setLoadingBookings] = useState(true);
+  const { fetchBookings } = useBookingStore();
+
   
   useEffect(() => {
     if (user?.venueManager) {
@@ -22,26 +23,10 @@ function Profile() {
 
 
   useEffect(() => {
-    if (!user) return;
-    const fetchBookings = async () => {
-      
-      try {
-        setLoadingBookings(true);
-
-        const data = await apiClient(`/holidaze/profiles/${user.name}/bookings?_venue=true`, {}, true, true)
-
-        setBookings(data.data || []);
-
-        console.log(data)
-      } catch (error) {
-        console.error('Failed to fetch bookings', error);
-      } finally {
-        setLoadingBookings(false);
-      }
-    };
-
-    fetchBookings();
-  }, [user]);
+    if (user) {
+      fetchBookings(user?.name);
+    }
+  }, [user, fetchBookings])
 
 
   if(!user) {
@@ -101,14 +86,7 @@ function Profile() {
             </>
           ) : (
             <>
-              {loadingBookings ? (
-                <p>Loading your bookings...</p>
-              ) : (
-                <ProfileBookings 
-                  bookings={bookings}
-                  onDeleted={(id) => setBookings((prev) => prev.filter((b) => b.id !== id))}
-                />
-              )}
+              <ProfileBookings/>
               <Link to='/bookings' className="btn-l btn-primary">
                 Explore venues
               </Link>
