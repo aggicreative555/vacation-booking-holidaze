@@ -88,4 +88,13 @@ export const showToast = {
       hideProgressBar: false,
       progressClassName: 'bg-amber-800 rounded',
     }),
+
+    venueCreated: () =>
+    toast.success(`Your venue has been successfully created`, {
+      className:
+        'p-6 shadow-md bg-green-100 border border-green-800 text-green-800 font-garamond italic normal-case text-base rounded-none',
+      hideProgressBar: true,
+      autoClose: 300,
+      closeButton: false,
+    }),
 };
