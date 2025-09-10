@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import ProfileVenues from "../components/venues/ProfileVenues";
 import ProfileBookings from "../components/venues/ProfileBookings";
 import { Pencil } from "lucide-react";
-import { apiClient } from "../utils/apiClient";
 import useBookingStore from "../stores/useBookingStore";
+import CreateVenueForm from "../components/forms/CreateVenueForm";
 
 
 function Profile() {
@@ -26,7 +26,7 @@ function Profile() {
     if (user) {
       fetchBookings(user?.name);
     }
-  }, [user, fetchBookings])
+  }, [user, fetchBookings]);
 
 
   if(!user) {
@@ -79,10 +79,12 @@ function Profile() {
         <div className="mt-20 flex flex-col gap-6 items-center font-caslon border-[1px] w-full m-4 py-8 border-gray-200 p-2">
           {user.venueManager ? (
             <>
-              <ProfileVenues venues={venue} />
-              <Link to='*' className="btn-l btn-primary">
-              Create Listing
+              <ProfileVenues />
+              <Link className="btn-l btn-primary"
+                  to='/create'>
+                    Create a new venue
               </Link>
+              <CreateVenueForm/>
             </>
           ) : (
             <>
