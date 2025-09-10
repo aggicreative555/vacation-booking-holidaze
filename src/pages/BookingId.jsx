@@ -4,7 +4,6 @@ function BookingId() {
   return (
     <main className="container mx-auto px-8">
       <SingleVenue/>
-
     </main>
   );
 };

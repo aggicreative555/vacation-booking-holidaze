@@ -1,6 +1,5 @@
 import { MapPin } from "lucide-react"
 import { Link } from "react-router-dom"
-import { apiClient } from "../../utils/apiClient"
 import useBookingStore from "../../stores/useBookingStore";
 
 function ProfileBookings() {
