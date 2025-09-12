@@ -44,7 +44,10 @@ function ProfileBookings() {
                             </div>
                         </Link>
                         <button className="btn-l btn-primary"
-                        onClick={() => removeFromBookings(booking.id)}>
+                         onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeFromBookings(booking.id)
+                                }}>
                             Cancel booking
                         </button>
                     </div>

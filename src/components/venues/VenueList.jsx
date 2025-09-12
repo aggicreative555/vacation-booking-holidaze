@@ -8,7 +8,7 @@ import { MapPin } from 'lucide-react';
 
 function VenueList({ venues: propVenue, itemsPerPage = 6 }) {
   const {
-    venue: storeVenue,
+    venues: storeVenue,
     isLoading,
     isError,
     fetchVenue,
