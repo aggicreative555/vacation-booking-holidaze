@@ -7,19 +7,21 @@ import ProfileBookings from "../components/venues/ProfileBookings";
 import { Pencil } from "lucide-react";
 import useBookingStore from "../stores/useBookingStore";
 import CreateVenueForm from "../components/forms/CreateVenueForm";
+import Modal from "../components/modal/Modal";
 
 
 function Profile() {
   const { user } = useAuthStore();
-  const { venue, fetchVenue } = useVenueStore();
+  const { fetchVenueByUser } = useVenueStore();
   const { fetchBookings } = useBookingStore();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   
   useEffect(() => {
     if (user?.venueManager) {
-      fetchVenue();
+      fetchVenueByUser(user?.name);
     }
-  }, [user, fetchVenue]);
+  }, [user, fetchVenueByUser]);
 
 
   useEffect(() => {
@@ -27,7 +29,6 @@ function Profile() {
       fetchBookings(user?.name);
     }
   }, [user, fetchBookings]);
-
 
   if(!user) {
     return (
@@ -79,12 +80,14 @@ function Profile() {
         <div className="mt-20 flex flex-col gap-6 items-center font-caslon border-[1px] w-full m-4 py-8 border-gray-200 p-2">
           {user.venueManager ? (
             <>
-              <ProfileVenues />
-              <Link className="btn-l btn-primary"
-                  to='/create'>
+              <ProfileVenues/>
+              <button className="btn-l btn-primary"
+              onClick={() => setIsModalOpen(true)}>
                     Create a new venue
-              </Link>
-              <CreateVenueForm/>
+              </button>
+              <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <CreateVenueForm onClose={() => setIsModalOpen(false)}/>
+              </Modal>
             </>
           ) : (
             <>

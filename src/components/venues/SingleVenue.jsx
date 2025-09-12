@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import StarRating from "../rating/StarRating";
 import { useVenueStore } from "../../stores/useVenueStore";
@@ -6,6 +6,8 @@ import { NotFound } from "../../pages";
 import { formatDate } from "../../utils/dataFormatter";
 import useBookingStore from "../../stores/useBookingStore";
 import { useAuthStore } from "../../stores/useAuthStore";
+import Modal from "../modal/Modal";
+import EditVenueForm from "../forms/EditVenueForm";
 
 function SingleVenue() {
     const { id } = useParams();
@@ -13,6 +15,7 @@ function SingleVenue() {
     const { addToBookings } = useBookingStore();
     const { user } = useAuthStore();
     const navigate = useNavigate();
+    const [editIsOpen, setEditIsOpen] = useState(false);
 
 
     const handleAddBooking = () => {
@@ -86,27 +89,55 @@ function SingleVenue() {
                             {singleVenue.location.country}
                         </p>
                     </div>
-                    {user.venueManager ? (
-                        <>
+                    {user?.venueManager && singleVenue?.owner?.name === user?.name && (
+                        <div className="flex gap-6 flex-row justify-between w-full"> 
+                            <button className="btn-l btn-secondary w-full"
+                                onClick={() => setEditIsOpen(true)}>
+                                    Edit Venue
+                            </button>
+                            <button
+                                    className="btn-l btn-primary w-full"
+                                    onClick={() => {navigate(-1)}}
+                                    >
+                                    Go back
+                            </button>
+                        </div>
+
+                    )}
+                    <Modal
+                        isOpen={editIsOpen}
+                        onClose={() => setEditIsOpen(false)}>
+                            <EditVenueForm venue={singleVenue} onClose={() => setEditIsOpen(false)}/>
+                    </Modal>
+
+                    {user.venueManager && singleVenue?.owner?.name !== user?.name && (
+                        <div>
                             <button
                                 className="btn-l btn-primary w-full"
                                 onClick={() => {navigate(-1)}}
                                 >
                                 Go back
                             </button>
-                        </>
-                    ) : (
-                        <>
+                        </div>
+                    )}
+
+                    {!user?.venueManager && (
+                        <div className="flex gap-6 flex-row justify-between w-full"> 
                             <button
                                 className="btn-l btn-primary w-full"
-                                onClick={(e) => {
-                                    e.stopPropagation();
+                                onClick={() => {
                                     handleAddBooking();
                                 }}
                                 >
                                 Book Now
                             </button>
-                        </>
+                            <button
+                                    className="btn-l btn-secondary w-full"
+                                    onClick={() => {navigate(-1)}}
+                                    >
+                                    Go back
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
