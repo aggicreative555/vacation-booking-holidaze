@@ -2,20 +2,37 @@ import { create } from 'zustand';
 import { apiClient } from '../utils/apiClient';
 
 export const useVenueStore = create((set, get) => ({
-    venue: [],
+    venues: [],
+    userVenues: [],
     singleVenue: null,
     isLoading: false,
     isError: false,
 
     fetchVenue: async () => {
-        set({ isLoading: true, isError: false });
-
         try {
-        const data = await apiClient('/holidaze/venues');
-        set({ venue: data.data || [], isLoading: false });
+            const data = await apiClient(
+                `/holidaze/venues`, 
+                {},
+            );
+            
+            set({ venues: data.data || []});
         } catch (error) {
-        console.error('Fetch error:', error);
-        set({ isError: true, isLoading: false, venue: [] });
+            console.error('Failed to fetch venues from API', error)
+        }
+    },
+
+    fetchVenueByUser: async (name) => {
+        try {
+            const data = await apiClient(
+                `/holidaze/profiles/${name}/venues`, 
+                {},
+                true,
+                true,
+            );
+            
+            set({ userVenues: data.data || []});
+        } catch (error) {
+            console.error('Failed to fetch venues by user from API', error)
         }
     },
 
@@ -32,7 +49,7 @@ export const useVenueStore = create((set, get) => ({
         }
 
         try {
-        const data = await apiClient(`/holidaze/venues/${id}`);
+        const data = await apiClient(`/holidaze/venues/${id}?_owner=true`, {}, true, true);
         set({ singleVenue: data.data, isLoading: false });
         } catch (error) {
         console.error('Fetch error:', error);
