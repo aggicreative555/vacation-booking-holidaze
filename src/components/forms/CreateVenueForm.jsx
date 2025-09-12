@@ -6,12 +6,11 @@ import { toast } from 'react-toastify';
 import { apiClient } from '../../utils/apiClient';
 
 
-function CreateVenueForm() {
+function CreateVenueForm({ onClose }) {
     const {
         register,
         control,
         handleSubmit,
-        reset,
         formState: { errors, isSubmitting },
     } = useForm({
         resolver: yupResolver(venueSchema),
@@ -32,16 +31,20 @@ function CreateVenueForm() {
     const onSubmit = async (data) => {
         const toastId = showToast.loading('Creating Venue...');
         try {
-          await apiClient('/holidaze/venues', {
-            method: 'POST',
-            body: JSON.stringify(data),
-          }, true, true);
+            await apiClient('/holidaze/venues', {
+                method: 'POST',
+                body: JSON.stringify(data),
+            }, true, true);
 
-          await new Promise((res) => setTimeout(res, 1500));
-          toast.dismiss(toastId);
+            await new Promise((res) => setTimeout(res, 1500));
+            toast.dismiss(toastId);
 
-          await new Promise((res) => setTimeout(res, 2000));
-          showToast.venueCreated();
+            await new Promise((res) => setTimeout(res, 2000));
+            showToast.venueCreated();
+            if (onClose) onClose();
+
+            await new Promise((res) => setTimeout(res, 1500));
+            window.location.reload(true);
     
         } catch (error) {
             console.error('Error creating venue:', error);
