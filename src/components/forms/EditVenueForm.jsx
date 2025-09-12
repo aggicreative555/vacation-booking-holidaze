@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { apiClient } from '../../utils/apiClient';
 
 
-function EditVenueForm({venue}) {
+function EditVenueForm({venue, onClose }) {
     const {
         register,
         control,
@@ -27,7 +27,7 @@ function EditVenueForm({venue}) {
     const onSubmit = async (data) => {
         const toastId = showToast.loading('Updating Venue...');
         try {
-          await apiClient('/holidaze/venues/${venue.id}', {
+          await apiClient(`/holidaze/venues/${venue.id}`, {
             method: 'PUT',
             body: JSON.stringify(data),
           }, true, true);
@@ -36,7 +36,10 @@ function EditVenueForm({venue}) {
           toast.dismiss(toastId);
 
           await new Promise((res) => setTimeout(res, 2000));
-          showToast.venueCreated('Venue updated successfully!');
+          showToast.venueUpdated();
+          if (onClose) onClose();
+          await new Promise((res) => setTimeout(res, 1500));
+          window.location.reload(true);
     
         } catch (error) {
             console.error('Error updating venue:', error);
@@ -207,7 +210,7 @@ function EditVenueForm({venue}) {
                 disabled={isSubmitting}
                 >
                 {' '}
-                {isSubmitting ? 'Creating venue...' : 'Create Venue'}
+                {isSubmitting ? 'Updating venue...' : 'Update Venue'}
                 </button>
             </form>
         </>
