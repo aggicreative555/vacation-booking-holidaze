@@ -11,5 +11,10 @@ export const useAuthStore = create((set) => ({
     logout: () => {
         sessionStorage.removeItem('user');
         set({ user: null });
+    },
+
+    updateUser: (updatedUser) => {
+        sessionStorage.setItem('user', JSON.stringify(updatedUser));
+        set({ user: updatedUser });
     }
 }));

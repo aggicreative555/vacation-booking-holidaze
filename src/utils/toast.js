@@ -106,4 +106,13 @@ export const showToast = {
       autoClose: 500,
       closeButton: false,
     }),
+
+    profileUpdated: () =>
+    toast.success(`Your profile has been successfully updated`, {
+      className:
+        'p-6 shadow-md bg-green-100 border border-green-800 text-green-800 font-garamond italic normal-case text-base rounded-none',
+      hideProgressBar: true,
+      autoClose: 500,
+      closeButton: false,
+    }),
 };
