@@ -8,6 +8,9 @@ import useBookingStore from "../../stores/useBookingStore";
 import { useAuthStore } from "../../stores/useAuthStore";
 import Modal from "../modal/Modal";
 import EditVenueForm from "../forms/EditVenueForm";
+import { showToast } from "../../utils/toast";
+import { Calendar, Minus, Plus } from "lucide-react";
+import CalendarPicker from "../calendar/CalendarPicker";
 
 function SingleVenue() {
     const { id } = useParams();
@@ -16,20 +19,49 @@ function SingleVenue() {
     const { user } = useAuthStore();
     const navigate = useNavigate();
     const [editIsOpen, setEditIsOpen] = useState(false);
+    const [selectedRange, setSelectedRange] = useState(null);
+    const [guests, setGuests] = useState(1);
+    const [calculatedPrice, setCalculatedPrice] = useState(0);
 
 
+    
+    
     const handleAddBooking = () => {
+        if(!selectedRange?.from || !selectedRange.to) {
+            return showToast.error('Please select a date for your vacation')
+        }
+
         addToBookings(
             singleVenue,
             {
-                dateFrom: new Date().toISOString(),
-                dateTo: new Date(Date.now() + 86400000).toISOString(),
-                guests: 1,
+                dateFrom: selectedRange.from,
+                dateTo: selectedRange.to,
+                guests: guests,
             },
             user?.name
         );
     };
-  
+    
+    useEffect(() => {
+        if (selectedRange?.from && selectedRange?.to) {
+            const nights = (selectedRange?.to - selectedRange?.from) / (1000 * 60 * 60 * 24);
+            console.log(nights)
+            setCalculatedPrice(singleVenue?.price * nights)
+        }
+    }, [selectedRange, singleVenue?.price]);
+
+    const incrementGuests = () => {
+        if (guests < singleVenue.maxGuests) {
+            setGuests((prev) => prev + 1);
+        }
+    }
+
+    const decrementGuests = () => {
+        if (guests > 1) {
+            setGuests((prev) => prev - 1);
+        }
+    }
+
     useEffect(() => {
       if (!singleVenue || singleVenue.id !== id) {
           fetchVenueById(id);
@@ -73,7 +105,7 @@ function SingleVenue() {
                         </p>
                         <p className="text-lg font-button text-black">
                             {singleVenue.maxGuests}
-                            <span className="text-xs">Guests</span>
+                            <span className="text-xs">Max Guests</span>
                         </p>
                         <p className="text-lg font-button text-black">
                             {singleVenue._count.bookings}
@@ -110,7 +142,7 @@ function SingleVenue() {
                             <EditVenueForm venue={singleVenue} onClose={() => setEditIsOpen(false)}/>
                     </Modal>
 
-                    {user.venueManager && singleVenue?.owner?.name !== user?.name && (
+                    {user?.venueManager && singleVenue?.owner?.name !== user?.name && (
                         <div>
                             <button
                                 className="btn-l btn-primary w-full"
@@ -122,7 +154,33 @@ function SingleVenue() {
                     )}
 
                     {!user?.venueManager && (
-                        <div className="flex gap-6 flex-row justify-between w-full"> 
+                        <div className="flex gap-6 flex-col max-w-[500px] justify-between w-full">
+                            <CalendarPicker onSelectRange={setSelectedRange}/>
+                            <div className="flex items-center gap-4 mt-6 w-[500px]">
+                                <p className="font-lg font-caslon uppercase text-gray-400">Guests</p>
+                                <button 
+                                onClick={decrementGuests}
+                                disabled={guests <= 1}
+                                className="px-3 py-1 border rounded-lg bg-gray-100 disabled:opacity-50">
+                                    <Minus/>
+                                </button>
+                                    <label className="label-base">
+                                        <input
+                                        type='number'
+                                        min={1}
+                                        value={guests}
+                                        onChange={(e) => setGuests(Number(e.target.value))}
+                                        className="input-base border-b border-gray-300 focus:border-black transition-all text-xl justify-center items-center flex"/>
+                                        
+                                    </label> 
+                                <button 
+                                onClick={incrementGuests}
+                                disabled={guests >= singleVenue.maxGuests}
+                                className="px-3 py-1 border rounded-lg bg-gray-100 disabled:opacity-50">
+                                    <Plus/>
+                                </button>
+                            </div>
+                            <div className="text-3xl md:text-5xl text-center font-garamond uppercase tracking-tighter text-red-800 transition-all duration-300 ease-in-out">{calculatedPrice} NOK total</div>
                             <button
                                 className="btn-l btn-primary w-full"
                                 onClick={() => {
