@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import StarRating from "../rating/StarRating";
 import { useVenueStore } from "../../stores/useVenueStore";
 import { NotFound } from "../../pages";
@@ -15,16 +15,16 @@ import CalendarPicker from "../calendar/CalendarPicker";
 function SingleVenue() {
     const { id } = useParams();
     const { singleVenue, isLoading, isError, fetchVenueById } = useVenueStore();
-    const { addToBookings } = useBookingStore();
+    const { addToBookings, bookings, removeFromBookings } = useBookingStore();
     const { user } = useAuthStore();
     const navigate = useNavigate();
     const [editIsOpen, setEditIsOpen] = useState(false);
     const [selectedRange, setSelectedRange] = useState(null);
     const [guests, setGuests] = useState(1);
     const [calculatedPrice, setCalculatedPrice] = useState(0);
+    const canBook = selectedRange?.from && selectedRange?.to && !exisitingBooking;
 
-
-    
+    const exisitingBooking = bookings.find(b => b.venue?.id === singleVenue?.id);
     
     const handleAddBooking = () => {
         if(!selectedRange?.from || !selectedRange.to) {
@@ -41,11 +41,16 @@ function SingleVenue() {
             user?.name
         );
     };
+
+    const handleCancelBooking = () => {
+        if (!exisitingBooking) return;
+        removeFromBookings(exisitingBooking.id);
+
+    }
     
     useEffect(() => {
         if (selectedRange?.from && selectedRange?.to) {
             const nights = (selectedRange?.to - selectedRange?.from) / (1000 * 60 * 60 * 24);
-            console.log(nights)
             setCalculatedPrice(singleVenue?.price * nights)
         }
     }, [selectedRange, singleVenue?.price]);
@@ -153,7 +158,7 @@ function SingleVenue() {
                         </div>
                     )}
 
-                    {!user?.venueManager && (
+                    {!user?.venueManager && user !== null && !exisitingBooking && (
                         <div className="flex gap-6 flex-col max-w-[500px] justify-between w-full">
                             <CalendarPicker onSelectRange={setSelectedRange}/>
                             <div className="flex items-center gap-4 mt-6 w-[500px]">
@@ -183,12 +188,46 @@ function SingleVenue() {
                             <div className="text-3xl md:text-5xl text-center font-garamond uppercase tracking-tighter text-red-800 transition-all duration-300 ease-in-out">{calculatedPrice} NOK total</div>
                             <button
                                 className="btn-l btn-primary w-full"
-                                onClick={() => {
-                                    handleAddBooking();
-                                }}
+                                onClick={handleAddBooking}
+                                disabled={!canBook && !exisitingBooking}
                                 >
-                                Book Now
+                                Book now
                             </button>
+                            <button
+                                    className="btn-l btn-secondary w-full"
+                                    onClick={() => {navigate(-1)}}
+                                    >
+                                    Go back
+                            </button>
+                        </div>
+                    )}
+
+                    {!user?.venueManager && user !== null && exisitingBooking && (
+                        <div>
+                            <button
+                                className="btn-l btn-primary w-full disabled:bg-gray-300 disabled:text-gray-500"
+                                onClick={handleCancelBooking}
+                                disabled={!canBook && !exisitingBooking}
+                                >
+                                Cancel booking
+                            </button>
+                            <button
+                                    className="btn-l btn-secondary w-full"
+                                    onClick={() => {navigate(-1)}}
+                                    >
+                                    Go back
+                            </button>
+                        </div>
+                    )}
+
+                    { user === null && (
+                        <div className="flex gap-6 flex-col max-w-[300px] justify-between w-full"> 
+                             <Link
+                                className="btn-l btn-primary w-full"
+                                to='/login'
+                                >
+                                Log in to book venue
+                            </Link>
                             <button
                                     className="btn-l btn-secondary w-full"
                                     onClick={() => {navigate(-1)}}
