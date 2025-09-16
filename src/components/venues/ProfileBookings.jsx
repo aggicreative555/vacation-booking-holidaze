@@ -21,7 +21,7 @@ function ProfileBookings() {
                 {bookings.map((booking) => (
                     <div key={booking.id}
                     className="flex flex-col text-lg items-center gap-2 max-w-90 lg:w-fit border-[1px] pb-10 border-gray-200 cursor-default container mx-auto">
-                        <Link to={`/booking/${booking.id}`} className="cursor-pointer">
+                        <Link to={`/booking/${booking?.venue?.id}`} className="cursor-pointer">
                             <div className="flex justify-center items-center h-64 w-fill overflow-clip">
                                 <img
                                     className="h-fill w-fill object-cover"
