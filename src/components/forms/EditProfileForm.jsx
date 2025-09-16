@@ -17,14 +17,14 @@ function EditProfileForm({ user, onClose }) {
         mode: 'onBlur',
         reValidateMode: 'onChange',
         defaultValues: {
-            bio: `${user?.data.bio}` || '',
+            bio: `${user?.data?.bio}` || '',
             avatar: {
-                url: `${user?.data.avatar?.url}` || '', 
-                alt: `${user?.data.avatar?.alt}` || 'User avatar picture'
+                url: `${user?.data?.avatar?.url}` || '', 
+                alt: `${user?.data?.avatar?.alt}` || 'User avatar picture'
             },
             banner: {
-                url: `${user?.data.avatar?.url}` || '', 
-                alt: `${user?.data.banner?.alt}` || 'User banner picture',
+                url: `${user?.data?.avatar?.url}` || '', 
+                alt: `${user?.data?.banner?.alt}` || 'User banner picture',
             },
         }
     });

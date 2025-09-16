@@ -17,19 +17,16 @@ function Profile() {
   const { fetchBookings } = useBookingStore();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-
-  console.log(user?.data.name)
   
   useEffect(() => {
     if (user?.venueManager) {
-      fetchVenueByUser(user?.data.name);
+      fetchVenueByUser(user?.name);
     }
   }, [user, fetchVenueByUser]);
 
-
   useEffect(() => {
     if (user) {
-      fetchBookings(user?.data.name);
+      fetchBookings(user?.name);
     }
   }, [user, fetchBookings]);
 
@@ -54,15 +51,15 @@ function Profile() {
       <div className="relative w-full">
         <div className="w-full h-auto group overflow-hidden max-h-80 flex md:max-h-96 justify-center items-center ">
           <img
-            src={user.data.banner?.url}
-            alt={user.data.banner?.alt}
+            src={user?.banner?.url}
+            alt={user?.banner?.alt}
             className="transition-transform duration-300 ease-in-out object-cover aspect-auto group-hover:scale-110 w-full"
           />
         </div>
         <div className="absolute top-2/3 left-3/12 w-54 border-black border-8 group overflow-hidden h-72 justify-center items-center rounded-full">
           <img
-            src={user.data.avatar?.url}
-            alt={user.data.avatar?.alt}
+            src={user?.avatar?.url}
+            alt={user?.avatar?.alt}
             className="transition-transform duration-300 ease-in-out object-cover aspect-auto group-hover:scale-110 w-full h-full"
           />
         </div>
@@ -79,14 +76,14 @@ function Profile() {
       </div>
       <div className="container flex mx-auto flex-col items-center">
         <h1 className="uppercase font-garamond w-full text-center max-w-[400px] md:max-w-[500px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
-        Hi I'm {user?.data.name}
+        Hi I'm {user?.name}
         </h1>
         <p className="text-center text-xs font-caslon text-black line-clamp-2 mt-4">
-          {user?.data.bio || 'Write a few words about yourself...'}
+          {user?.bio || 'Write a few words about yourself...'}
         </p>
 
         <div className="mt-20 flex flex-col gap-6 items-center font-caslon border-[1px] w-full m-4 py-8 border-gray-200 p-2">
-          {user?.data.venueManager ? (
+          {user?.venueManager ? (
             <>
               <ProfileVenues/>
               <button className="btn-l btn-primary"
