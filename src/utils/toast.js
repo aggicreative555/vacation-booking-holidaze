@@ -36,7 +36,7 @@ export const showToast = {
     }),
 
     bookingAdded: (bookingId, bookingName) =>
-    toast.success(`${bookingName} added to cart!`, {
+    toast.success(`${bookingName} booked successfully!`, {
       className:
         'p-6 shadow-md bg-green-100 border border-green-800 text-green-800 font-garamond italic normal-case text-base rounded-none',
       hideProgressBar: true,
