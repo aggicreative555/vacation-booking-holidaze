@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  --font-garamond: 'EB Garamond', 'serif';
+  --font-caslon: 'Libre Caslon Text', 'serif';
+}
+
+.calendar {
+  @apply p-4 rounded-2xl bg-white uppercase font-garamond mx-auto tracking-widest;
+
+  /* Override DayPicker variables */
+  --rdp-accent-color: theme('colors.red.800'); /* Tailwind color */
+  --rdp-background-color: theme('colors.red.100');
+  --rdp-range_start-color: theme('colors.red.800');
+  --rdp-range_end-color: theme('colors.red.800');
+  --rdp-range_middle-color: theme('colors.red.200');
+  --rdp-accent-color-dark: theme('colors.red.900');
+  --rdp-outline: 2px solid theme('colors.red.800');
+  --rdp-outline-selected: 2px solid theme('colors.red.800');
+}
+
+/* Calendar cell */
+.calendar .rdp-root {
+  @apply mx-auto border border-black;
+}
+
+.calendar .rdp-caption_label {
+  @apply text-3xl font-semibold text-center;
+}
+
+/* Navigation buttons */
+.calendar .rdp-nav_button {
+  @apply p-2 m-2 rounded hover:bg-gray-200 bg-red-800;
+}
+
+
+/* Today */
+.calendar .rdp-day_today {
+  @apply border-b-2 w-3 border-red-800 bg-red-800 font-bold;
+}
+
+.calendar .rdp-range_middle .rdp-day_button  {
+  @apply  text-red-600 font-bold;
+}
+
+.calendar .rdp-range_start .rdp-day_button {
+    @apply bg-red-800 text-white;
+}
+
+.calendar .rdp-range_end .rdp-day_button {
+    @apply bg-red-800 text-white;
+}
+
+/* Selected day */
+.calendar .rdp-day_selected {
+  @apply bg-red-800 text-white hover:bg-red-800;
+}
+
+/* Disabled days */
+.calendar .rdp-day_disabled {
+  @apply text-gray-300 line-through cursor-not-allowed;
+}
