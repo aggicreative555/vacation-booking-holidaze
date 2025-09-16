@@ -43,6 +43,7 @@ export const venueSchema = yup.object().shape({
         breakfast: yup.boolean(),
         pets: yup.boolean(),
     }),
+    
     location: yup.object().shape({
         country: yup
            .string()
