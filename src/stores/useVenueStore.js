@@ -36,6 +36,23 @@ export const useVenueStore = create((set, get) => ({
         }
     },
 
+    fetchVenueWithBookings: async (id) => {
+        set({ isLoading: true, isError: false });
+        try {
+            const data = await apiClient(
+                `/holidaze/venues/${id}?_owner=true&_bookings=true`, 
+                {},
+                true,
+                true,
+            );
+            
+            set({ singleVenue: data.data, isLoading: false });
+        } catch (error) {
+            console.error('Failed to fetch bookings by user from API', error)
+            set({ isLoading: false, isError: true });
+        }
+    },
+
     fetchVenueById: async (id) => {
         set({ isLoading: true, isError: false });
 

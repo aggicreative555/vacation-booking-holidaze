@@ -1,13 +1,18 @@
-import { MapPin } from "lucide-react"
+import { MapPin, Trash2 } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useVenueStore } from "../../stores/useVenueStore"
 import Modal from "../modal/Modal";
-import CreateVenueForm from "../forms/CreateVenueForm";
 import { useState } from "react";
+import EditVenueForm from "../forms/EditVenueForm";
+import BookingsList from "./BookingsList";
 
 function ProfileVenues() {
     const { userVenues, removeFromVenues } = useVenueStore();
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isBookingsModalOpen, setIsBookingsModalOpen] = useState(false);
+    const [selectedVenueId, setSelectedVenueId] = useState(null);
+
+
     if (!userVenues || userVenues.length === 0) {
         return (
             <>
@@ -51,15 +56,30 @@ function ProfileVenues() {
                                     setEditIsOpen(true)}}>
                                     Edit Venue
                                 </button>
-                                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                                    <CreateVenueForm onClose={() => setIsModalOpen(false)}/>
+                                <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
+                                    <EditVenueForm onClose={() => setIsEditModalOpen(false)}/>
+                                </Modal>
+                                <button className="btn-l btn-secondary"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setIsBookingsModalOpen(true)
+                                        setSelectedVenueId(venue.id)
+                                    }}>
+                                    View Bookings
+                                </button>
+                                <Modal isOpen={isBookingsModalOpen} onClose={() => setIsBookingsModalOpen(false)}>
+                                    <div className="flex flex-row gap-2 p-8 mb-4 justify-center items-center">
+                                        <p className="text-xl font-garamond text-gray-500 uppercase ">Booking for: </p>
+                                        <p className="text-3xl font-garamond text-red-800 uppercase ">{venue?.name}</p>
+                                    </div>
+                                    {selectedVenueId && <BookingsList venueId={selectedVenueId} />}
                                 </Modal>
                                 <button className="btn-l btn-secondary"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         removeFromVenues(venue.id)
                                     }}>
-                                    Remove venue
+                                    <Trash2/>
                                 </button>
                             </div>
                         </div>

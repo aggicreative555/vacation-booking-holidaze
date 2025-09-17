@@ -14,7 +14,7 @@ import EditProfileForm from "../components/forms/EditProfileForm";
 function Profile() {
   const { user } = useAuthStore();
   const { fetchVenueByUser } = useVenueStore();
-  const { fetchBookings } = useBookingStore();
+  const { fetchBookingsByUser } = useBookingStore();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   
@@ -26,9 +26,9 @@ function Profile() {
 
   useEffect(() => {
     if (user) {
-      fetchBookings(user?.name);
+      fetchBookingsByUser(user?.name);
     }
-  }, [user, fetchBookings]);
+  }, [user, fetchBookingsByUser]);
 
   if(!user) {
     return (
