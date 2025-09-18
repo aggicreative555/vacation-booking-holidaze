@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { showToast } from '../../utils/toast';
 import { useDebounce } from '../../hooks/useDebounce';
-import { useVenueStore } from '../../stores/useVenueStore';
 import { Search } from 'lucide-react';
 import { toast } from 'react-toastify';
 
-const SearchBar = ({ onResults }) => {
-  const venues = useVenueStore((state) => state.venues);
+const SearchBar = ({ data = [], onResults }) => {
   const [query, setQuery] = useState('');
   const debouncedQuery = useDebounce(query, 300);
   const [suggestions, setSuggestions] = useState([]);
@@ -19,31 +17,23 @@ const SearchBar = ({ onResults }) => {
 
   
   useEffect(() => {
-      if (debouncedQuery.length === 0 || debouncedQuery.length > 1) {
-          const results = venues.filter((venue) =>
-            venue?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+        if (debouncedQuery.length === 0 || debouncedQuery.length > 1) {
+          const results = data.filter((item) =>
+            item?.venue?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
         );
         
         // 1 error toast per second
-        if (debouncedQuery.length > 1 && results.length === 0) {
+        if (debouncedQuery.length > 1 && results.length === 0 && !errorToast.current) {
             showToast.error('No items match your search. Please try again.');
             errorToast.current = true;
-        } else {
             setTimeout(() => {
                 errorToast.current = false;
             }, 1000);
         }
-        
         setSuggestions(results.slice(0, 3));
-        
-        if (onResults) {
-            onResults(results);
-        } else {
-            setSuggestions([]);
-            onResults?.(venues)
-      }
+        onResults?.(results);
     }
-  }, [debouncedQuery, venues, onResults]);
+  }, [debouncedQuery, data, onResults]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -60,6 +50,12 @@ const SearchBar = ({ onResults }) => {
   const handleSuggestions = (name) => {
     setQuery(name);
     setSuggestions([]);
+
+    const selected = data.filter(
+        (item) => item?.venue?.name.toLowerCase() === name.toLowerCase()
+    );
+
+    onResults?.(selected);
   };
 
   return (
@@ -79,13 +75,13 @@ const SearchBar = ({ onResults }) => {
       <Search/>
       {isFocused && suggestions.length > 0 && (
         <ul className="text-sm absolute left-0 right-0 top-14 mt-1 pt-2 pb-5 bg-white border-b-[1px] border-gray-300 font-caslon font-light italic z-10 max-h-60 overflow-y-auto transition-all duration-300 ease-in-out">
-          {suggestions.map((venue) => (
+          {suggestions.map((item) => (
             <li
-              key={venue.id}
+              key={item?.venue?.id}
               className="px-6 py-2 hover:bg-gray-100 hover:tracking-wider cursor-pointer transition-all duration-300 ease-in-out"
-              onClick={() => handleSuggestions(venue?.name)}
+              onClick={() => handleSuggestions(item?.venue?.name)}
             >
-              {venue?.name}
+              {item?.venue?.name}
             </li>
           ))}
         </ul>
