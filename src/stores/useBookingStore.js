@@ -7,8 +7,25 @@ const useBookingStore = create(
   persist(
     (set, get) => ({
       bookings: [],
+      isLoading: false,
+      isError: false,
 
-      fetchBookings: async (name) => {
+      fetchBookings: async () => {
+        try {
+            const data = await apiClient(
+                `/holidaze/bookings?_customer=true&_venue=true`, 
+                {},
+                true,
+                true
+            );
+
+            set({ bookings: data.data || []});
+        } catch (error) {
+            console.error('Failed to fetch bookings from API', error)
+        }
+      },
+
+      fetchBookingsByUser: async (name) => {
         try {
             const data = await apiClient(
                 `/holidaze/profiles/${name}/bookings?_venue=true`, 

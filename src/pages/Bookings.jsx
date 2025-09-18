@@ -1,22 +1,37 @@
-import { useCallback, useState } from "react";
-import { useVenueStore } from "../stores/useVenueStore";
-import VenueList from "../components/venues/VenueList";
+import { useCallback, useEffect, useState } from "react";
 import SearchBar from "../components/search/SearchBar";
+import BookingList from "../components/venues/BookingList";
+import BookingsFilter from "../components/filters/BookingsFilter";
+import useBookingStore from "../stores/useBookingStore";
 
 const Bookings = () => {
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const venues = useVenueStore((state) => state.venues);
-    const handleResults = useCallback((results) => {
-      setFilteredProducts(results);
-      }, []);
+  const { bookings, fetchBookings, isLoading, isError } = useBookingStore();
+  const [filteredBookings, setFilteredBookings] = useState([]);
+
+  useEffect(() => {
+    fetchBookings();
+  }, [fetchBookings]);
+
+  useEffect(() => {
+    setFilteredBookings(bookings);
+  }, [bookings]);
+
+  const handleFilterResults = useCallback((results) => {
+    setFilteredBookings(results);
+  }, []);
+
+  if (isLoading) return <p>Loading bookings...</p>;
+  if (isError) return <p>Error lodaing bookings. Please refresh the page.</p>;
+ 
 
     return (
-      <main className="container mx-auto px-8">
-          <h1 className="text-4xl md:text-6xl text-red-800 font-garamond text-center w-full cursor-default uppercase mb-10 ">
-            All Bookings
-          </h1>
-          <SearchBar onResults={handleResults}/>
-          <VenueList venues={filteredProducts.length ? filteredProducts : venues}/>
+      <main className="container mx-auto px-8 w-full">
+          <div className="flex flex-row justify-center gap-10 w-full">
+            <BookingsFilter bookings={bookings} onFilter={handleFilterResults}/>
+            <div>
+              <BookingList bookings={displayBookings}/>
+            </div>
+          </div>
       </main>
   );
 
