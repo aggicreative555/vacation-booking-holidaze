@@ -1,11 +1,11 @@
-import SingleVenue from "../components/venues/SingleVenue";
+import SingleVenue from '../components/venues/SingleVenue';
 
 function BookingId() {
   return (
     <main className="container mx-auto px-8">
-      <SingleVenue/>
+      <SingleVenue />
     </main>
   );
-};
+}
 
 export default BookingId;

@@ -6,7 +6,7 @@ import LogoutButton from '../buttons/LogoutButton';
 
 export function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const {user} = useAuthStore();
+  const { user } = useAuthStore();
   return (
     <>
       <nav className="container mx-auto flex justify-between items-center px-6 md:px-12 transition-all duration-150 py-4">
@@ -15,7 +15,7 @@ export function NavBar() {
           className="p-1 relative hover:scale-110 transition-all duration-300 ease-in-out"
         >
           <img
-            src='*'
+            src="*"
             alt="Holidaze logo"
             className="w-[70px] h-auto object-cover transition-all duration-300 ease-in-out translate-y-3"
           />
@@ -37,10 +37,8 @@ export function NavBar() {
         </button>
         {/* Desktop */}
         <ul className="hidden md:flex gap-6">
-            <NavLinks/>
-            {user && (  
-            <LogoutButton/>
-            )}
+          <NavLinks />
+          {user && <LogoutButton />}
         </ul>
       </nav>
       {/* Mobile */}
@@ -52,10 +50,8 @@ export function NavBar() {
         }`}
       >
         <ul className="flex flex-col bg-white justify-center items-center gap-4 px-4 py-10">
-            <NavLinks/>
-            {user && (  
-            <LogoutButton/>
-            )}
+          <NavLinks />
+          {user && <LogoutButton />}
         </ul>
       </div>
     </>

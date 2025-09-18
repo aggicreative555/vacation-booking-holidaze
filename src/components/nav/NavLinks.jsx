@@ -1,51 +1,48 @@
-import { NavLink } from "react-router-dom";
-import { useAuthStore } from "../../stores/useAuthStore";
-import useBookingStore from "../../stores/useBookingStore";
-import { CircleUserRound } from "lucide-react";
-import { useEffect, useState } from "react";
-
+import { NavLink } from 'react-router-dom';
+import { useAuthStore } from '../../stores/useAuthStore';
+import useBookingStore from '../../stores/useBookingStore';
+import { CircleUserRound } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 function NavLinks() {
-    const { user } = useAuthStore();
-    const itemCount = useBookingStore((state) => state.getItems());
-    const [animate, setAnimate] = useState(false);
+  const { user } = useAuthStore();
+  const itemCount = useBookingStore((state) => state.getItems());
+  const [animate, setAnimate] = useState(false);
 
-    // animation when cart amount increases
-    useEffect(() => {
-      if (itemCount > 0) {
-        setAnimate(true);
-        const timeout = setTimeout(() => {
-          setAnimate(false);
-        }, 1500);
-        return () => clearTimeout(timeout);
-      }
-    }, [itemCount]);
+  // animation when cart amount increases
+  useEffect(() => {
+    if (itemCount > 0) {
+      setAnimate(true);
+      const timeout = setTimeout(() => {
+        setAnimate(false);
+      }, 1500);
+      return () => clearTimeout(timeout);
+    }
+  }, [itemCount]);
 
+  const visitorLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/bookings', label: 'Explore' },
+    { to: '/contact', label: 'Contact' },
+    { to: '/login', label: 'Login' },
+    { to: '/register', label: 'Register' },
+  ];
 
-    const visitorLinks = [
-        { to: '/', label: 'Home'},
-        { to: '/bookings', label: 'Explore'},
-        { to: '/contact', label: 'Contact'},
-        { to: '/login', label: 'Login'},
-        { to: '/register', label: 'Register'},
-    ];
+  const userLinks = [
+    { to: '/', label: 'Home', isCart: false },
+    { to: '/bookings', label: 'Explore', isCart: false },
+    { to: '/contact', label: 'Contact', isCart: false },
+    {
+      to: '/profile',
+      icon: <CircleUserRound />,
+      isCart: true,
+    },
+  ];
 
-    const userLinks = [
-        { to: '/', label: 'Home', isCart: false},
-        { to: '/bookings', label: 'Explore', isCart: false},
-        { to: '/contact', label: 'Contact', isCart: false},
-        {
-          to: '/profile',
-          icon: <CircleUserRound />,
-          isCart: true,
-        },
-    ];
-
-    const links = user ? userLinks : visitorLinks;
-
+  const links = user ? userLinks : visitorLinks;
 
   return (
-     <>
+    <>
       {links.map(({ to, label, icon, isCart }) => (
         <li key={to} className="relative bg-white ">
           <NavLink
@@ -77,7 +74,7 @@ function NavLinks() {
         </li>
       ))}
     </>
-  )
+  );
 }
 
-export default NavLinks
+export default NavLinks;

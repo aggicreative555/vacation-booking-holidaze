@@ -15,23 +15,26 @@ const SearchBar = ({ data = [], onResults }) => {
   // dismiss error on empty search field
   toast.dismiss(showToast.error);
 
-  
   useEffect(() => {
-        if (debouncedQuery.length === 0 || debouncedQuery.length > 1) {
-          const results = data.filter((item) =>
-            item?.venue?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
-        );
-        
-        // 1 error toast per second
-        if (debouncedQuery.length > 1 && results.length === 0 && !errorToast.current) {
-            showToast.error('No items match your search. Please try again.');
-            errorToast.current = true;
-            setTimeout(() => {
-                errorToast.current = false;
-            }, 1000);
-        }
-        setSuggestions(results.slice(0, 3));
-        onResults?.(results);
+    if (debouncedQuery.length === 0 || debouncedQuery.length > 1) {
+      const results = data.filter((item) =>
+        item?.venue?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+      );
+
+      // 1 error toast per second
+      if (
+        debouncedQuery.length > 1 &&
+        results.length === 0 &&
+        !errorToast.current
+      ) {
+        showToast.error('No items match your search. Please try again.');
+        errorToast.current = true;
+        setTimeout(() => {
+          errorToast.current = false;
+        }, 1000);
+      }
+      setSuggestions(results.slice(0, 3));
+      onResults?.(results);
     }
   }, [debouncedQuery, data, onResults]);
 
@@ -52,7 +55,7 @@ const SearchBar = ({ data = [], onResults }) => {
     setSuggestions([]);
 
     const selected = data.filter(
-        (item) => item?.venue?.name.toLowerCase() === name.toLowerCase()
+      (item) => item?.venue?.name.toLowerCase() === name.toLowerCase()
     );
 
     onResults?.(selected);
@@ -72,7 +75,7 @@ const SearchBar = ({ data = [], onResults }) => {
         aria-label="Search venues"
         onFocus={() => setIsFocused(true)}
       />
-      <Search/>
+      <Search />
       {isFocused && suggestions.length > 0 && (
         <ul className="text-sm absolute left-0 right-0 top-14 mt-1 pt-2 pb-5 bg-white border-b-[1px] border-gray-300 font-caslon font-light italic z-10 max-h-60 overflow-y-auto transition-all duration-300 ease-in-out">
           {suggestions.map((item) => (

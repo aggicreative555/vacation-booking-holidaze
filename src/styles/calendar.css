@@ -35,22 +35,21 @@
   @apply p-2 m-2 rounded hover:bg-gray-200 bg-red-800;
 }
 
-
 /* Today */
 .calendar .rdp-day_today {
   @apply border-b-2 w-3 border-red-800 bg-red-800 font-bold;
 }
 
-.calendar .rdp-range_middle .rdp-day_button  {
-  @apply  text-red-600 font-bold;
+.calendar .rdp-range_middle .rdp-day_button {
+  @apply text-red-600 font-bold;
 }
 
 .calendar .rdp-range_start .rdp-day_button {
-    @apply bg-red-800 text-white;
+  @apply bg-red-800 text-white;
 }
 
 .calendar .rdp-range_end .rdp-day_button {
-    @apply bg-red-800 text-white;
+  @apply bg-red-800 text-white;
 }
 
 /* Selected day */

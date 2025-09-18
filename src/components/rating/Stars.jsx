@@ -1,7 +1,6 @@
-import { Sparkle } from "lucide-react";
+import { Sparkle } from 'lucide-react';
 
-const Stars = ({ rating = 0, max = 5}) => {
-
+const Stars = ({ rating = 0, max = 5 }) => {
   return (
     <div className={`flex gap-1`}>
       {[...Array(max)].map((_, index) => (
@@ -10,7 +9,9 @@ const Stars = ({ rating = 0, max = 5}) => {
           size={16}
           strokeWidth={1}
           className={
-            index < Math.round(rating) ? 'text-amber-800 fill-amber-800' : 'text-gray-300'
+            index < Math.round(rating)
+              ? 'text-amber-800 fill-amber-800'
+              : 'text-gray-300'
           }
         />
       ))}
