@@ -4,7 +4,7 @@ import { useVenueStore } from "../../stores/useVenueStore"
 import Modal from "../modal/Modal";
 import { useState } from "react";
 import EditVenueForm from "../forms/EditVenueForm";
-import BookingsList from "./BookingsList";
+import BookingGuestList from "./BookingGuestList";
 
 function ProfileVenues() {
     const { userVenues, removeFromVenues } = useVenueStore();
@@ -72,7 +72,7 @@ function ProfileVenues() {
                                         <p className="text-xl font-garamond text-gray-500 uppercase ">Booking for: </p>
                                         <p className="text-3xl font-garamond text-red-800 uppercase ">{venue?.name}</p>
                                     </div>
-                                    {selectedVenueId && <BookingsList venueId={selectedVenueId} />}
+                                    {selectedVenueId && <BookingGuestList venueId={selectedVenueId} />}
                                 </Modal>
                                 <button className="btn-l btn-secondary"
                                     onClick={(e) => {
