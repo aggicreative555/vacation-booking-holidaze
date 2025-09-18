@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useVenueStore } from "../../stores/useVenueStore"
 
-function BookingsList({ venueId }) {
+function BookingGuestList({ venueId }) {
     const { singleVenue, fetchVenueWithBookings, isLoading, isError } = useVenueStore();
 
     useEffect(() => {
@@ -36,4 +36,4 @@ function BookingsList({ venueId }) {
     )
 }
 
-export default BookingsList;
+export default BookingGuestList;
