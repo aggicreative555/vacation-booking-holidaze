@@ -2,19 +2,19 @@ import { useCallback, useEffect, useState } from 'react';
 import SearchBar from '../components/search/SearchBar';
 import BookingList from '../components/venues/BookingList';
 import BookingsFilter from '../components/filters/BookingsFilter';
-import useBookingStore from '../stores/useBookingStore';
+import { useVenueStore } from '../stores/useVenueStore';
 
 const Bookings = () => {
-  const { bookings, fetchBookings, isLoading, isError } = useBookingStore();
+  const { venues, fetchVenue, isLoading, isError } = useVenueStore();
   const [filteredBookings, setFilteredBookings] = useState([]);
 
   useEffect(() => {
-    fetchBookings();
-  }, [fetchBookings]);
+    fetchVenue();
+  }, [fetchVenue]);
 
   useEffect(() => {
-    setFilteredBookings(bookings);
-  }, [bookings]);
+    setFilteredBookings(venues);
+  }, [venues]);
 
   const handleFilterResults = useCallback((results) => {
     setFilteredBookings(results);
@@ -25,7 +25,7 @@ const Bookings = () => {
   }, []);
 
   const displayBookings =
-    filteredBookings.length > 0 ? filteredBookings : bookings;
+    filteredBookings.length > 0 ? filteredBookings : venues;
 
   if (isLoading) return <p>Loading bookings...</p>;
   if (isError) return <p>Error lodaing bookings. Please refresh the page.</p>;
@@ -33,9 +33,9 @@ const Bookings = () => {
   return (
     <main className="container mx-auto px-8 w-full">
       <div className="flex flex-row justify-center gap-10 w-full">
-        <BookingsFilter bookings={bookings} onFilter={handleFilterResults} />
+        <BookingsFilter venues={venues || []} onFilter={handleFilterResults} />
         <div>
-          <SearchBar data={bookings} onResults={handleSearchResults} />
+          <SearchBar data={venues} onResults={handleSearchResults} />
           <BookingList bookings={displayBookings} />
         </div>
       </div>

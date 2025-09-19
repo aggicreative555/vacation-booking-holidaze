@@ -7,19 +7,21 @@ const useBookingStore = create(
   persist(
     (set, get) => ({
       bookings: [],
+      userBookings: [],
       isLoading: false,
       isError: false,
 
       fetchBookings: async () => {
         try {
           const data = await apiClient(
-            `/holidaze/bookings?_customer=true&_venue=true`,
+            `/holidaze/bookings`,
             {},
             true,
             true
           );
 
           set({ bookings: data.data || [] });
+          
         } catch (error) {
           console.error('Failed to fetch bookings from API', error);
         }
@@ -34,7 +36,7 @@ const useBookingStore = create(
             true
           );
 
-          set({ bookings: data.data || [] });
+          set({ userBookings: data.data || [] });
         } catch (error) {
           console.error('Failed to fetch bookings from API', error);
         }
@@ -56,14 +58,18 @@ const useBookingStore = create(
             true,
             true
           );
-          await get().fetchBookings(name);
+
+          if (name) {
+            await get().fetchBookingsByUser(name)
+          } 
+
           showToast.bookingAdded(venue?.id, venue?.name || 'Booking');
         } catch (error) {
           console.error('Failed to save booking to API', error);
         }
       },
 
-      removeFromBookings: async (id) => {
+      removeFromBookings: async (id, name) => {
         try {
           await apiClient(
             `/holidaze/bookings/${id}`,
@@ -71,14 +77,16 @@ const useBookingStore = create(
             true,
             true
           );
-          const booking = get().bookings.find((b) => b.id === id);
+
           set({
-            bookings: get().bookings.filter((b) => b.id !== id),
+            userBookings: get().userBookings.filter((b) => b.id !== id),
           });
-          showToast.bookingRemoved(
-            booking?.id,
-            booking?.venue?.name || 'Your booking'
-          );
+
+          if (name) {
+            await get().fetchBookingsByUser(name);
+          }
+
+          showToast.bookingRemoved(id, venue?.name || 'Your booking');
         } catch (error) {
           console.error('Failed to delete booking from API', error);
         }
@@ -86,7 +94,7 @@ const useBookingStore = create(
 
       clearBookings: async () => {
         try {
-          const currentBookings = get().bookings;
+          const currentBookings = get().userBookings;
           await Promise.all(
             currentBookings.map((b) =>
               apiClient(
@@ -98,7 +106,7 @@ const useBookingStore = create(
             )
           );
           set({
-            bookings: [],
+            user: [],
           });
           showToast.bookingsEmpty();
         } catch (error) {
@@ -107,12 +115,10 @@ const useBookingStore = create(
       },
 
       getTotal: () =>
-        get().bookings.reduce(
+        get().userBookings.reduce(
           (sum, b) => sum + (b.venue.price || 0) * (b.guests || 1),
           0
         ),
-
-      getItems: () => get().bookings.length,
     }),
 
     {

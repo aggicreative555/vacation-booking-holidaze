@@ -66,8 +66,8 @@ export const useVenueStore = create((set, get) => ({
       const data = await apiClient(
         `/holidaze/venues/${id}?_owner=true`,
         {},
-        true,
-        true
+        false,
+        false
       );
       set({ singleVenue: data.data, isLoading: false });
     } catch (error) {
