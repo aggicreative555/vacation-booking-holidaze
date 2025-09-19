@@ -39,15 +39,7 @@ function VenueList({ venues: propVenue, itemsPerPage = 6 }) {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
         {currentProducts.map((venue) => {
-          const {
-            name,
-            price,
-            media,
-            amenities,
-            bookings,
-            location,
-            maxGuests,
-          } = venue;
+          const { name, price, media, amenities, } = venue;
 
           return (
             <div
@@ -58,23 +50,28 @@ function VenueList({ venues: propVenue, itemsPerPage = 6 }) {
                 <div className="h-64 w-fit overflow-clip">
                   <img
                     className="h-64 w-100"
-                    src={media?.[0]?.url}
-                    alt={media?.[0]?.alt || 'Venue image'}
+                      src={media?.[0]?.url}
+                      alt={media?.[0]?.alt || "Venue image"}
                   />
                 </div>
                 <div className="px-6 py-4 flex justify-between items-center flex-col relative w-full overflow-hidden h-fit">
                   <h2 className="text-3xl text-center font-garamond uppercase text-red-800 mb-2 line-clamp-1 h-fit w-40">
                     {name}
                   </h2>
-                  <div className="mb-4">
-                    <StarRating venue={venue} />
+                  <div className='mb-4'>
+                    <StarRating venue={venue}/>
+
                   </div>
-                  <p className="text-2xl font-button text-black">{price} NOK</p>
+                    <p className="text-2xl font-button text-black">
+                      {price} NOK
+                    </p>
                   <p className="text-center text-xs font-caslon text-black line-clamp-2 mt-4">
                     {venue.description}
                   </p>
                   <p className="text-center text-sm font-caslon text-black line-clamp-2 mt-4 flex justify-center items-center gap-1">
-                    <MapPin size={16} />
+                    <MapPin
+                    size={16}
+                    />
                     {venue.location.city}
                   </p>
                 </div>
