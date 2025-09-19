@@ -18,7 +18,7 @@ const SearchBar = ({ data = [], onResults }) => {
   useEffect(() => {
     if (debouncedQuery.length === 0 || debouncedQuery.length > 1) {
       const results = data.filter((item) =>
-        item?.venue?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+        item?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
       );
 
       // 1 error toast per second
@@ -55,7 +55,7 @@ const SearchBar = ({ data = [], onResults }) => {
     setSuggestions([]);
 
     const selected = data.filter(
-      (item) => item?.venue?.name.toLowerCase() === name.toLowerCase()
+      (item) => item?.name.toLowerCase() === name.toLowerCase()
     );
 
     onResults?.(selected);
@@ -80,11 +80,11 @@ const SearchBar = ({ data = [], onResults }) => {
         <ul className="text-sm absolute left-0 right-0 top-14 mt-1 pt-2 pb-5 bg-white border-b-[1px] border-gray-300 font-caslon font-light italic z-10 max-h-60 overflow-y-auto transition-all duration-300 ease-in-out">
           {suggestions.map((item) => (
             <li
-              key={item?.venue?.id}
+              key={item?.id}
               className="px-6 py-2 hover:bg-gray-100 hover:tracking-wider cursor-pointer transition-all duration-300 ease-in-out"
-              onClick={() => handleSuggestions(item?.venue?.name)}
+              onClick={() => handleSuggestions(item?.name)}
             >
-              {item?.venue?.name}
+              {item?.name}
             </li>
           ))}
         </ul>
