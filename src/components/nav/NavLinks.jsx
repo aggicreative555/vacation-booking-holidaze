@@ -6,8 +6,16 @@ import { useEffect, useState } from 'react';
 
 function NavLinks() {
   const { user } = useAuthStore();
-  const itemCount = useBookingStore((state) => state.getItems());
+  const fetchBookingsByUser = useBookingStore((state) => state.fetchBookingsByUser);
+  const bookings = useBookingStore((state) => state.userBookings);
+  const itemCount = bookings.length;
   const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    if (user?.name) {
+      fetchBookingsByUser(user.name);
+    }
+  }, [user, fetchBookingsByUser]);
 
   // animation when cart amount increases
   useEffect(() => {
