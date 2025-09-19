@@ -23,40 +23,39 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
         {currentProducts.map((booking) => {
-          const { venue } = booking;
 
           return (
             <div
               className="h-[600px] w-60 md:w-80 shadow-md flex flex-col justify-between transition-all ease-in-out duration-300 hover:shadow-xl group"
               key={booking.id}
             >
-              <Link to={`/booking/${venue.id}`} className="cursor-pointer">
+              <Link to={`/booking/${booking?.id}`} className="cursor-pointer">
                 <div className="h-64 w-fit overflow-clip">
                   <img
                     className="h-64 w-100"
-                    src={venue.media?.[0]?.url}
-                    alt={venue.media?.[0]?.alt || 'Venue image'}
+                    src={booking?.media?.[0]?.url}
+                    alt={booking?.media?.[0]?.alt || 'Venue image'}
                   />
                 </div>
                 <div className="px-6 py-4 flex justify-between items-center flex-col relative w-full overflow-hidden h-fit">
                   <h2 className="text-3xl text-center font-garamond uppercase text-red-800 mb-2 line-clamp-1 h-fit w-40">
-                    {venue?.name}
+                    {booking?.name}
                   </h2>
                   <div className="mb-4">
-                    <StarRating venue={venue} />
+                    <StarRating venue={booking} />
                   </div>
                   <p className="text-2xl font-button text-black">
-                    {venue.price} NOK
+                    {booking?.price} NOK
                   </p>
                   <p className="text-center text-xs font-caslon text-black line-clamp-2 mt-4">
-                    {venue.description}
+                    {booking?.description}
                   </p>
                   <p className="text-center text-gray-600 uppercase font-button text-xs line-clamp-2 mt-4 flex justify-center items-center gap-1">
                     <MapPin size={16} />
-                    {venue.location.city}, {venue.location.country}
+                    {booking?.location?.city}, {booking?.location?.country}
                   </p>
                   <div className="flex gap-2 text-xs mt-2">
-                    {Object.entries(venue.meta)
+                    {Object.entries(booking.meta)
                       .filter(([__dirname, value]) => value)
                       .map(([key]) => (
                         <span
@@ -76,7 +75,7 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
                     e.stopPropagation();
                   }}
                 >
-                  See Venue
+                  See booking
                 </button>
               </div>
             </div>

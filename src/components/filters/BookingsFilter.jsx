@@ -23,7 +23,8 @@ const guestOptions = [
   { key: 10, label: '10 or more' },
 ];
 
-function BookingsFilter({ bookings, onFilter }) {
+
+function BookingsFilter({ venues, onFilter }) {
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [selectedContinents, setSelectedContinents] = useState([]);
   const [selectedGuests, setSelectedGuests] = useState(null);
@@ -39,33 +40,42 @@ function BookingsFilter({ bookings, onFilter }) {
       prev.includes(key) ? prev.filter((c) => c !== key) : [...prev, key]
     );
   };
-
+  
   const handleGuestChange = (key) => {
-    setSelectedGuests((prev) => (prev === key ? null : key));
-  };
+      setSelectedGuests((prev) => (prev === key ? null : key));
+    };
+    
+    useEffect(() => {
+        let filtered = [...venues];
+        
+        if (selectedAmenities.length > 0) {
+            filtered = filtered.filter((venue) =>
+                selectedAmenities.every((amenity) => venue?.meta?.[amenity])
+        );
 
-  useEffect(() => {
-    let filtered = [...bookings];
+        }
 
-    if (selectedAmenities.length > 0) {
-      filtered = filtered.filter((booking) =>
-        selectedAmenities.every((amenity) => booking.venue?.meta?.[amenity])
-      );
-    }
-    if (selectedContinents.length > 0) {
-      filtered = filtered.filter((booking) =>
-        selectedContinents.includes(booking.venue?.location?.continent)
-      );
-    }
-    if (selectedGuests) {
-      filtered = filtered.filter((booking) => {
-        if (selectedGuests === 10) return booking.venue?.maxGuests >= 10;
-        return booking.venue?.maxGuests <= selectedGuests;
-      });
-    }
-    onFilter(filtered);
+        if (selectedContinents.length > 0) {
+            filtered = filtered.filter((venue) => {
+            const continent = (venue?.location?.continent || '').toLowerCase().trim();
+            return selectedContinents.some((c) => continent.includes(c));
+            });
+        }
+
+         if (selectedGuests) {
+            const guestLimit = Number(selectedGuests);
+
+            filtered = filtered.filter((venue) => {
+                const max = Number(venue?.maxGuests); // ensure numeric
+                if (isNaN(max)) return false; // skip invalid maxGuests
+                if (guestLimit === 10) return max >= 10; // 10 or more
+                return max >= guestLimit; // allow venues that can accommodate at least the selected guests
+            });
+        }
+
+        onFilter(filtered);
   }, [
-    bookings,
+    venues,
     selectedAmenities,
     selectedContinents,
     selectedGuests,
@@ -113,7 +123,7 @@ function BookingsFilter({ bookings, onFilter }) {
       {/* Max guests */}
       <div>
         <h3 className="font-garamond text-cl mb-2 uppercase text-gray-600 tracking-wider">
-          Location
+          Guests
         </h3>
         <div className="flex flex-wrap md:flex-col gap-2">
           {guestOptions.map((g) => (
