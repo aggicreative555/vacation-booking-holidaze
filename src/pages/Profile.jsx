@@ -29,6 +29,7 @@ function Profile() {
     }
   }, [user, fetchBookingsByUser]);
 
+
   if (!user) {
     return (
       <main>

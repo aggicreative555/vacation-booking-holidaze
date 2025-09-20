@@ -13,14 +13,14 @@ const useBookingStore = create(
 
       fetchBookings: async () => {
         try {
-          const data = await apiClient(
+          const response = await apiClient(
             `/holidaze/bookings`,
             {},
             true,
             true
           );
 
-          set({ bookings: data.data || [] });
+          set({ bookings: response?.data ?? response });
           
         } catch (error) {
           console.error('Failed to fetch bookings from API', error);
@@ -29,14 +29,14 @@ const useBookingStore = create(
 
       fetchBookingsByUser: async (name) => {
         try {
-          const data = await apiClient(
+          const response = await apiClient(
             `/holidaze/profiles/${name}/bookings?_venue=true`,
             {},
             true,
             true
           );
 
-          set({ userBookings: data.data || [] });
+          set({ userBookings: response?.data ?? response });
         } catch (error) {
           console.error('Failed to fetch bookings from API', error);
         }
@@ -69,7 +69,7 @@ const useBookingStore = create(
         }
       },
 
-      removeFromBookings: async (id, name) => {
+      removeFromBookings: async (id, name, venue) => {
         try {
           await apiClient(
             `/holidaze/bookings/${id}`,
@@ -86,7 +86,7 @@ const useBookingStore = create(
             await get().fetchBookingsByUser(name);
           }
 
-          showToast.bookingRemoved(id, venue?.name || 'Your booking');
+          showToast.bookingRemoved(id, name || 'Your booking');
         } catch (error) {
           console.error('Failed to delete booking from API', error);
         }

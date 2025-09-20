@@ -16,26 +16,25 @@ function EditProfileForm({ user, onClose }) {
     mode: 'onBlur',
     reValidateMode: 'onChange',
     defaultValues: {
-      bio: `${user?.data?.bio}` || '',
+      bio: user?.bio ?? '',
       avatar: {
-        url: `${user?.data?.avatar?.url}` || '',
-        alt: `${user?.data?.avatar?.alt}` || 'User avatar picture',
+        url: user?.avatar?.url ||  '',
+        alt: user?.avatar?.alt ?? 'User avatar picture' ,
       },
       banner: {
-        url: `${user?.data?.avatar?.url}` || '',
-        alt: `${user?.data?.banner?.alt}` || 'User banner picture',
+        url: user?.banner?.url || '',
+        alt: user?.banner?.alt ?? 'User banner picture',
       },
     },
   });
 
   const { updateUser } = useAuthStore();
-  console.log(user);
 
   const onSubmit = async (data) => {
     const toastId = showToast.loading('Updating Profile...');
     try {
       const updatedUser = await apiClient(
-        `/holidaze/profiles/${user?.data.name}`,
+        `/holidaze/profiles/${user?.name}`,
         {
           method: 'PUT',
           body: JSON.stringify(data),
@@ -44,8 +43,7 @@ function EditProfileForm({ user, onClose }) {
         true
       );
 
-      updateUser(updatedUser);
-      console.log(updatedUser);
+      updateUser(updatedUser.data);
 
       await new Promise((res) => setTimeout(res, 1500));
       toast.dismiss(toastId);
@@ -54,11 +52,9 @@ function EditProfileForm({ user, onClose }) {
       showToast.profileUpdated();
       if (onClose) onClose();
 
-      await new Promise((res) => setTimeout(res, 1500));
-      window.location.reload(true);
     } catch (error) {
       console.error('Error updating profile:', error);
-      const apiMessage = error?.data?.errors?.[0]?.message;
+      const apiMessage = error?.errors?.[0]?.message;
       const errorMessage =
         `${apiMessage}. Please try again.` ||
         'Something went wrong when updating your profile. Please try again later.';

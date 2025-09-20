@@ -31,10 +31,10 @@ function LoginForm() {
         body: JSON.stringify(data),
       });
 
-      const result = await response;
+      const result = response;
 
-      const token = response.data.accessToken;
-      const key = response.data.apiKey;
+      const token = result.data.accessToken;
+      const key = result.data.apiKey;
       if (!token && !key)
         throw new Error('No access token or api key returned from API');
       localStorage.setItem('accessToken', token);

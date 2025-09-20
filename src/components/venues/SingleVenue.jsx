@@ -15,7 +15,7 @@ import CalendarPicker from '../calendar/CalendarPicker';
 function SingleVenue() {
   const { id } = useParams();
   const { singleVenue, isLoading, isError, fetchVenueById } = useVenueStore();
-  const { addToBookings, userBookings, removeFromBookings } = useBookingStore();
+  const { addToBookings, userBookings, removeFromBookings, fetchBookingsByUser } = useBookingStore();
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const [editIsOpen, setEditIsOpen] = useState(false);
@@ -23,8 +23,7 @@ function SingleVenue() {
   const [guests, setGuests] = useState(1);
   const [calculatedPrice, setCalculatedPrice] = useState(0);
 
-    const hasOverlap = userBookings.some((b) =>
-        b.venue?.id === singleVenue?.id &&
+    const hasOverlap = singleVenue?.bookings?.some((b) =>
         selectedRange?.from <= new Date(b.dateTo) &&
         selectedRange?.to >= new Date(b.dateFrom)
     );
@@ -32,6 +31,10 @@ function SingleVenue() {
     const exceedsGuests = guests > singleVenue?.maxGuests;
 
     const canBook = selectedRange?.from && selectedRange?.to && !hasOverlap && !exceedsGuests;
+
+    const alreadyBooked = userBookings?.some(
+      (booking) => booking?.venue?.id === singleVenue?.id && booking?.customer?.name === user?.name
+    );
 
 
     const handleAddBooking = () => {
@@ -80,6 +83,12 @@ function SingleVenue() {
         fetchVenueById(id);
     }
     }, [id, singleVenue, fetchVenueById]);
+
+    useEffect(() => {
+    if (user) {
+        fetchBookingsByUser(user.name);
+    }
+    }, [user, fetchBookingsByUser]);
 
     if (isLoading) return <p>Loading Content...</p>;
     if (isError) return <p>Error loading venues, please refresh the page...</p>;
@@ -207,7 +216,7 @@ function SingleVenue() {
                   {calculatedPrice} NOK total
                 </div>
 
-                {!hasOverlap ? (
+                {!alreadyBooked && !hasOverlap ? (
                   <button
                     className="btn-l btn-primary w-full"
                     onClick={handleAddBooking}

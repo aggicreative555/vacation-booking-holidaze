@@ -46,7 +46,7 @@ function EditVenueForm({ venue, onClose }) {
       window.location.reload(true);
     } catch (error) {
       console.error('Error updating venue:', error);
-      const apiMessage = error?.data?.errors?.[0]?.message;
+      const apiMessage = error?.data?.errors?.[0]?.message || error.message ;
       const errorMessage =
         `${apiMessage}. Please try again.` ||
         'Something went wrong when updating your venue. Please try again later.';

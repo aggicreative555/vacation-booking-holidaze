@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import useBookingStore from '../../stores/useBookingStore';
 
 function ProfileBookings() {
-  const { bookings, clearBookings, removeFromBookings } = useBookingStore();
+  const { userBookings, clearBookings, removeFromBookings } = useBookingStore();
 
-  if (!bookings || bookings.length === 0) {
+  if (!userBookings || userBookings.length === 0) {
     return (
       <p className="text-gray-400 uppercase font-button text-2xl pb-2 mb-5 mt-5 transition-all duration-300 ease-in-out">
         {' '}
@@ -21,7 +21,7 @@ function ProfileBookings() {
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
-        {bookings.map((booking) => (
+        {userBookings.map((booking) => (
           <div
             key={booking.id}
             className="flex flex-col text-lg items-center gap-2 max-w-90 lg:w-fit border-[1px] pb-10 border-gray-200 cursor-default container mx-auto"
@@ -33,7 +33,7 @@ function ProfileBookings() {
               <div className="flex justify-center items-center h-64 w-fill overflow-clip">
                 <img
                   className="h-fill w-fill object-cover"
-                  src={booking?.venue.media?.[0]?.url}
+                  src={booking?.venue?.media?.[0]?.url}
                   alt={booking.venue?.media?.[0]?.alt || 'Venue image'}
                 />
               </div>
@@ -53,7 +53,7 @@ function ProfileBookings() {
               className="btn-l btn-primary"
               onClick={(e) => {
                 e.stopPropagation();
-                removeFromBookings(booking.id);
+                removeFromBookings(booking.id, booking.name );
               }}
             >
               Cancel booking
