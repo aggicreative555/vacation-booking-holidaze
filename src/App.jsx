@@ -11,10 +11,8 @@ import {
   Profile,
   Register,
 } from './pages';
-import AuthRequired from './components/auth/AuthRequired';
 
 function App() {
-  const ProtectedProfile = AuthRequired(Profile);
   return (
     <>
       <ToastContainer
