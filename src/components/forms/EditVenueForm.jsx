@@ -1,15 +1,18 @@
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { venueSchema } from '../../schema/venueSchema';
 import { showToast } from '../../utils/toast';
 import { toast } from 'react-toastify';
 import { apiClient } from '../../utils/apiClient';
+import { useEffect } from 'react';
+import { useVenueStore } from '../../stores/useVenueStore';
 
 function EditVenueForm({ venue, onClose }) {
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(venueSchema),
@@ -23,18 +26,38 @@ function EditVenueForm({ venue, onClose }) {
     name: 'media',
   });
 
+  const { updateVenue } = useVenueStore.getState();
+
+  useEffect(() => {
+    if (venue) {
+      reset({
+          ...venue,
+          meta: {
+          wifi: !!venue?.meta?.wifi ||  false,
+          parking: !!venue?.meta?.parking || false,
+          breakfast: !!venue?.meta?.breakfast || false,
+          pets: !!venue?.meta?.pets || false,
+        },
+      })
+
+    }
+  }, [venue, reset]);
+
   const onSubmit = async (data) => {
     const toastId = showToast.loading('Updating Venue...');
+
     try {
-      await apiClient(
+      const response = await apiClient(
         `/holidaze/venues/${venue.id}`,
         {
           method: 'PUT',
-          body: JSON.stringify(data),
+          body: data,
         },
         true,
         true
       );
+
+      updateVenue(response?.data ?? response)
 
       await new Promise((res) => setTimeout(res, 1500));
       toast.dismiss(toastId);
@@ -43,7 +66,6 @@ function EditVenueForm({ venue, onClose }) {
       showToast.venueUpdated();
       if (onClose) onClose();
       await new Promise((res) => setTimeout(res, 1500));
-      window.location.reload(true);
     } catch (error) {
       console.error('Error updating venue:', error);
       const apiMessage = error?.data?.errors?.[0]?.message || error.message ;
@@ -157,10 +179,20 @@ function EditVenueForm({ venue, onClose }) {
           </button>
         </div>
         {/* Amenities */}
-        <div className="flex flex-wrap flex-col gap-4 font-button uppercase my-6">
-          {['Wifi', 'Parking', 'Breakfast', 'Pets'].map((amenity) => (
+        <div className="flex flex-wrap flex-col gap-4 font-button uppercase my-6 checked:bg-black">
+          {['wifi', 'parking', 'breakfast', 'pets'].map((amenity) => (
             <label key={amenity} className="flex gap-2 items-center">
-              <input type="checkbox" {...register(`meta.${amenity}`)} />
+                <Controller
+                  name={`meta.${amenity}`}
+                  control={control}
+                  render={({ field }) => (
+                    <input 
+                    type="checkbox"
+                    checked={!!field.value}
+                    onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  )}
+                />
               {amenity}
             </label>
           ))}

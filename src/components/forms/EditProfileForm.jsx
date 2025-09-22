@@ -5,6 +5,7 @@ import { profileSchema } from '../../schema/profileSchema';
 import { toast } from 'react-toastify';
 import { apiClient } from '../../utils/apiClient';
 import { useAuthStore } from '../../stores/useAuthStore';
+import { useVenueStore } from '../../stores/useVenueStore';
 
 function EditProfileForm({ user, onClose }) {
   const {
