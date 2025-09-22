@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { apiClient } from '../utils/apiClient';
+import { showToast } from '../utils/toast';
 
 export const useVenueStore = create((set, get) => ({
   venues: [],
@@ -74,6 +75,24 @@ export const useVenueStore = create((set, get) => ({
       console.error('Fetch error:', error);
       set({ isError: true, isLoading: false });
     }
+  },
+
+  addVenue: (newVenue) => {
+    set((state) => ({ 
+      venues: [newVenue, ...state.venues],
+      userVenues: [newVenue, ...state.userVenues],
+    }));
+  },
+
+  updateVenue: (updatedVenue) => {
+    set((state) => ({
+      venues: state.venues.map((v) => 
+      v.id === updatedVenue.id ? updatedVenue : v
+    ),
+      userVenues: state.userVenues.map((v) => 
+      v.id === updatedVenue.id ? updatedVenue : v 
+    ),
+    }))
   },
 
   removeFromVenues: async (id) => {
