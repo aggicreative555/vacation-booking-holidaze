@@ -16,30 +16,28 @@ const SearchBar = ({ data = [], onResults }) => {
   toast.dismiss(showToast.error);
 
   useEffect(() => {
-    if (debouncedQuery.length === 0 || debouncedQuery.length > 1) {
-      const results = data.filter((item) =>
-        item?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
-      );
-
-      // 1 error toast per second
-      if (
-        debouncedQuery.length > 1 &&
-        results.length === 0 &&
-        !errorToast.current
-      ) {
-        showToast.error('No items match your search. Please try again.');
-        errorToast.current = true;
-        setTimeout(() => {
-          errorToast.current = false;
-        }, 1000);
-      }
-      setSuggestions(results.slice(0, 3));
-      onResults?.(results);
+    if (!debouncedQuery) {
+      onResults?.(data);
+      setSuggestions([]);
+      return;
     }
-  }, [debouncedQuery, data, onResults]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
+    const results = data.filter((item) => 
+    item?.name.toLowerCase().includes(debouncedQuery.toLowerCase()));
+
+    setSuggestions(results.slice(0, 3));
+    onResults?.(results);
+
+    if (results.length === 0 && !errorToast.current) {
+      showToast.error('No venues match your search. Please try again');
+      errorToast.current = true;
+      setTimeout(() => (errorToast.current = false), 1000);
+    }
+    
+}, [debouncedQuery, data, onResults]);
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target))
         setIsFocused(false);
     };
@@ -55,7 +53,7 @@ const SearchBar = ({ data = [], onResults }) => {
     setSuggestions([]);
 
     const selected = data.filter(
-      (item) => item?.name.toLowerCase() === name.toLowerCase()
+      (item) => item?.name.toLowerCase().includes(name.toLowerCase())
     );
 
     onResults?.(selected);

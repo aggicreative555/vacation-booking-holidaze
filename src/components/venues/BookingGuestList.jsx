@@ -17,7 +17,7 @@ function BookingGuestList({ venueId }) {
   return (
     <div className="overflow-x-auto pb-8 px-10">
       {singleVenue.bookings.map((booking) => (
-        <table className="w-fit">
+        <table key={booking.id} className="w-fit">
           <thead className=" font-garamond font-semibold text-2xl uppercase pb-5 text-left">
             <tr>
               <th className="px-8 py-2 text-left">Customer</th>
