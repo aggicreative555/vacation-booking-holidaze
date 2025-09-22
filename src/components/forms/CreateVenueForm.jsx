@@ -4,6 +4,7 @@ import { venueSchema } from '../../schema/venueSchema';
 import { showToast } from '../../utils/toast';
 import { toast } from 'react-toastify';
 import { apiClient } from '../../utils/apiClient';
+import { useVenueStore } from '../../stores/useVenueStore';
 
 function CreateVenueForm({ onClose }) {
   const {
@@ -22,6 +23,8 @@ function CreateVenueForm({ onClose }) {
     },
   });
 
+  const { addVenue } = useVenueStore.getState();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'media',
@@ -30,7 +33,7 @@ function CreateVenueForm({ onClose }) {
   const onSubmit = async (data) => {
     const toastId = showToast.loading('Creating Venue...');
     try {
-      await apiClient(
+      const response = await apiClient(
         '/holidaze/venues',
         {
           method: 'POST',
@@ -40,6 +43,9 @@ function CreateVenueForm({ onClose }) {
         true
       );
 
+      addVenue(response?.data ?? response );
+      console.log(response?.data || response);
+
       await new Promise((res) => setTimeout(res, 1500));
       toast.dismiss(toastId);
 
@@ -48,10 +54,9 @@ function CreateVenueForm({ onClose }) {
       if (onClose) onClose();
 
       await new Promise((res) => setTimeout(res, 1500));
-      window.location.reload(true);
     } catch (error) {
       console.error('Error creating venue:', error);
-      const apiMessage = error?.data?.errors?.[0]?.message;
+      const apiMessage = error?.errors?.[0]?.message;
       const errorMessage =
         `${apiMessage}. Please try again.` ||
         'Something went wrong when creating your venue. Please try again later.';
