@@ -8,9 +8,8 @@ import BookingGuestList from './BookingGuestList';
 
 function ProfileVenues() {
   const { userVenues, removeFromVenues } = useVenueStore();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isBookingsModalOpen, setIsBookingsModalOpen] = useState(false);
   const [selectedVenueId, setSelectedVenueId] = useState(null);
+  const [ editingVenue, setEditingVenue ] = useState(null);
 
   if (!userVenues || userVenues.length === 0) {
     return (
@@ -55,43 +54,20 @@ function ProfileVenues() {
                   className="btn-l btn-primary"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setEditIsOpen(true);
+                    setEditingVenue(venue);
                   }}
                 >
                   Edit Venue
                 </button>
-                <Modal
-                  isOpen={isEditModalOpen}
-                  onClose={() => setIsEditModalOpen(false)}
-                >
-                  <EditVenueForm onClose={() => setIsEditModalOpen(false)} />
-                </Modal>
                 <button
                   className="btn-l btn-secondary"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setIsBookingsModalOpen(true);
                     setSelectedVenueId(venue.id);
                   }}
                 >
                   View Bookings
                 </button>
-                <Modal
-                  isOpen={isBookingsModalOpen}
-                  onClose={() => setIsBookingsModalOpen(false)}
-                >
-                  <div className="flex flex-row gap-2 p-8 mb-4 justify-center items-center">
-                    <p className="text-xl font-garamond text-gray-500 uppercase ">
-                      Booking for:{' '}
-                    </p>
-                    <p className="text-3xl font-garamond text-red-800 uppercase ">
-                      {venue?.name}
-                    </p>
-                  </div>
-                  {selectedVenueId && (
-                    <BookingGuestList venueId={selectedVenueId} />
-                  )}
-                </Modal>
                 <button
                   className="btn-l btn-secondary"
                   onClick={(e) => {
@@ -105,6 +81,35 @@ function ProfileVenues() {
             </div>
           </div>
         ))}
+        {editingVenue && (
+        <Modal
+          key={editingVenue.id}
+          isOpen={!!editingVenue}
+          onClose={() => setEditingVenue(null)}
+        >
+          <EditVenueForm
+            venue={editingVenue}
+            onClose={() => setEditingVenue(null)}
+          />
+        </Modal>
+      )}
+      {selectedVenueId && (
+        <Modal
+          key={selectedVenueId}
+          isOpen={!!selectedVenueId}
+          onClose={() => setSelectedVenueId(null)}
+        >
+        <div className="flex flex-row gap-2 p-8 mb-4 justify-center items-center">
+          <p className="text-xl font-garamond text-gray-500 uppercase ">
+            Booking for:{' '}
+          </p>
+          <p className="text-3xl font-garamond text-red-800 uppercase ">
+            {userVenues.find((v) => v.id === selectedVenueId)?.name}
+          </p>
+        </div>
+          <BookingGuestList venueId={selectedVenueId} />
+        </Modal>
+      )}
       </div>
     </div>
   );

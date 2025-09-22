@@ -53,7 +53,7 @@ function ProfileBookings() {
               className="btn-l btn-primary"
               onClick={(e) => {
                 e.stopPropagation();
-                removeFromBookings(booking.id, booking.name );
+                removeFromBookings(booking.id, booking.name);
               }}
             >
               Cancel booking
