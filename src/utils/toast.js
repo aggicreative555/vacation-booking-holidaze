@@ -11,7 +11,7 @@ export const showToast = {
     }),
 
   logoutSuccess: (username) =>
-    toast.success(`${username} is logged out.` || 'You are logged out.', {
+    toast.success(`${username || 'You'} is logged out.`, {
       className:
         'p-6 shadow-md bg-green-100 border border-green-800 text-green-800 font-garamond italic normal-case text-base rounded-none',
       hideProgressBar: false,
