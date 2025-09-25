@@ -52,13 +52,13 @@ function NavLinks() {
   return (
     <>
       {links.map(({ to, label, icon, isCart }) => (
-        <li key={to} className="relative bg-white ">
+        <li key={to} className="relative">
           <NavLink
             to={to}
             className={({ isActive }) =>
-              `block my-1 font-garamond text-lg uppercase text-black transition-all duration-50 ease-in-out ${
+              `block my-1 font-garamond text-base uppercase text-black transition-all duration-50 ease-in-out ${
                 isActive
-                  ? 'text-red-900 font-bold border-b-[1px] border-red-900 hover:text-black hover:border-black hover:tracking-wider'
+                  ? 'text-crimson font-bold border-b-[1px] border-crimson hover:text-black hover:border-black hover:tracking-wider'
                   : 'text-black hover:border-b-[1px] border-black hover:tracking-wide'
               }`
             }
@@ -69,7 +69,7 @@ function NavLinks() {
               <span
                 aria-label="Cart booking count"
                 className={`
-                  absolute -top-2 -right-3 bg-red-900 text-white font-button text-xs w-5 h-5 flex items-center justify-center rounded-full
+                  absolute -top-2 -right-3 bg-buoy text-light font-button text-xs w-5 h-5 flex items-center justify-center rounded-full
                   transition-all duration-300
                   ${itemCount > 0 ? 'block' : 'hidden'}
                   ${animate ? 'animate-bounce' : ''}
