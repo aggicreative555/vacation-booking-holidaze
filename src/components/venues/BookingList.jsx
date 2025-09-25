@@ -38,7 +38,7 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
                   />
                 </div>
                 <div className="px-6 py-4 flex justify-between items-center flex-col relative w-full overflow-hidden h-fit">
-                  <h2 className="text-3xl text-center font-garamond uppercase text-red-800 mb-2 line-clamp-1 h-fit w-40">
+                  <h2 className="text-3xl text-center font-chonburi uppercase text-red-800 mb-2 line-clamp-1 h-fit w-40">
                     {booking?.name}
                   </h2>
                   <div className="mb-4">

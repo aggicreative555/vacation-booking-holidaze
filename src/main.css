@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Chonburi&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=IM+Fell+English:ital@0;1&display=swap');
 @import '@glidejs/glide/dist/css/glide.core.min.css';
 @import '@glidejs/glide/dist/css/glide.theme.min.css';
 
@@ -22,33 +21,31 @@ input[type='search']::-webkit-search-results-decoration {
 
 /* frame cutout */
 
-.tv {
-  position: relative;
-  margin: 20px 0;
-  border-radius: 50% / 10%;
-}
-
-.tv:before {
-  content: '';
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  right: -5%;
-  left: -5%;
-  background: inherit;
-  border-radius: 5% / 50%;
-}
 
 @theme {
-  --font-garamond: 'EB Garamond', 'serif';
-  --font-caslon: 'Libre Caslon Text', 'serif';
-  --font-button: 'Fahkwang', 'sans-serif';
-  --font-ballet: 'Ballet', 'serif';
+  --font-garamond: 'Garamond', 'serif';
+  --font-imfell: 'IM Fell English', 'serif';
+  --font-chonburi: 'Chonburi', 'serif';
+  --color-marine: #003049 ;
+  --color-crimson: #780000 ;
+  --color-sand-300: #F9B34A ;
+  --color-sand-200: #FAC777 ;
+  --color-sand-100: #FDF0D5 ;
+  --color-lamp: #4A6552 ;
+  --color-buoy: #DB502F ;
+  --color-dark: #0F0B01 ;
+  --color-light: #FFFDF8 ;
+  --color-brown-100: #DEDBD7 ;
+  --color-brown-200: #AEA59B ;
+  --color-brown-300: #7D6E5F ;
+  --color-brown-400: #6C5C4B ;
+  --color-brown-500: #5C4A37 ;
+  --color-brown-600: #2E251C ;
 }
 
 @layer components {
   .btn-l {
-    @apply flex items-center justify-center px-4 py-2 my-1 border-2 border-black outline-black outline-1 outline-offset-2 font-button uppercase text-xs font-light transition-all duration-300 ease-in-out hover:font-medium hover:border-4 hover:tracking-wider cursor-pointer;
+    @apply flex items-center justify-center px-4 py-2 my-1 border-2 border-black outline-black outline-1 outline-offset-2 font-garamond uppercase text-xs font-light transition-all duration-300 ease-in-out hover:font-medium hover:border-4 hover:tracking-wider cursor-pointer;
   }
 
   .btn-primary {
@@ -56,18 +53,14 @@ input[type='search']::-webkit-search-results-decoration {
   }
 
   .btn-s {
-    @apply flex items-center justify-center px-4 py-2 my-4 rounded-full shadow-md font-button uppercase text-xs font-light transition-all duration-300 ease-in-out hover:font-medium hover:shadow-lg cursor-pointer;
-  }
-
-  .input-base {
-    @apply border-gray-300 group-hover:border-black py-2 px-2;
+    @apply flex items-center justify-center px-4 py-2 my-4 rounded-full shadow-md font-garamond uppercase text-xs transition-all duration-300 ease-in-out hover:font-medium hover:shadow-lg cursor-pointer;
   }
 
   .label-base {
-    @apply flex flex-col p-2 w-full font-garamond uppercase text-black text-sm focus:tracking-wider gap-2;
+    @apply flex flex-col p-2 w-full font-garamond uppercase text-black font-semibold text-base focus:tracking-wider gap-2;
   }
 
   .error-message {
-    @apply py-4 mb-2 text-red-800 italic font-caslon normal-case transition-all duration-300 ease-in-out;
+    @apply py-4 mb-2 text-red-800 italic font-garamond normal-case transition-all duration-300 ease-in-out;
   }
 }
