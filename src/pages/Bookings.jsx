@@ -3,7 +3,6 @@ import SearchBar from '../components/search/SearchBar';
 import BookingList from '../components/venues/BookingList';
 import BookingsFilter from '../components/filters/BookingsFilter';
 import { useVenueStore } from '../stores/useVenueStore';
-import { preview } from 'vite';
 
 const Bookings = () => {
   const {venues, fetchVenue, isLoading, isError } = useVenueStore();
@@ -17,7 +16,7 @@ const Bookings = () => {
 
   useEffect(() => {
     setFilteredBookings((prev => {
-      const venueIds = new Set(preview.map(v => v.id));
+      const venueIds = new Set(prev.map(v => v.id));
       const merged = [...prev];
       venues.forEach(v => {
         if (!venueIds.has(v.id)) merged.push(v);
