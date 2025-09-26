@@ -68,16 +68,16 @@ function LoginForm() {
 
   return (
     <>
-      <h1 className="uppercase font-garamond w-full text-center break-word max-w-[400px] md:max-w-[450px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
-        Log in
-      </h1>
-      <span className="h-[1px] w-2/4 bg-black m-[1px]"></span>
-      <span className="h-[1px] w-2/4 bg-black m-[1px]"></span>
+      <div className='w-fit min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12'>
+        <h1 className="uppercase font-chonburi text-center break-word py-6 w-fit h-fit text-buoy text-6xl md:text-8xl">
+          Log in
+        </h1>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit, (formErrors) => {
           console.error('Form errors:', formErrors);
         })}
-        className={`flex flex-col gap-6 md:w-96 mt-10 ${isSubmitting ? 'opacity-50 pointer-events-none' : ''}`}
+        className={`flex flex-col gap-6 md:w-[588px] max-w-[588px] mt-10 ${isSubmitting ? 'opacity-50 pointer-events-none' : ''}`}
       >
         <label className="label-base group">
           Email
@@ -85,19 +85,19 @@ function LoginForm() {
             type="email"
             {...register('email')}
             autoComplete="email"
-            className="input-base border-b-[1px] hover:border-black hover:border-b-[2px] transition-all duration-200 ease-in-out focus:border-black focus:border focus:rounded-none focus:outline-1 focus:outline-offset-1 focus:outline-black"
+            className="input-base"
           />
           {errors.email && (
             <p className="error-message">{errors.email.message}</p>
           )}
         </label>
-        <label className="label-base group">
+        <label className="label-base group mb-20">
           Password
           <input
             type="password"
             {...register('password')}
             autoComplete="new-password"
-            className="input-base border-b-[1px] hover:border-black hover:border-b-[2px] transition-all duration-200 ease-in-out focus:border-black focus:border focus:rounded-none focus:outline-1 focus:outline-offset-1 focus:outline-black"
+            className="input-base"
           />
           {errors.password && (
             <p className="error-message">{errors.password.message}</p>
@@ -105,7 +105,7 @@ function LoginForm() {
         </label>
         <button
           type="submit"
-          className="btn-l btn-primary disabled:bg-gray-100 disabled:text-gray-400"
+          className="btn-l btn-primary mt-6 mb-8 disabled:bg-gray-100 disabled:text-gray-400"
           disabled={isSubmitting}
         >
           {' '}

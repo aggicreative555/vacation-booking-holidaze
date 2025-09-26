@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+body {
+  @apply bg-light 
+}
+
 /* remove browser icon appearence */
 
 input[type='search']::-webkit-search-decoration,
@@ -45,7 +49,7 @@ input[type='search']::-webkit-search-results-decoration {
 
 @layer components {
   .btn-l {
-    @apply flex items-center justify-center px-[54px] py-4 my-1 border-2 bg-light border-black outline-black outline-1 outline-offset-2 font-garamond uppercase text-xl font-semibold transition-all duration-100 ease-in-out hover:font-bold hover:border-4 hover:tracking-wider cursor-pointer;
+    @apply flex items-center justify-center px-[54px] py-4 my-1 border-2 bg-light border-dark outline-dark outline-1 outline-offset-2 font-garamond uppercase text-xl font-semibold transition-all duration-100 ease-in-out hover:font-bold hover:border-4 hover:tracking-wider cursor-pointer;
   }
 
   .btn-primary {
@@ -53,14 +57,18 @@ input[type='search']::-webkit-search-results-decoration {
   }
 
   .btn-s {
-    @apply flex items-center justify-center px-[54px] py-4 border-2 border-black outline-black outline-1 outline-offset-2 font-garamond uppercase font-semibold text-xs transition-all duration-100 ease-in-out hover:font-bold cursor-pointer;
+    @apply flex items-center justify-center px-[54px] py-4 border-2 border-dark outline-dark outline-1 outline-offset-2 font-garamond uppercase font-semibold text-xs transition-all duration-100 ease-in-out hover:font-bold cursor-pointer;
   }
 
   .label-base {
-    @apply flex flex-col p-2 w-full font-garamond uppercase text-black font-semibold text-base focus:tracking-wider gap-2;
+    @apply flex flex-col p-2 w-full font-garamond uppercase text-dark font-semibold text-base focus:tracking-wider gap-2 hover:tracking-wider transition-all duration-300;
+  }
+
+  .input-base {
+    @apply flex flex-col p-4 justify-center w-full border-b-[1px] m-4 border-brown-300 focus:border-dark focus:border-b-2 hover:border-b-dark hover:border-b-2 text-dark transition-all duration-300 text-xl text-center;
   }
 
   .error-message {
-    @apply py-4 mb-2 text-red-800 italic font-garamond normal-case transition-all duration-300 ease-in-out;
+    @apply px-2 mb-2 text-buoy italic font-garamond font-semibold normal-case text-base transition-all duration-300 ease-in-out;
   }
 }
