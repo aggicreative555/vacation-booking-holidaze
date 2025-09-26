@@ -77,6 +77,24 @@ export const useVenueStore = create((set, get) => ({
     }
   },
 
+  fetchVenuesByIds: async (ids = []) => {
+    set({ isLoading: true, isError: false });
+    try {
+      const responses = await Promise.all(
+        ids.map(async (id) => {
+          const res = await apiClient(`/holidaze/venues/${id}?_owner=true`);
+          return res?.data ?? null;
+        })
+      );
+      set({ isLoading: false });
+      return responses.filter((v) => v !== null);
+    } catch (error) {
+      console.error("Failed to fetch venues by IDs:", error);
+      set({ isLoading: false, isError: true });
+      return [];
+    }
+  },
+
   addVenue: (newVenue) => {
     set((state) => ({ 
       venues: [newVenue, ...state.venues],
