@@ -5,8 +5,6 @@ import { profileSchema } from '../../schema/profileSchema';
 import { toast } from 'react-toastify';
 import { apiClient } from '../../utils/apiClient';
 import { useAuthStore } from '../../stores/useAuthStore';
-import UserToggle from '../buttons/Usertoggle';
-
 function EditProfileForm({ user, onClose }) {
   const {
     register,

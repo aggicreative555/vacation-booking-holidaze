@@ -5,7 +5,7 @@ import { registerSchema } from '../../schema/registerSchema';
 import { toast } from 'react-toastify';
 import { showToast } from '../../utils/toast';
 import { apiClient } from '../../utils/apiClient';
-import Usertoggle from '../buttons/Usertoggle';
+import UserToggle from '../buttons/UserToggle';
 
 function RegisterForm() {
   const navigate = useNavigate();
