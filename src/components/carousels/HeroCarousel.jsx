@@ -68,7 +68,7 @@ const HeroCarousel = ({ bookings = [], height = 'h-[800px]', content = true}) =>
                 <div className="absolute pointer-events-auto top-2/5 left-[208px] flex gap-6 flex-col">
                     <h1 className="text-light md:text-8xl font-chonburi uppercase">Holiday haze</h1>
                     <p className="font-imfell text-2xl text-light max-w-[500px]">Stay dazed with our curated venue selection; charming boutique hotels, holidays inns, and cozy lodges.</p>
-                    <Link to='/explore'
+                    <Link to='/bookings'
                     className="btn-l btn-primary text-light max-w-[300px]"> Explore
                     </Link> 
                 </div>
