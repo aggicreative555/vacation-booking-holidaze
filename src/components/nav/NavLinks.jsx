@@ -30,6 +30,7 @@ function NavLinks() {
 
   const visitorLinks = [
     { to: '/', label: 'Home' },
+    { to: '/bookings', label: 'Explore', isCart: false },
     { to: '/login', label: 'Login' },
     { to: '/register', label: 'Register' },
   ];
