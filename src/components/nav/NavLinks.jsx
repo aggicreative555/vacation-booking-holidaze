@@ -30,8 +30,6 @@ function NavLinks() {
 
   const visitorLinks = [
     { to: '/', label: 'Home' },
-    { to: '/bookings', label: 'Explore' },
-    { to: '/contact', label: 'Contact' },
     { to: '/login', label: 'Login' },
     { to: '/register', label: 'Register' },
   ];
@@ -39,7 +37,6 @@ function NavLinks() {
   const userLinks = [
     { to: '/', label: 'Home', isCart: false },
     { to: '/bookings', label: 'Explore', isCart: false },
-    { to: '/contact', label: 'Contact', isCart: false },
     {
       to: '/profile',
       icon: <CircleUserRound />,
