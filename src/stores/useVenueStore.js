@@ -12,10 +12,12 @@ export const useVenueStore = create((set, get) => ({
   fetchVenue: async () => {
     try {
       const response = await apiClient(`/holidaze/venues`, {});
+      const venues = Array.isArray(response?.data) ? response.data : [];
 
-      set({ venues: response?.data ?? response });
+      set({ venues, isLoading: false});
     } catch (error) {
       console.error('Failed to fetch venues from API', error);
+      set({ venues: [], isLoading: false, isError:true });
     }
   },
 

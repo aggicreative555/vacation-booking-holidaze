@@ -15,14 +15,7 @@ const Bookings = () => {
   }, [fetchVenue]);
 
   useEffect(() => {
-    setFilteredBookings((prev => {
-      const venueIds = new Set(prev.map(v => v.id));
-      const merged = [...prev];
-      venues.forEach(v => {
-        if (!venueIds.has(v.id)) merged.push(v);
-      })
-      return merged;
-    }));
+   setFilteredBookings(venues);
   }, [venues]);
 
   const handleFilterResults = useCallback((results) => {
@@ -30,11 +23,14 @@ const Bookings = () => {
   }, []);
 
   const handleSearchResults = useCallback((results) => {
-    setSearchedBookings(results);
+    setFilteredBookings(results);
   }, []);
 
-  const displayBookings = useMemo(() => {
-    let data = searchBookings.length > 0 ? searchBookings : filteredBookings.length > 0 ? filteredBookings : venues;
+  const sortedBookings = [...filteredBookings].sort((a, b) => {
+    const timeA = a.created ? new Date(a.created).getTime() : 0;
+    const timeB = b.created ? new Date(b.created).getTime() : 0;
+    return timeB - timeA; // newest first
+  });
 
     return [...data].sort((a, b) => {
       const dateA = a.created ? new Date(a.created) : a.id;
@@ -51,9 +47,16 @@ const Bookings = () => {
       <div className="flex flex-row justify-center gap-10 w-full">
         <BookingsFilter venues={venues || []} onFilter={handleFilterResults} />
         <div>
+    <main className="container mx-auto px-8 w-full transition-all duarion-300">
+      <HeroCarousel bookings={venueImages} height='h-[500px]' content={false}/>
+      <div className='max-w-[1500px]'>
           <SearchBar data={venues} onResults={handleSearchResults} />
           <BookingList bookings={displayBookings} />
         </div>
+          <div className='px-6 py-4 mb-6 group'>
+            <BookingsFilter venues={venues} onFilter={handleFilterResults} />
+          </div>
+          <BookingList bookings={sortedBookings} />
       </div>
     </main>
   );

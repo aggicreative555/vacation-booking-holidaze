@@ -1,3 +1,4 @@
+import { SlidersHorizontal } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const amenitiesOptions = [
@@ -28,6 +29,7 @@ function BookingsFilter({ venues, onFilter }) {
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [selectedContinents, setSelectedContinents] = useState([]);
   const [selectedGuests, setSelectedGuests] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleAmenity = (key) => {
     setSelectedAmenities((prev) =>
@@ -72,7 +74,6 @@ function BookingsFilter({ venues, onFilter }) {
                 return max >= guestLimit; // allow venues that can accommodate at least the selected guests
             });
         }
-
         onFilter(filtered);
   }, [
     venues,
@@ -83,62 +84,80 @@ function BookingsFilter({ venues, onFilter }) {
   ]);
 
   return (
-    <div className="max-w-40 pt-60 flex flex-col gap-6 p-6 mr-8">
-      {/* Amenities */}
-      <div>
-        <h3 className="font-garamond text-cl mb-2 uppercase text-gray-600 tracking-wider">
-          Amenities
-        </h3>
-        <div className="flex flex-wrap md:flex-col gap-2">
-          {amenitiesOptions.map((amenity) => (
-            <label key={amenity.key} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={selectedAmenities.includes(amenity.key)}
-                onChange={() => toggleAmenity(amenity.key)}
-              />
-              {amenity.label}
-            </label>
-          ))}
-        </div>
-      </div>
-      {/* Location */}
-      <div>
-        <h3 className="font-garamond text-cl mb-2 uppercase text-gray-600 tracking-wider">
-          Location
-        </h3>
-        <div className="flex flex-wrap md:flex-col gap-2">
-          {continentOptions.map((c) => (
-            <label key={c.key} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={selectedContinents.includes(c.key)}
-                onChange={() => toggleContinent(c.key)}
-              />
-              {c.label}
-            </label>
-          ))}
-        </div>
-      </div>
-      {/* Max guests */}
-      <div>
-        <h3 className="font-garamond text-cl mb-2 uppercase text-gray-600 tracking-wider">
-          Guests
-        </h3>
-        <div className="flex flex-wrap md:flex-col gap-2">
-          {guestOptions.map((g) => (
-            <label key={g.key} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={selectedGuests === g.key}
-                onChange={() => handleGuestChange(g.key)}
-              />
-              {g.label}
-            </label>
-          ))}
-        </div>
+    <div>
+      <button
+          aria-label="Toggle menu"
+          className="cursor-pointer m-3 flex gap-[10px] flex-row w-fit text-2xl items-center my-4 mx-2 font-garamond uppercase text-brown-300 tracking-wider group-hover:text-dark group-hover:tracking-widest transition-all duration-300"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          Filters
+          <SlidersHorizontal className='text-brown-400 group-hover:text-dark transition-all duration-300'/>
+      </button>
+      <div
+          className={`transform transition-all duration-700 ease-in-out origin-top ${
+            menuOpen
+              ? 'h-fit translate-y-0 opacity-100 pointer-events-auto'
+              : '-translate-y-100 -z-10 opacity-0 max-h-0 pointer-events-none'
+          }`}> 
+          <div className="w-full border-brown-100 border-[1px] flex flex-row gap-14 px-[46px] py-7 transition-all duration-300">
+            {/* Amenities */}
+            <div>
+              <h3 className="font-garamond text-2xl uppercase mb-2  text-brown-300 tracking-wider">
+                Amenities
+              </h3>
+              <div className="flex flex-wrap flex-col gap-2">
+                {amenitiesOptions.map((amenity) => (
+                  <label key={amenity.key} className="flex items-center gap-2 font-medium font-garamond text-base text-brown-300 uppercase tracking-wider">
+                    <input
+                      type="checkbox"
+                      checked={selectedAmenities.includes(amenity.key)}
+                      onChange={() => toggleAmenity(amenity.key)}
+                    />
+                    {amenity.label}
+                  </label>
+                ))}
+              </div>
+            </div>
+            {/* Location */}
+            <div>
+              <h3 className="font-garamond text-2xl uppercase mb-2  text-brown-300 tracking-wider">
+                Location
+              </h3>
+              <div className="flex flex-wrap md:flex-col gap-2">
+                {continentOptions.map((c) => (
+                  <label key={c.key} className="flex items-center gap-2 font-medium font-garamond text-base text-brown-300 uppercase tracking-wider">
+                    <input
+                      type="checkbox"
+                      checked={selectedContinents.includes(c.key)}
+                      onChange={() => toggleContinent(c.key)}
+                    />
+                    {c.label}
+                  </label>
+                ))}
+              </div>
+            </div>
+            {/* Max guests */}
+            <div>
+              <h3 className="font-garamond text-2xl uppercase mb-2  text-brown-300 tracking-wider">
+                Guests
+              </h3>
+              <div className="flex flex-wrap md:flex-col gap-2">
+                {guestOptions.map((g) => (
+                  <label key={g.key} className="flex items-center gap-2 font-medium font-garamond text-base text-brown-300 uppercase tracking-wider">
+                    <input
+                      type="checkbox"
+                      checked={selectedGuests === g.key}
+                      onChange={() => handleGuestChange(g.key)}
+                    />
+                    {g.label}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
       </div>
     </div>
+
   );
 }
 
