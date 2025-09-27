@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import Pagination from '../Pagination';
-import StarRating from '../rating/StarRating';
 import { MapPin } from 'lucide-react';
 
 function BookingList({ bookings = [], itemsPerPage = 6 }) {
@@ -17,67 +16,79 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
-  if (!bookings.length) return <p>No bookings found.</p>;
 
+   if (!bookings.length) return (
+    <div className='max-w-[500] flex items-center justify-center gap-2 my-80'>
+      <p className='text-center font-imfell italic text-crimson text-xl'>No bookings found. Please refresh the page and try again</p>
+      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+    </div>
+    
+  );
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
         {currentProducts.map((booking) => {
-
           return (
             <div
-              className="h-[600px] w-60 md:w-80 shadow-md flex flex-col justify-between transition-all ease-in-out duration-300 hover:shadow-xl group"
+              className="flex flex-col bg-sand-100 text-brown-300 p-2 w-fit max-w-[800px] h-[500px] md:h-[776px] transition-all ease-in-out duration-300 group"
               key={booking.id}
             >
-              <Link to={`/booking/${booking?.id}`} className="cursor-pointer">
-                <div className="h-64 w-fit overflow-clip">
+              <Link to={`/booking/${booking?.id}`} className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full">
+                <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] md:h-[440px] p-2 overflow-hidden">
                   <img
-                    className="h-64 w-100"
+                    className="object-cover h-full w-full border-2 border-marine"
                     src={booking?.media?.[0]?.url}
                     alt={booking?.media?.[0]?.alt || 'Venue image'}
                   />
                 </div>
-                <div className="px-6 py-4 flex justify-between items-center flex-col relative w-full overflow-hidden h-fit">
-                  <h2 className="text-3xl text-center font-chonburi uppercase text-red-800 mb-2 line-clamp-1 h-fit w-40">
+                <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
+                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6">
+                  <p className="text-xl italic text-center font-imfell">
+                    Stay at
+                  </p>
+                  <h2 className="text-2xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2">
                     {booking?.name}
                   </h2>
-                  <div className="mb-4">
-                    <StarRating venue={booking} />
-                  </div>
-                  <p className="text-2xl font-button text-black">
-                    {booking?.price} NOK
+                  <p className='flex flex-row text-xs uppercase font-garamond'>
+                    <MapPin size={16}/>
+                    {booking?.location?.country}
                   </p>
-                  <p className="text-center text-xs font-caslon text-black line-clamp-2 mt-4">
-                    {booking?.description}
-                  </p>
-                  <p className="text-center text-gray-600 uppercase font-button text-xs line-clamp-2 mt-4 flex justify-center items-center gap-1">
-                    <MapPin size={16} />
-                    {booking?.location?.city}, {booking?.location?.country}
-                  </p>
-                  <div className="flex gap-2 text-xs mt-2">
-                    {Object.entries(booking.meta)
-                      .filter(([__dirname, value]) => value)
-                      .map(([key]) => (
-                        <span
-                          key={key}
-                          className="px-3 py-1 pb-2 my-2 border rounded-full text-gray-600"
-                        >
-                          {key}
-                        </span>
-                      ))}
+                  <div className='flex flex-col justify-center items-center p-2 mt-2 border-brown-200 border-1 w-full md:mb-4'>
+                    <div className='flex flex-row justify-between'>
+                      <div className='flex flex-col justify-between'>
+                        <p className=" text-base text-brown font-garamond max-w-[200px] line-clamp-2 h-[100px] overflow-hidden hidden md:block ">
+                        {booking?.description}
+                        </p>
+                        <div className='flex flex-row justify-center items-center w-fit'>
+                          <p className="text-2xl font-chonburi w-fit">
+                            {booking?.price} NOK
+                          </p>
+                          <span className="text-xs uppercase font-garamond">
+                            / night
+                          </span>
+                        </div>
+                      </div>
+                      <div className='hidden md:block'>
+                        <div className="gap-1 text-xs mt-2 flex flex-col px-4 ">
+                          {Object.entries(booking.meta)
+                            .filter(([__dirname, value]) => value)
+                            .map(([key]) => (
+                              <span
+                                key={key}
+                                className="text-right text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full"
+                              >
+                                {key}
+                              </span>
+                            ))}
+                          </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                </div>
               </Link>
-              <div className="px-6 pb-4 h-full flex flex-col justify-end items-center">
-                <button
-                  className="flex w-full btn-l mb-5"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                >
-                  See booking
-                </button>
-              </div>
             </div>
           );
         })}

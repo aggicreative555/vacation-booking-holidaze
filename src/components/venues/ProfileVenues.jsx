@@ -1,4 +1,4 @@
-import { MapPin, Trash2 } from 'lucide-react';
+import { MapPin, Pencil, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useVenueStore } from '../../stores/useVenueStore';
 import Modal from '../modal/Modal';
@@ -14,10 +14,12 @@ function ProfileVenues() {
   if (!userVenues || userVenues.length === 0) {
     return (
       <>
-        <p className="text-gray-400 uppercase font-button text-2xl pb-2 mb-5 mt-5 transition-all duration-300 ease-in-out">
-          {' '}
-          You have not created any venues yet{' '}
-        </p>
+        <div className='max-w-[500] flex items-center justify-center gap-2 my-80'>
+        <p className='text-center font-imfell italic text-crimson text-xl'>You have not created any venues yet</p>
+        <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+        <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+        <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+      </div>
       </>
     );
   }
@@ -28,58 +30,72 @@ function ProfileVenues() {
         {userVenues.map((venue) => (
           <div
             key={venue.id}
-            className="flex flex-col text-lg items-center gap-2 lg:w-full border-[1px] pb-10 border-gray-200 cursor-default container mx-auto"
+            className="flex flex-col bg-sand-100 text-brown-300 p-2 w-fit max-w-[800px] h-[500px] transition-all ease-in-out duration-300 group"
           >
-            <div className="w-full">
-              <Link to={`/booking/${venue.id}`} className="cursor-pointer w-80">
-                <div className="h-64 overflow-clip w-full">
+              <Link
+                to={`/booking/${venue?.id}`}
+                className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full relative">
+                <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] p-2 overflow-hidden">
                   <img
-                    className="h-64 w-full object-cover"
+                    className="object-cover h-full w-full border-2 border-marine"
                     src={venue?.media?.[0]?.url}
                     alt={venue?.media?.[0]?.alt || 'Venue image'}
                   />
                 </div>
-                <div className="flex flex-col items-center gap-2 p-4">
-                  <h2 className="text-3xl text-center font-garamond uppercase text-red-800 mb-2 line-clamp-1 h-fit w-full">
-                    {venue?.name}
-                  </h2>
-                  <p className="text-center text-sm font-caslon text-black line-clamp-2 mt-4 flex justify-center items-center gap-1">
-                    <MapPin size={16} />
-                    {venue?.location?.city}, {venue?.location?.country}
-                  </p>
-                </div>
-              </Link>
-              <div className="flex flex-row mt-2 gap-4 items-center justify-center">
                 <button
-                  className="btn-l btn-primary"
+                  className="absolute btn-l aspect-square flex items-center right-0 top-0 justify-center p-3 rounded-full bg-light"
                   onClick={(e) => {
+                    title='Edit venue'
+                    e.preventDefault();
                     e.stopPropagation();
                     setEditingVenue(venue);
-                  }}
-                >
-                  Edit Venue
+                  }}>
+                  <Pencil size={16} />
                 </button>
-                <button
-                  className="btn-l btn-secondary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedVenueId(venue.id);
-                  }}
-                >
-                  View Bookings
-                </button>
-                <button
-                  className="btn-l btn-secondary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeFromVenues(venue.id);
-                  }}
-                >
-                  <Trash2 />
-                </button>
-              </div>
+                <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
+                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6">
+                    <h2 className="text-2xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2">
+                      {venue?.name}
+                    </h2>
+                    <p className='flex flex-row text-xs uppercase font-garamond'>
+                      <MapPin size={16}/>
+                      {venue?.location?.country}
+                    </p>
+                    < div className='flex flex-col justify-center items-center p-2 mt-2 border-brown-200 border-1 w-full md:mb-4'>
+                      <div className='flex flex-row justify-center items-center w-fit'>
+                        <p className="text-2xl font-chonburi w-fit">
+                          {venue?.price} NOK
+                        </p>
+                        <span className="text-xs uppercase font-garamond">
+                          / night
+                        </span>
+                      </div>
+                    </div>
+                    <div className='flex flex-row gap-6'>
+                      <button
+                      className='btn-s btn-primary'
+                       onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setSelectedVenueId(venue.id);
+                      }}>
+                        View Bookings
+                      </button>
+                      <button
+                        className="btn-l p-2 h-fit rounded-full"
+                        title='Remove venue'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          removeFromVenues(venue.id);
+                        }}>
+                        <Trash2/>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </div>
-          </div>
         ))}
         {editingVenue && (
         <Modal
@@ -99,14 +115,16 @@ function ProfileVenues() {
           isOpen={!!selectedVenueId}
           onClose={() => setSelectedVenueId(null)}
         >
-        <div className="flex flex-row gap-2 p-8 mb-4 justify-center items-center">
-          <p className="text-xl font-garamond text-gray-500 uppercase ">
-            Booking for:{' '}
-          </p>
-          <p className="text-3xl font-garamond text-red-800 uppercase ">
-            {userVenues.find((v) => v.id === selectedVenueId)?.name}
-          </p>
-        </div>
+          <div className='flex flex-col justify-center items-center my-8 mx-4'>
+            <div className='flex flex-row gap-2 justify-center items-center mb-8'>
+              <p className='text-base text-brown-300 font-garamond tracking-wide uppercase '>Bookings for: {''}</p>
+              <h1 className="text-4xl uppercase font-chonburi
+                w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson">
+                {userVenues.find((v) => v.id === selectedVenueId)?.name}
+              </h1>
+            </div>
+          </div>
+          
           <BookingGuestList venueId={selectedVenueId} />
         </Modal>
       )}
