@@ -11,7 +11,7 @@
 }
 
 body {
-  @apply bg-light 
+  @apply bg-light font-garamond
 }
 
 /* remove browser icon appearence */
@@ -56,6 +56,10 @@ input[type='search']::-webkit-search-results-decoration {
     @apply bg-marine text-light hover:border-4 hover:font-medium cursor-pointer;
   }
 
+  .btn-secondary {
+    @apply bg-light text-marine border-marine hover:border-4 hover:font-medium cursor-pointer;
+  }
+
   .btn-s {
     @apply flex items-center justify-center px-[54px] py-4 border-2 border-dark outline-dark outline-1 outline-offset-2 font-garamond uppercase font-semibold text-xs transition-all duration-100 ease-in-out hover:font-bold cursor-pointer;
   }
@@ -65,7 +69,7 @@ input[type='search']::-webkit-search-results-decoration {
   }
 
   .input-base {
-    @apply flex flex-col p-4 justify-center w-full border-b-[1px] m-4 border-brown-300 focus:border-dark focus:border-b-2 hover:border-b-dark hover:border-b-2 text-dark transition-all duration-300 text-xl text-center;
+    @apply flex flex-col p-4 justify-center w-full border-b-[1px] m-4 border-brown-300 focus:border-dark focus:border-b-2 hover:border-b-dark hover:border-b-2 text-dark transition-all duration-300 text-xl;
   }
 
   .error-message {
