@@ -15,12 +15,12 @@ const Home = () => {
     setVenueImages(images);
   };
 
-  fetchImages();
-}, [fetchVenuesByIds]);
+    fetchImages();
+  }, [fetchVenuesByIds]);
 
   return (
     <main className="bg-light">
-      <h1 className="text-4xl md:text-6xl text-crimson font-garamond text-center w-full cursor-default uppercase mb-10 ">
+      <h1 className="text-4xl hidden md:text-6xl text-crimson font-garamond text-center w-full cursor-default uppercase mb-10 ">
         Home page
       </h1>
       <HeroCarousel bookings={venueImages} height='h-[800px]'/>

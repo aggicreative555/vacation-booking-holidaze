@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-function Usertoggle({ register, setValue }) {
+function UserToggle({ register, setValue }) {
     const [selectedRole, setSelectedRole] = useState('customer');
 
     useEffect(() => {
@@ -40,4 +40,4 @@ function Usertoggle({ register, setValue }) {
     )
 }
 
-export default Usertoggle
+export default UserToggle;

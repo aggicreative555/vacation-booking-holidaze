@@ -36,7 +36,6 @@ const HeroCarousel = ({ bookings = [], height = 'h-[800px]', content = true}) =>
                             {bookings.slice(0,3).map((booking) => {
                                 const imageUrl = booking?.url;
                                 const imageAlt = booking?.alt;
-                                console.log(booking.url)
                                 return (
                                     <li
                                     key={imageUrl}
