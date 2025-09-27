@@ -13,7 +13,7 @@ import EditProfileForm from '../components/forms/EditProfileForm';
 function Profile() {
   const { user } = useAuthStore();
   const { fetchVenueByUser } = useVenueStore();
-  const { fetchBookingsByUser } = useBookingStore();
+  const { fetchBookingsByUser, clearBookings } = useBookingStore();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
@@ -33,7 +33,7 @@ function Profile() {
   if (!user) {
     return (
       <main>
-        <div className="flex flex-col gap-4 itemscenter justify-center">
+        <div className="flex flex-col gap-4 items-center justify-center">
           <h1 className="uppercase font-garamond w-full text-center max-w-[400px] md:max-w-[500px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
             You must be logged in to view this page
           </h1>
@@ -52,21 +52,22 @@ function Profile() {
           <img
             src={user?.banner?.url}
             alt={user?.banner?.alt}
-            className="transition-transform duration-300 ease-in-out object-cover aspect-auto group-hover:scale-110 w-full"
+            className="transition-transform duration-300 ease-in-out object-cover aspect-auto w-full"
           />
         </div>
-        <div className="absolute top-2/3 left-3/12 w-54 border-black border-8 group overflow-hidden h-72 justify-center items-center rounded-full">
+        <div className="absolute top-2/3 left-3/12 w-54 border-black border-[24px] group overflow-hidden h-72 justify-center items-center rounded-full">
           <img
             src={user?.avatar?.url}
             alt={user?.avatar?.alt}
-            className="transition-transform duration-300 ease-in-out object-cover aspect-auto group-hover:scale-110 w-full h-full"
+            className="object-cover aspect-auto w-full h-full"
           />
         </div>
         <button
-          className="absolute flex items-center bg-red-800 text-white right-1/3 -bottom-1/6 justify-center h-20 w-20 border-white border-8 shadow-lg rounded-full"
+          className="absolute btn-l aspect-square flex items-center right-1/3 -bottom-1/5 justify-center p-3 rounded-full"
           onClick={() => setIsProfileModalOpen(true)}
+          title='Edit profile'
         >
-          <Pencil size={24} />
+          <Pencil size={16} />
         </button>
         <Modal
           isOpen={isProfileModalOpen}
@@ -78,30 +79,45 @@ function Profile() {
           />
         </Modal>
       </div>
-      <div className="container flex mx-auto flex-col items-center">
-        <h1 className="uppercase font-garamond w-full text-center max-w-[400px] md:max-w-[500px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
-          Hi I'm {user?.name}
-        </h1>
-        <p className="text-center text-xs font-caslon text-black line-clamp-2 mt-4">
-          {user?.bio || 'Write a few words about yourself...'}
-        </p>
+      <div className="flex mx-auto flex-col items-center mt-14 md:w-[1500px]">
+        <div className='flex flex-col gap-2 items-center'>
+          <span className='text-xl text-brown-300 uppercase font-garamond'>Hi I'm</span>
+          <p className="uppercase font-chonburi text-4xl w-full text-crimson text-center max-w-[400px] md:max-w-[500px]">
+          {user?.name}
+          </p>
+          <p className="text-center text-xl font-garamond italic text-dark">
+            {user?.bio || 'Write a few words about yourself...'}
+          </p>
 
-        <div className="mt-20 flex flex-col gap-6 items-center font-caslon border-[1px] w-full m-4 py-8 border-gray-200 p-2">
+        </div>
+        <div className='flex w-full justify-between items-end mt-4'>
+          <h2 className='text-2xl uppercase text-brown-300 w-full'>My Bookings</h2>
+          {user?.venueManager ? (
+            <>
+              <button
+                  className="btn-l btn-primary md:w-[500px]"
+                  onClick={() => setIsCreateModalOpen(true)}
+                >
+                  Create a new venue
+                </button>
+                <Modal
+                  isOpen={isCreateModalOpen}
+                  onClose={() => setIsCreateModalOpen(false)}
+                >
+                  <CreateVenueForm onClose={() => setIsCreateModalOpen(false)} />
+                </Modal>
+            </>
+          ) : (
+            <button className="btn-l btn-secondary w-full max-w-[400px]" onClick={() => clearBookings()}>
+              Clear all bookings
+            </button>
+
+          )} 
+        </div>
+        <div className="flex flex-col gap-6 items-center border-[1px] w-full px-12 py-7 border-brown-100 my-4">
           {user?.venueManager ? (
             <>
               <ProfileVenues />
-              <button
-                className="btn-l btn-primary"
-                onClick={() => setIsCreateModalOpen(true)}
-              >
-                Create a new venue
-              </button>
-              <Modal
-                isOpen={isCreateModalOpen}
-                onClose={() => setIsCreateModalOpen(false)}
-              >
-                <CreateVenueForm onClose={() => setIsCreateModalOpen(false)} />
-              </Modal>
             </>
           ) : (
             <>
