@@ -1,0 +1,13 @@
+.dot {
+    animation: bounce 1s infinite;
+}
+
+.dot-1 {
+  animation-delay: 0s;
+}
+.dot-2 {
+  animation-delay: 0.2s;
+}
+.dot-3 {
+  animation-delay: 0.4s;
+}
