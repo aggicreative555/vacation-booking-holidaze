@@ -5,7 +5,7 @@ import { profileSchema } from '../../schema/profileSchema';
 import { toast } from 'react-toastify';
 import { apiClient } from '../../utils/apiClient';
 import { useAuthStore } from '../../stores/useAuthStore';
-import { useVenueStore } from '../../stores/useVenueStore';
+import UserToggle from '../buttons/Usertoggle';
 
 function EditProfileForm({ user, onClose }) {
   const {
@@ -55,7 +55,7 @@ function EditProfileForm({ user, onClose }) {
 
     } catch (error) {
       console.error('Error updating profile:', error);
-      const apiMessage = error?.errors?.[0]?.message;
+      const apiMessage = error?.data?.errors?.[0]?.message || error?.errors?.[0]?.message;
       const errorMessage =
         `${apiMessage}. Please try again.` ||
         'Something went wrong when updating your profile. Please try again later.';
@@ -67,53 +67,55 @@ function EditProfileForm({ user, onClose }) {
 
   return (
     <>
-      <h1 className="uppercase font-garamond w-full text-center break-word max-w-[400px] md:max-w-[450px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
-        Update profile
-      </h1>
-      <span className="h-[1px] w-2/4 bg-black m-[1px]"></span>
-      <span className="h-[1px] w-2/4 bg-black m-[1px]"></span>
+      <div className='flex flex-col justify-center items-center my-8 mx-4'>
+        <h1 className="text-4xl uppercase font-chonburi
+          w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson">
+          Update profile
+        </h1>
+        <span className="mt-4 h-[1px] w-1/2 bg-brown-200"></span>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`flex flex-col gap-6 md:w-96 mt-10 ${isSubmitting ? 'opacity-50 pointer-events-none' : ''}`}
+        className={`flex flex-col gap-6 md:w-[500px] mt-10 ${isSubmitting ? 'opacity-50 pointer-events-none' : ''}`}
       >
-        <p className="text-xl font-garamond">{user?.name}</p>
-        <label className="label-base group">
+        <label className="label-base group ">
           My Bio
           <input
             type="text"
             {...register('bio')}
-            className="input-base border-b-[1px] hover:border-black hover:border-b-[2px] transition-all duration-200 ease-in-out focus:border-black focus:border focus:rounded-none focus:outline-1 focus:outline-offset-1 focus:outline-black"
+            className="input-base text-left text-dark font-normal"
           />
           {errors.bio && <p className="error-message">{errors.bio.message}</p>}
         </label>
         {/* Banner */}
         <div>
-          <p className="text-gray-400 uppercase font-button text-2xl">
-            Banner Image
-          </p>
-          <div className="flex flex-col my-4 gap-4 py-4 pb-6 px-6 justify-between items-start border-[1px] border-gray-200 ">
-            {errors.banner?.url && (
-              <p className="error-message">{errors.banner.url.message}</p>
-            )}
-            {errors.banner?.alt && (
-              <p className="error-message">{errors.banner.alt.message}</p>
-            )}
-            <input
-              {...register('banner.url')}
-              placeholder="https://"
-              className="input-base border-b-[1px] hover:border-black hover:border-b-[2px] transition-all duration-200 ease-in-out focus:border-black focus:border focus:rounded-none focus:outline-1 focus:outline-offset-1 focus:outline-black"
-            />
-            <input
-              {...register('banner.alt')}
-              placeholder="Image alt text"
-              className="input-base border-b-[1px] hover:border-black hover:border-b-[2px] transition-all duration-200 ease-in-out focus:border-black focus:border focus:rounded-none focus:outline-1 focus:outline-offset-1 focus:outline-black"
-            />
+          <div className='flex flex-col justify-center items-start'>
+            <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>banner image</p>
+            <div className="border-1 border-brown-200 px-6 py-8 w-full">
+              {errors.banner?.url && (
+                <p className="error-message">{errors.banner.url.message}</p>
+              )}
+              {errors.banner?.alt && (
+                <p className="error-message">{errors.banner.alt.message}</p>
+              )}
+              <input
+                {...register('banner.url')}
+                placeholder="https://"
+                className="input-base text-left text-dark font-normal"
+              />
+              <input
+                {...register('banner.alt')}
+                placeholder="Image alt text"
+                className="input-base text-left text-dark font-normal"
+              />
+              </div>
+            </div>
           </div>
-        </div>
         {/* Avatar */}
-        <div>
-          <p className="text-gray-400 uppercase font-button text-2xl">Avatar</p>
-          <div className="flex flex-col my-4 gap-4 py-4 pb-6 px-6 justify-between items-start border-[1px] border-gray-200 ">
+        <div className='flex flex-col justify-center items-start'>
+          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>avatar image</p>
+          <div className="border-1 border-brown-200 px-6 py-8 w-full">
+          
             {errors.avatar?.url && (
               <p className="error-message">{errors.avatar.url.message}</p>
             )}
@@ -123,18 +125,18 @@ function EditProfileForm({ user, onClose }) {
             <input
               {...register('avatar.url')}
               placeholder="https://"
-              className="input-base border-b-[1px] hover:border-black hover:border-b-[2px] transition-all duration-200 ease-in-out focus:border-black focus:border focus:rounded-none focus:outline-1 focus:outline-offset-1 focus:outline-black"
+              className="input-base text-left text-dark font-normal"
             />
             <input
               {...register('avatar.alt')}
               placeholder="Image alt text"
-              className="input-base border-b-[1px] hover:border-black hover:border-b-[2px] transition-all duration-200 ease-in-out focus:border-black focus:border focus:rounded-none focus:outline-1 focus:outline-offset-1 focus:outline-black"
+              className="input-base text-left text-dark font-normal"
             />
           </div>
         </div>
         <button
           type="submit"
-          className="btn-l btn-primary disabled:bg-gray-100 disabled:text-gray-400"
+          className="mt-12 btn-l btn-primary font-normal disabled:bg-brown-100 disabled:text-brown-200" 
           disabled={isSubmitting}
         >
           {' '}
