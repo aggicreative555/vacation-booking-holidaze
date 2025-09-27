@@ -101,7 +101,7 @@ function SingleVenue() {
     }
     }, [user, fetchBookingsByUser]);
 
-    if (isLoading || !isContentReady) { 
+    if (isLoading) { 
       return (
       <div className='max-w-[500] flex items-center justify-center gap-2 my-80'>
         <p className='text-center font-imfell italic text-crimson text-xl'>Loading all venues. Please wait</p>
