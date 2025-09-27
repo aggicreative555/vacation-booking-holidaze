@@ -6,12 +6,12 @@ const Stars = ({ rating = 0, max = 5 }) => {
       {[...Array(max)].map((_, index) => (
         <Sparkle
           key={index}
-          size={16}
+          size={24}
           strokeWidth={1}
           className={
             index < Math.round(rating)
-              ? 'text-amber-800 fill-amber-800'
-              : 'text-gray-300'
+              ? 'text-sand-300 fill-sand-300'
+              : 'text-brown-200 fill-brown-200'
           }
         />
       ))}

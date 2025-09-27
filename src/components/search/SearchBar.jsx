@@ -62,24 +62,24 @@ useEffect(() => {
   return (
     <div
       ref={wrapperRef}
-      className="w-full flex justify-between items-center container max-w-[500px] mx-auto px-4 mt-20 mb-30 relative z-10 border-b border-gray-300 hover:border-black focus:border-none group transition-all duration-300 ease-in-out"
+      className="w-full flex justify-between items-center max-w-[500px] mx-auto px-2 py-4 relative z-10 border-b border-dark hover:border-b-2 focus:border-none group transition-all duration-300 ease-in-out"
     >
       <input
         type="search"
         placeholder="What are you looking for today?"
-        className="uppercase text-black break-words text-wrap w-full overflow-visible p-3 focus:bg-gray-200 focus:outline-none appearence-none group-hover:text-gray-400 focus:normal-case focus:italic font-button transition-all duration-300 ease-in-out tracking-tighter text-sm md:text-base"
+        className="uppercase text-brown-400 text-base font-garamond break-words text-wrap w-full font-medium tracking-wide overflow-visible p-3 focus:bg-gray-200 focus:outline-none appearence-none group-hover:tracking-wider focus:normal-case focus:italic transition-all duration-300 ease-in-out md:text-base"
         onChange={(e) => setQuery(e.target.value)}
         value={query}
         aria-label="Search venues"
         onFocus={() => setIsFocused(true)}
       />
-      <Search />
+      <Search className='group-hover:scale-110 transition-all duration-300'/>
       {isFocused && suggestions.length > 0 && (
         <ul className="text-sm absolute left-0 right-0 top-14 mt-1 pt-2 pb-5 bg-white border-b-[1px] border-gray-300 font-caslon font-light italic z-10 max-h-60 overflow-y-auto transition-all duration-300 ease-in-out">
           {suggestions.map((item) => (
             <li
               key={item?.id}
-              className="px-6 py-2 hover:bg-gray-100 hover:tracking-wider cursor-pointer transition-all duration-300 ease-in-out"
+              className="px-6 py-2 hover:bg-brown-100 hover:tracking-wider cursor-pointer transition-all duration-300 ease-in-out"
               onClick={() => handleSuggestions(item?.name)}
             >
               {item?.name}

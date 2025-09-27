@@ -17,11 +17,11 @@ const Pagination = ({ totalItems, itemsPerPage = 3 }) => {
   }
 
   return (
-    <div className="flex justify-center mt-8 gap-2 flex-col max-w-fit">
+    <div className="flex justify-center mt-8 gap-6 flex-col max-w-fit mb-14">
       <button
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage === 1}
-        className="capitalize btn-l disabled:hidden"
+        className="btn-l btn-secondary disabled:hidden"
       >
         previous page
       </button>
@@ -32,8 +32,8 @@ const Pagination = ({ totalItems, itemsPerPage = 3 }) => {
             <button
               key={page}
               onClick={() => goToPage(page)}
-              className={`px-1 mx-4 my-2 text-black font-button cursor-pointer
-                        ${currentPage === page ? 'border-b-2 border-black' : 'border-b-2 border-white'}`}
+              className={`px-1 mx-4 my-2 text-base font-garamond tracking-wide hover:font-semibold cursor-pointer
+                        ${currentPage === page ? 'border-b-2 border-crimson text-crimson' : 'text-dark border-b-2 border-white'}`}
             >
               {page}
             </button>
@@ -43,7 +43,7 @@ const Pagination = ({ totalItems, itemsPerPage = 3 }) => {
       <button
         onClick={() => goToPage(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="capitalize btn-l disabled:hidden"
+        className="btn-l btn-primary disabled:hidden"
       >
         next page
       </button>
