@@ -70,7 +70,7 @@ function RegisterForm() {
         className={`flex flex-col gap-6 md:w-[800px] max-w-[700px] mt-10 ${isSubmitting ? 'opacity-50 pointer-events-none' : ''}`}
       >
           <div className="flex items-center p-2 w-full mb-7">
-            <Usertoggle register={register} setValue={setValue}/>
+            <UserToggle register={register} setValue={setValue}/>
           </div>
           {errors.venueManager && (
             <p className="error-message">{errors.venueManager.message}</p>
