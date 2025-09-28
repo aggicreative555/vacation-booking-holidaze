@@ -7,19 +7,22 @@ function ProfileBookings() {
 
   if (!userBookings || userBookings.length === 0) {
     return (
-    <div className='max-w-[500] flex items-center justify-center gap-2 my-80'>
-      <p className='text-center font-imfell italic text-crimson text-xl'>You have not booked any venues yet</p>
-      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
-      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
-      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
-    </div>
+      <div className='flex flex-col gap-6'>
+        <div className='max-w-[500] flex items-center justify-center gap-2 md:my-20 my-10'>
+          <p className='text-center font-imfell italic text-crimson text-xl'>You have not booked any venues yet</p>
+          <span className='text-center font-imfell italic text-crimson text-xl dot dot-1'>.</span>
+          <span className='text-center font-imfell italic text-crimson text-xl dot dot-2'>.</span>
+          <span className='text-center font-imfell italic text-crimson text-xl dot dot-3'>.</span>
+        </div>
+        <Link to="/bookings" className="btn-l btn-primary">
+          Explore venues
+        </Link>
+      </div>
     );
   }
 
   return (
     <div>
-
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
         {userBookings.map((booking) => (
           <div
@@ -31,13 +34,13 @@ function ProfileBookings() {
               className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full">
               <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] p-2 overflow-hidden">
                 <img
-                  className="object-cover h-full w-full border-2 border-marine"
+                  className="object-cover h-full w-full border-2 border-marine group-hover:scale-110 transition-all duration-300"
                   src={booking?.venue?.media?.[0]?.url}
                   alt={booking.venue?.media?.[0]?.alt || 'Venue image'}
                 />
               </div>
               <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
-                <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6">
+                <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:border-2 transition-all duration-300 group-hover:tracking-wider">
                   <h2 className="text-2xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2">
                     {booking?.venue?.name}
                   </h2>
@@ -55,7 +58,7 @@ function ProfileBookings() {
                       </span>
                     </div>
                   </div>
-                  <div className='flex flex-row gap-6'>
+                  <div className='flex flex-row gap-6 mt-5'>
                     <Link to={`/booking/${booking?.venue?.id}`}
                     className='btn-s btn-primary'>
                       View Booking

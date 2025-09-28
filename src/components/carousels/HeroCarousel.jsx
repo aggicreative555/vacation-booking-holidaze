@@ -30,21 +30,21 @@ const HeroCarousel = ({ bookings = [], height = 'h-[800px]', content = true}) =>
             <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -left-[2%] -bottom-[3%] z-10 "/>
             <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -right-[2%] -bottom-[3%] z-10 "/>
             <div className={`w-full md:max-h-[800px] max-h-[600px] overflow-hidden ${height}`}>
-                <div className="glide" ref={sliderRef}>
-                    <div className="glide__track" data-glide-el='track'>
-                        <ul className="glide__slides">
+                <div className="glide h-full" ref={sliderRef}>
+                    <div className="glide__track h-full " data-glide-el='track'>
+                        <ul className="glide__slides h-full">
                             {bookings.slice(0,3).map((booking) => {
                                 const imageUrl = booking?.url;
                                 const imageAlt = booking?.alt;
                                 return (
                                     <li
                                     key={imageUrl}
-                                    className="glide__slide relative">
-                                        <div className="w-full h-full">
+                                    className="glide__slide">
+                                        <div className="h-full w-full">
                                             <img
                                             src={imageUrl || '/assets/holidaze-logo-red.png'}
                                             alt={imageAlt || 'Image of a venue'}
-                                            className="object-cover w-full h-full "/>
+                                            className="object-cover w-full h-full"/>
                                         </div>
                                     </li>
                                 )
@@ -52,7 +52,7 @@ const HeroCarousel = ({ bookings = [], height = 'h-[800px]', content = true}) =>
                         </ul>
                     <div className="absolute inset-0 bg-black/50"></div>
                     </div>
-                    <div className="glide__bullets flex gap-2 m-4"
+                    <div className="glide__bullets flex items-center justify-center gap-2"
                     data-glide-el='controls[nav]'>
                         {bookings.slice(0,3).map((_, index) => (
                             <button
@@ -65,11 +65,11 @@ const HeroCarousel = ({ bookings = [], height = 'h-[800px]', content = true}) =>
                 </div>
             </div>
             {content && (
-                <div className="absolute pointer-events-auto top-2/5 left-[208px] flex gap-6 flex-col">
-                    <h1 className="text-light md:text-8xl font-chonburi uppercase">Holiday haze</h1>
-                    <p className="font-imfell text-2xl text-light max-w-[500px]">Stay dazed with our curated venue selection; charming boutique hotels, holidays inns, and cozy lodges.</p>
+                <div className="w-full absolute pointer-events-auto bottom-1/9 right-1/2 translate-x-1/2 md:-translate-x-1/2 md:top-2/5 md:left-3/5 flex md:gap-6 gap-4 items-center md:items-start md:text-left text-center flex-col">
+                    <h1 className="text-light md:text-8xl text-4xl w-full font-chonburi uppercase">Holiday daze</h1>
+                    <p className="font-imfell text-2xl text-light md:w-[500px] w-[300px]">Stay dazed with our curated venue selection; charming boutique hotels, holidays inns, and cozy lodges.</p>
                     <Link to='/bookings'
-                    className="btn-l btn-primary text-light max-w-[300px]"> Explore
+                    className="btn-l btn-primary text-light w-[300px]"> Explore
                     </Link> 
                 </div>
             )}

@@ -84,7 +84,7 @@ function BookingsFilter({ venues, onFilter }) {
   ]);
 
   return (
-    <div>
+    <div className='relative z-0 bg-light transition-all duration-700 ease-in-out'>
       <button
           aria-label="Toggle menu"
           className="cursor-pointer m-3 flex gap-[10px] flex-row w-fit text-2xl items-center my-4 mx-2 font-garamond uppercase text-brown-300 tracking-wider group-hover:text-dark group-hover:tracking-widest transition-all duration-300"
@@ -97,9 +97,9 @@ function BookingsFilter({ venues, onFilter }) {
           className={`transform transition-all duration-700 ease-in-out origin-top ${
             menuOpen
               ? 'h-fit translate-y-0 opacity-100 pointer-events-auto'
-              : '-translate-y-100 -z-10 opacity-0 max-h-0 pointer-events-none'
+              : 'translate-y-30 opacity-0 max-h-0 pointer-events-none'
           }`}> 
-          <div className="w-full border-brown-100 border-[1px] flex flex-row gap-14 px-[46px] py-7 transition-all duration-300">
+          <div className="w-full border-brown-100 border-[1px] flex md:flex-row flex-col gap-14 px-[46px] py-7 transition-all duration-300">
             {/* Amenities */}
             <div>
               <h3 className="font-garamond text-2xl uppercase mb-2  text-brown-300 tracking-wider">

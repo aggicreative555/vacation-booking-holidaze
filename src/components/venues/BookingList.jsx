@@ -16,19 +16,18 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
-
    if (!bookings.length) return (
     <div className='max-w-[500] flex items-center justify-center gap-2 my-80'>
       <p className='text-center font-imfell italic text-crimson text-xl'>No bookings found. Please refresh the page and try again</p>
-      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
-      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
-      <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+      <span className='text-center font-imfell italic text-crimson text-xl dot dot-1'>.</span>
+      <span className='text-center font-imfell italic text-crimson text-xl dot dot-2'>.</span>
+      <span className='text-center font-imfell italic text-crimson text-xl dot dot-3'>.</span>
     </div>
     
   );
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300 bg-light">
         {currentProducts.map((booking) => {
           return (
             <div
@@ -36,15 +35,15 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
               key={booking.id}
             >
               <Link to={`/booking/${booking?.id}`} className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full">
-                <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] md:h-[440px] p-2 overflow-hidden">
+                <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] md:h-[440px] p-2 overflow-hidden ">
                   <img
-                    className="object-cover h-full w-full border-2 border-marine"
+                    className="object-cover h-full w-full border-2 border-marine group-hover:scale-110 transition-all duration-300"
                     src={booking?.media?.[0]?.url}
                     alt={booking?.media?.[0]?.alt || 'Venue image'}
                   />
                 </div>
                 <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
-                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6">
+                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:border-2 transition-all duration-300 group-hover:tracking-wider">
                   <p className="text-xl italic text-center font-imfell">
                     Stay at
                   </p>

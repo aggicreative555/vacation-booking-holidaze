@@ -14,11 +14,11 @@ function ProfileVenues() {
   if (!userVenues || userVenues.length === 0) {
     return (
       <>
-        <div className='max-w-[500] flex items-center justify-center gap-2 my-80'>
+        <div className='max-w-[500] flex items-center justify-center gap-2 md:my-20 my-10'>
         <p className='text-center font-imfell italic text-crimson text-xl'>You have not created any venues yet</p>
-        <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
-        <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
-        <span className='text-center font-imfell italic text-crimson text-xl animate-bounce duration-100'>.</span>
+        <span className='text-center font-imfell italic text-crimson text-xl dot dot-1'>.</span>
+        <span className='text-center font-imfell italic text-crimson text-xl dot dot-2'>.</span>
+        <span className='text-center font-imfell italic text-crimson text-xl dot dot-3'>.</span>
       </div>
       </>
     );
@@ -37,15 +37,15 @@ function ProfileVenues() {
                 className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full relative">
                 <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] p-2 overflow-hidden">
                   <img
-                    className="object-cover h-full w-full border-2 border-marine"
+                    className="object-cover h-full w-full border-2 border-marine group-hover:scale-110 transition-all duration-300"
                     src={venue?.media?.[0]?.url}
                     alt={venue?.media?.[0]?.alt || 'Venue image'}
                   />
                 </div>
                 <button
                   className="absolute btn-l aspect-square flex items-center right-0 top-0 justify-center p-3 rounded-full bg-light"
+                  title='Edit venue'
                   onClick={(e) => {
-                    title='Edit venue'
                     e.preventDefault();
                     e.stopPropagation();
                     setEditingVenue(venue);
@@ -53,7 +53,7 @@ function ProfileVenues() {
                   <Pencil size={16} />
                 </button>
                 <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
-                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6">
+                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:border-2 transition-all duration-300 group-hover:tracking-wide">
                     <h2 className="text-2xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2">
                       {venue?.name}
                     </h2>
@@ -71,7 +71,7 @@ function ProfileVenues() {
                         </span>
                       </div>
                     </div>
-                    <div className='flex flex-row gap-6'>
+                    <div className='flex flex-row gap-6 mt-5'>
                       <button
                       className='btn-s btn-primary'
                        onClick={(e) => {

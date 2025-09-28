@@ -140,31 +140,42 @@ function SingleVenue() {
               </div>
             </div>
         <div className="flex flex-col md:flex-row gap-10 container mx-auto px-8 lg:px-8 py-4 justify-center items-center relative">
-          <div className="flex flex-col gap-1 h-ful items-center justify-center lg:justify-between lg:gap-4">
-            <p className="text-xl italic text-center font-imfell">
-                    Stay at
-            </p>
-            <div className='flex flex-col gap-2 mb-4 jusitfy-center items-center'>
-              <div className='flex flex-row flex-wrap '>
-                <button
-                      className="p-2"
-                      onClick={() => {
-                        navigate(-1);
-                      }}
-                  >
-                    <ArrowLeft className=' cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300'/>
-                </button>
-                <h1 className="text-6xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2 hover:trakcing-wider">
-                  {singleVenue?.name}
-                </h1>
+          <div className="flex flex-col gap-1 h-full items-center justify-center lg:justify-between lg:gap-4">
+            <div className='flex flex-row md:flex-col items-center justify-start h-full w-fit'>
+              <button
+                  className="p-2"
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+              >
+                <ArrowLeft className=' cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300'/>
+              </button>
+              <p className="text-xl italic text-center font-imfell">
+                      Stay at
+              </p>
             </div>
+            <div className='flex flex-col gap-2 mb-4 jusitfy-center items-center w-[344px] md:w-[fit]'>
+              
+                <div className='flex flex-row justify-between flex-wrap '>
+                  <button
+                        className="p-2 hidden md:block"
+                        onClick={() => {
+                          navigate(-1);
+                        }}
+                    >
+                      <ArrowLeft className=' cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300'/>
+                  </button>
+                  <h1 className="md:text-6xl text-4xl w-[320px] md:max-w-[700px]  text-center font-chonburi uppercase text-marine line-clamp-3 mb-2 hover:trakcing-wider">
+                    {singleVenue?.name}
+                  </h1>
+              </div>
               <StarRating/>
-              <p className="text-center text-lg font-garamond italic text-brown-400 mt-4">
+              <p className="text-center text-lg font-garamond italic text-brown-400 mt-4 w-full md-w-[500px]">
                 {singleVenue.description}
               </p>
             </div>
-            <div className='flex flex-row w-full justify-between items-between md:w-[1250px]'>
-              <div className="flex flex-col py-5 md:w-[520px] w-fit">
+            <div className='flex flex-col md:flex-row w-[344px] justify-between items-between md:w-[1250px]'>
+              <div className="flex flex-col py-5 md:w-[520px] w-[344px] ">
                 <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2'>Location</p>
                 <div className='border-1 border-brown-200 px-6 py-8 w-full'>
                   <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
@@ -198,22 +209,22 @@ function SingleVenue() {
                 </div>
               </div>
               
-              <div className='flex flex-col items-center justify-between py-5 px-4 w-fit h-auto pb-12'>
-                <div className='flex flex-row gap-4'>
+              <div className='flex flex-col items-center justify-between py-5 px-4 md:w-fit h-auto pb-12 w-[344px]'>
+                <div className='flex flex-row md:gap-4 gap-0'>
                   <div className='flex flex-col gap-2 px-6 py-4 justify-center items-center'>
                     <p className='font-garamond text-xl uppercase text-brown-300'>Guests</p>
-                    <div className="btn-l pointer-events-none rounded-full border-brown-300 text-lg font-button text-brown-300">
+                    <div className="btn-l p-4 md:p-8 pointer-events-none rounded-full border-brown-300 text-lg font-button text-brown-300">
                       Max {singleVenue.maxGuests}
                     </div>
                   </div>
                   <div className='flex flex-col gap-2 px-6 py-4 justify-center items-center'>
                     <p className='font-garamond text-xl uppercase text-brown-300'>bookings</p>
-                    <div className="btn-l pointer-events-none rounded-full border-brown-300 text-lg font-button text-brown-300">
+                    <div className="btn-l px-8 py-4 md:p-8 pointer-events-none rounded-full border-brown-300 text-lg font-button text-brown-300">
                       {singleVenue._count.bookings}
                     </div>
                   </div>
                 </div>
-                <div className='flex flex-row w-fit justify-center items-center gap-2 border-b-[1px] border-brown-300 mt-12'>
+                <div className='w-[344px] flex flex-row md:w-fit justify-center items-center gap-2 border-b-[1px] border-brown-300 mt-12'>
                   {/* NOT LOGGED IN */}
                 </div>
                   {!user && (
@@ -282,7 +293,7 @@ function SingleVenue() {
                           <p className="text-base text-brown-400 lowercase font-garamond">x {guests} {guests === 1 ? "guest" : "guests"}</p>
                         </div>
                         <button
-                          className={`btn-l w-full ${
+                          className={`btn-l w-full mt-8 ${
                             !canBook || alreadyBooked ? 'bg-brown-100 text-brown-200 border-brown-300 cursor-not-allowed' : 'btn-primary'
                           }`}
                           disabled={!canBook || alreadyBooked}
@@ -350,7 +361,7 @@ function SingleVenue() {
             </div>
           </div>
         </div>
-        <div className='w-full flex flex-row justify-center items-center gap-6 py-4'>
+        <div className='w-full flex md:flex-row flex-col justify-center items-center md:gap-6 gap-2 py-4'>
           <p className="text-center text-xs uppercase font-caslon text-brown-400">
             Created: {formatDate(singleVenue.created)}
           </p>
