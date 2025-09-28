@@ -4,7 +4,6 @@ import { ToastContainer, Slide } from 'react-toastify';
 import {
   BookingId,
   Bookings,
-  Contact,
   Home,
   Login,
   NotFound,
