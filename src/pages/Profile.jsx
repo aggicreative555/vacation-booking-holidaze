@@ -55,7 +55,7 @@ function Profile() {
             className="transition-transform duration-300 ease-in-out object-cover aspect-auto w-full"
           />
         </div>
-        <div className="absolute top-2/3 left-3/12 w-54 border-black border-[24px] group overflow-hidden h-72 justify-center items-center rounded-full">
+        <div className="absolute lg:top-2/3 lg:left-3/12 top-3/4 left-1/2 -translate-y-1/2 -translate-x-1/2 md:w-54 w-[174px]  border-black md:border-[24px] border-[12px] group overflow-hidden md:h-72 h-[218px] justify-center items-center rounded-full">
           <img
             src={user?.avatar?.url}
             alt={user?.avatar?.alt}
@@ -63,7 +63,7 @@ function Profile() {
           />
         </div>
         <button
-          className="absolute btn-l aspect-square flex items-center right-1/3 -bottom-1/5 justify-center p-3 rounded-full"
+          className="absolute btn-l aspect-square flex items-center md:right-1/3 md:-bottom-1/5 right-1/10 justify-center p-3 rounded-full"
           onClick={() => setIsProfileModalOpen(true)}
           title='Edit profile'
         >
@@ -79,10 +79,10 @@ function Profile() {
           />
         </Modal>
       </div>
-      <div className="flex mx-auto flex-col items-center mt-14 md:w-[1500px]">
+      <div className="flex mx-auto flex-col items-center md:mt-14 mt-20 lg:w-[1500px] px-6 md:px-6 lg:px-0">
         <div className='flex flex-col gap-2 items-center'>
           <span className='text-xl text-brown-300 uppercase font-garamond'>Hi I'm</span>
-          <p className="uppercase font-chonburi text-4xl w-full text-crimson text-center max-w-[400px] md:max-w-[500px]">
+          <p className="uppercase font-chonburi text-3xl w-full text-crimson text-center max-w-[400px] md:max-w-[500px]">
           {user?.name}
           </p>
           <p className="text-center text-xl font-garamond italic text-dark">
@@ -90,12 +90,12 @@ function Profile() {
           </p>
 
         </div>
-        <div className='flex w-full justify-between items-end mt-4'>
+        <div className='flex md:flex-row flex-col-reverse justify-center items-center w-full md:justify-between md:items-end mt-4'>
           <h2 className='text-2xl uppercase text-brown-300 w-full'>My Bookings</h2>
           {user?.venueManager ? (
             <>
               <button
-                  className="btn-l btn-primary md:w-[500px]"
+                  className="btn-l btn-primary md:w-[500px] mb-10 md:mb-0"
                   onClick={() => setIsCreateModalOpen(true)}
                 >
                   Create a new venue
@@ -108,13 +108,13 @@ function Profile() {
                 </Modal>
             </>
           ) : (
-            <button className="btn-l btn-secondary w-full max-w-[400px]" onClick={() => clearBookings()}>
+            <button className="btn-l btn-secondary w-full max-w-[400px] mb-10 md:mb-0" onClick={() => clearBookings()}>
               Clear all bookings
             </button>
 
           )} 
         </div>
-        <div className="flex flex-col gap-6 items-center border-[1px] w-full px-12 py-7 border-brown-100 my-4">
+        <div className="flex flex-col md:gap-6 items-center border-[1px] w-full md:px-12 py-7 border-brown-100 my-4 mx-4">
           {user?.venueManager ? (
             <>
               <ProfileVenues />
@@ -122,9 +122,6 @@ function Profile() {
           ) : (
             <>
               <ProfileBookings />
-              <Link to="/bookings" className="btn-l btn-primary">
-                Explore venues
-              </Link>
             </>
           )}
         </div>

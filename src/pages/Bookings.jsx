@@ -4,7 +4,6 @@ import BookingList from '../components/venues/BookingList';
 import BookingsFilter from '../components/filters/BookingsFilter';
 import { useVenueStore } from '../stores/useVenueStore';
 import HeroCarousel from '../components/carousels/HeroCarousel';
-import '../styles/styles.css'
 
 const Bookings = () => {
   const { venues, fetchVenue, isLoading, isError, fetchVenuesByIds } = useVenueStore();
@@ -12,6 +11,7 @@ const Bookings = () => {
   const [ isContentReady, setisContentReady] = useState(false);
 
   const [filteredBookings, setFilteredBookings] = useState([]);
+
 
   useEffect(() => {
     fetchVenue();
@@ -72,14 +72,14 @@ const Bookings = () => {
     </div>);
 
   return (
-    <main className="container mx-auto px-8 w-full transition-all duarion-300">
-      <HeroCarousel bookings={venueImages} height='h-[500px]' content={false}/>
-      <div className='max-w-[1500px]'>
+    <main className="container mx-auto w-full transition-all duration-300">
+      <HeroCarousel bookings={venueImages} height='h-[400px]' content={false}/>
+      <div className='max-w-[1500px] px-8'>
           <SearchBar data={venues} onResults={handleSearchResults} />
-          <div className='px-6 py-4 mb-6 group'>
+          <div className='px-6 py-4 mb-6 group transition-all duration-700'>
             <BookingsFilter venues={venues} onFilter={handleFilterResults} />
           </div>
-          <BookingList bookings={sortedBookings} />
+            <BookingList bookings={sortedBookings} />
       </div>
     </main>
   );
