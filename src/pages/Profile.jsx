@@ -54,7 +54,7 @@ function Profile() {
             className="transition-transform duration-300 ease-in-out object-cover aspect-auto w-full"
           />
         </div>
-        <div className="absolute lg:top-2/3 lg:left-3/12 top-3/4 left-1/2 -translate-y-1/2 -translate-x-1/2 md:w-54 w-[174px]  border-black md:border-[24px] border-[12px] group overflow-hidden md:h-72 h-[218px] justify-center items-center rounded-full">
+        <div className="absolute lg:top-3/3 lg:left-3/9 top-3/4 left-1/2 -translate-y-1/2 -translate-x-1/2 md:w-[256px] w-[174px]  border-black md:border-[24px] border-[12px] group overflow-hidden md:h-[320px] h-[218px] justify-center items-center rounded-full">
           <img
             src={user?.avatar?.url}
             alt={user?.avatar?.alt}
@@ -90,7 +90,7 @@ function Profile() {
             {user?.bio || 'Write a few words about yourself...'}
           </p>
         </div>
-        <div className="flex md:flex-row flex-col-reverse justify-center items-center w-full md:justify-between md:items-end mt-4">
+        <div className="flex md:flex-row md:max-w-[1500px] flex-col-reverse justify-center items-center w-full md:justify-between md:items-end mt-4">
           <h2 className="text-2xl uppercase text-brown-300 w-full">
             My Bookings
           </h2>
@@ -118,7 +118,7 @@ function Profile() {
             </button>
           )}
         </div>
-        <div className="flex flex-col md:gap-6 items-center border-[1px] w-full md:px-12 py-7 border-brown-100 my-4 mx-4">
+        <div className="flex flex-col md:gap-6 items-center border-[1px] w-full md:px-12 py-7 border-brown-100 my-4 mx-4 md:max-w-[1500px]">
           {user?.venueManager ? (
             <>
               <ProfileVenues />

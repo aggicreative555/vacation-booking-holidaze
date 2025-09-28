@@ -174,17 +174,9 @@ function SingleVenue() {
               </button>
               <p className="text-xl italic text-center font-imfell">Stay at</p>
             </div>
-            <div className="flex flex-col gap-2 mb-4 jusitfy-center items-center w-[344px] md:w-[fit]">
+            <div className="flex flex-col gap-2 mb-4 jusitfy-center items-center w-[344px] md:w-[700px]">
               <div className="flex flex-row justify-between flex-wrap ">
-                <button
-                  className="p-2 hidden md:block"
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  <ArrowLeft className=" cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300" />
-                </button>
-                <h1 className="md:text-6xl text-4xl w-[320px] md:max-w-[700px]  text-center font-chonburi uppercase text-marine line-clamp-3 mb-2 hover:trakcing-wider">
+                <h1 className="md:text-6xl text-4xl w-[320px] md:w-[700px] text-center font-chonburi uppercase text-marine line-clamp-3 mb-2 hover:trakcing-wider">
                   {singleVenue?.name}
                 </h1>
               </div>
