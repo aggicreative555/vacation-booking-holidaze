@@ -1,63 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap');
 @import 'tailwindcss';
 
 @theme {
   --font-garamond: 'EB Garamond', 'serif';
-  --font-caslon: 'Libre Caslon Text', 'serif';
+  --color-crimson: #780000 ;
 }
 
 .calendar {
-  @apply p-4 rounded-2xl bg-white uppercase font-garamond mx-auto tracking-widest;
-
-  /* Override DayPicker variables */
-  --rdp-accent-color: theme('colors.red.800'); /* Tailwind color */
-  --rdp-background-color: theme('colors.red.100');
-  --rdp-range_start-color: theme('colors.red.800');
-  --rdp-range_end-color: theme('colors.red.800');
-  --rdp-range_middle-color: theme('colors.red.200');
-  --rdp-accent-color-dark: theme('colors.red.900');
-  --rdp-outline: 2px solid theme('colors.red.800');
-  --rdp-outline-selected: 2px solid theme('colors.red.800');
+  @apply p-4 rounded-2xl bg-light uppercase font-garamond mx-auto tracking-widest;
 }
 
-/* Calendar cell */
+/* Root container */
 .calendar .rdp-root {
-  @apply mx-auto border border-black;
+  @apply mx-auto border border-brown-200 rounded-lg;
+}
+
+/* Caption (month + nav) */
+.calendar .rdp-caption {
+  @apply flex items-center justify-between mb-4; 
 }
 
 .calendar .rdp-caption_label {
-  @apply text-3xl font-semibold text-center;
+  @apply text-sm font-semibold text-brown-400; 
 }
 
 /* Navigation buttons */
 .calendar .rdp-nav_button {
-  @apply p-2 m-2 rounded hover:bg-gray-200 bg-red-800;
+  @apply p-2 rounded-full bg-crimson text-light hover:scale-110;
+}
+
+/* Weekdays header */
+.calendar .rdp-head_cell {
+  @apply text-brown-400 uppercase text-base pb-2;
+}
+
+/* Day cells */
+.calendar .rdp-day {
+  @apply p-0 m-0;
+}
+
+.calendar .rdp-day_button {
+  @apply w-10 h-10 flex items-center justify-center rounded-full transition;
 }
 
 /* Today */
-.calendar .rdp-day_today {
-  @apply border-b-2 w-3 border-red-800 bg-red-800 font-bold;
-}
-
-.calendar .rdp-range_middle .rdp-day_button {
-  @apply text-red-600 font-bold;
-}
-
-.calendar .rdp-range_start .rdp-day_button {
-  @apply bg-red-800 text-white;
-}
-
-.calendar .rdp-range_end .rdp-day_button {
-  @apply bg-red-800 text-white;
-}
-
-/* Selected day */
-.calendar .rdp-day_selected {
-  @apply bg-red-800 text-white hover:bg-red-800;
+.calendar .rdp-day_today .rdp-day_button {
+  @apply bg-brown-400 text-light font-bold;
 }
 
 /* Disabled days */
-.calendar .rdp-day_disabled {
-  @apply text-gray-300 line-through cursor-not-allowed;
+.calendar .rdp-day_disabled .rdp-day_button {
+  @apply text-brown-200 line-through cursor-not-allowed;
+}
+
+/* Selected day */
+.calendar .rdp-day_selected .rdp-day_button {
+  @apply bg-crimson text-light font-bold hover:bg-crimson;
+}
+
+/* Range start */
+.calendar .rdp-range_start .rdp-day_button {
+  @apply bg-crimson text-light font-bold;
+}
+
+/* Range end */
+.calendar .rdp-range_end .rdp-day_button {
+  @apply bg-crimson text-light font-bold;
+}
+
+/* Range middle */
+.calendar .rdp-range_middle .rdp-day_button {
+  @apply bg-brown-200 text-brown-400;
 }

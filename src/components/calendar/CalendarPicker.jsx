@@ -19,7 +19,7 @@ function CalendarPicker({ onSelectRange, bookedDates = [] }) {
   }));
 
   return (
-    <div className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
+    <div className="border border-brown-200 rounded-md p-4 bg-light">
       <DayPicker
         mode="range"
         selected={range}
@@ -27,12 +27,12 @@ function CalendarPicker({ onSelectRange, bookedDates = [] }) {
         disabled={{ before: new Date() }}
         modifiers={{ booked: bookedRanges }}
         modifiersClassNames={{
-          booked: 'bg-gray-200 text-red-800 cursor-not-allowed',
+          booked: 'bg-brown-200 text-crimson cursor-not-allowed',
         }}
         className="calendar"
       />
       {range?.from && range?.to && (
-        <p className="text-sm text-center mt-2 text-gray-600 font-caslon">
+        <p className="text-base font-garamond italic text-center mt-2 text-brown-300">
           Selected: {range.from.toLocaleDateString()} - {''}{' '}
           {range.to.toLocaleDateString()}
         </p>

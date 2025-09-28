@@ -233,7 +233,11 @@ function SingleVenue() {
                   {/* CUSTOMER BOOKING FLOW */}
                   {user && !user.venueManager && (
                     <div className="flex gap-6 flex-col max-w-[500px] justify-between w-full">
-                      <CalendarPicker onSelectRange={setSelectedRange} />
+                      <div className='my-4 gap-6 flex items-center justify-center flex-col '> 
+                        <p className='font-garamond text-xl uppercase text-brown-300'>Schedule a date</p>
+                        <CalendarPicker onSelectRange={setSelectedRange} />
+                      </div>
+
 
                       <div className='flex flex-col items-center justify-center gap-2'>
                         <p className="font-garamond text-xl uppercase text-brown-300">
