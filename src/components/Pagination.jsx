@@ -25,7 +25,7 @@ const Pagination = ({ totalItems, itemsPerPage = 3 }) => {
       >
         previous page
       </button>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center">
         {[...Array(totalPages)].map((_, i) => {
           const page = i + 1;
           return (
