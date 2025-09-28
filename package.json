@@ -21,30 +21,31 @@
     "@hookform/resolvers": "^5.2.1",
     "@tailwindcss/postcss": "^4.1.5",
     "lucide-react": "^0.542.0",
-    "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-day-picker": "^9.10.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.62.0",
     "react-router-dom": "^7.8.2",
     "react-toastify": "^11.0.5",
-    "tailwindcss": "^4.1.5",
     "yup": "^1.7.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "tailwindcss": "^4.1.13",
     "vite": "^7.1.7"
   },
   "resolutions": {
-  "vite": "7.1.7"
+    "vite": "7.1.7"
   }
 }
