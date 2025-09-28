@@ -1,14 +1,15 @@
+@import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Chonburi&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=IM+Fell+English:ital@0;1&display=swap');
 @import '@glidejs/glide/dist/css/glide.core.min.css';
 @import '@glidejs/glide/dist/css/glide.theme.min.css';
 
-@import 'tailwindcss';
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 
 body {
   @apply bg-light font-garamond
