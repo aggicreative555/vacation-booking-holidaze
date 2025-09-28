@@ -21,7 +21,7 @@ function Modal({ isOpen, onClose, children }) {
         onClick={onClose}
       ></div>
       <div
-        className={`relative flex items-center flex-col bg-light shadow-lg w-full max-w-[768px] max-h-[80%] overflow-y-auto px-6 pt-6 pb-12 transform transition-transform duration-300
+        className={`relative flex items-center flex-col bg-light shadow-lg w-full max-w-[768px] max-h-[80%] overflow-y-auto md:px-6 px-4 mx-4 pt-6 pb-12 transform transition-transform duration-300
                 ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
       >
         <button

@@ -1,5 +1,4 @@
 import { formatDate } from "../../utils/dataFormatter";
-import { showToast } from "../../utils/toast";
 import Modal from "./Modal";
 
 function ConfirmBooking({ 
@@ -36,11 +35,11 @@ function ConfirmBooking({
         <div className="flex items-end flex-row border-b-[1px] border-brown-100 justify-between w-full px-4 max-w-[500px]">
             <p className="text-brown-300 uppercase font-normal text-base">Total:</p>
             <div className="flex flex-row items-end gap-2">
-                <p className="pb-2 text-marine uppercase font-chonburi text-6xl">{totalPrice}</p>
+                <p className="pb-2 text-marine uppercase font-chonburi md:text-6xl text-4xl">{totalPrice}</p>
                 <span className="text-brown-300 uppercase font-normal text-base">Nok</span>
             </div>
         </div>
-        <div className="flex flex-row flex-wrap gap-4 mt-12">
+        <div className="flex flex-row flex-wrap justify-center items-center gap-4 mt-12">
             <button className="btn-l btn-secondary" onClick={onClose}>
             Go back
             </button>
@@ -49,7 +48,6 @@ function ConfirmBooking({
             onClick={() => {
                 handleConfirmBooking();
                 onClose();
-                showToast.bookingAdded();
             }}
             >
             Book now
