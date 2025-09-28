@@ -59,7 +59,7 @@ function RegisterForm() {
   return (
     <>
        <div className='w-fit min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12'>
-        <h1 className="uppercase font-chonburi text-center break-word py-6 w-fit h-fit text-buoy text-6xl md:text-8xl">
+        <h1 className="uppercase font-chonburi text-center break-word py-6 w-fit h-fit text-buoy text-4xl md:text-8xl">
           Register
         </h1>
       </div>
@@ -81,7 +81,7 @@ function RegisterForm() {
             type="text"
             {...register('name')}
             autoComplete="name"
-            className="input-base"
+            className="input-base text-left font-normal text-dark"
           />
           {errors.name && (
             <p className="error-message">{errors.name.message}</p>
@@ -93,7 +93,7 @@ function RegisterForm() {
             type="email"
             {...register('email')}
             autoComplete="email"
-            className="input-base"
+            className="input-base text-left font-normal text-dark"
           />
           {errors.email && (
             <p className="error-message">{errors.email.message}</p>
@@ -105,7 +105,7 @@ function RegisterForm() {
             type="password"
             {...register('password')}
             autoComplete="new-password"
-            className="input-base"
+            className="input-base text-left font-normal text-dark"
           />
           {errors.password && (
             <p className="error-message">{errors.password.message}</p>
@@ -117,7 +117,7 @@ function RegisterForm() {
             type="password"
             {...register('passwordConfirm')}
             autoComplete="off"
-            className="input-base"
+            className="input-base text-left font-normal text-dark"
           />
           {errors.passwordConfirm && (
             <p className="error-message">{errors.passwordConfirm.message}</p>

@@ -45,6 +45,7 @@ function CreateVenueForm({ onClose }) {
       );
 
       addVenue(response?.data ?? response );
+      console.log('Created venue:', response?.data ?? response);
 
       await new Promise((res) => setTimeout(res, 1500));
       toast.dismiss(toastId);

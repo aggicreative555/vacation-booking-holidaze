@@ -68,8 +68,8 @@ function LoginForm() {
 
   return (
     <>
-      <div className='w-fit min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12'>
-        <h1 className="uppercase font-chonburi text-center break-word py-6 w-fit h-fit text-buoy text-6xl md:text-8xl">
+      <div className='w-fit md:min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12'>
+        <h1 className="uppercase font-chonburi text-center break-word py-6 w-fit h-fit text-buoy text-4xl md:text-8xl">
           Log in
         </h1>
       </div>
@@ -85,7 +85,7 @@ function LoginForm() {
             type="email"
             {...register('email')}
             autoComplete="email"
-            className="input-base"
+            className="input-base text-left font-normal text-dark"
           />
           {errors.email && (
             <p className="error-message">{errors.email.message}</p>
@@ -97,7 +97,7 @@ function LoginForm() {
             type="password"
             {...register('password')}
             autoComplete="new-password"
-            className="input-base"
+            className="input-base text-left font-normal text-dark"
           />
           {errors.password && (
             <p className="error-message">{errors.password.message}</p>
