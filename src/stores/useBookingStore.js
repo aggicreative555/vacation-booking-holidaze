@@ -106,7 +106,7 @@ const useBookingStore = create(
             )
           );
           set({
-            user: [],
+            userBookings: [],
           });
           showToast.bookingsEmpty();
         } catch (error) {

@@ -4,8 +4,9 @@ export const useAuthStore = create((set) => ({
   user: JSON.parse(localStorage.getItem('user')) || null,
 
   login: (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    set({ user: userData });
+    const normalisedUser = userData?.data ?? userData;
+    localStorage.setItem('user', JSON.stringify(normalisedUser));
+    set({ user: normalisedUser });
   },
 
   logout: () => {
@@ -14,7 +15,8 @@ export const useAuthStore = create((set) => ({
   },
 
   updateUser: (updatedUser) => {
-    localStorage.setItem('user', JSON.stringify(updatedUser));
-    set({ user: updatedUser });
+    const normalisedUser = updatedUser?.data ?? updatedUser;
+    localStorage.setItem('user', JSON.stringify(normalisedUser));
+    set({ user: normalisedUser });
   },
 }));
