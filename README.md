@@ -1,12 +1,15 @@
 _Noroff Frameworks Assignment_
 
 # 👙 Holidaze — React Vacation Booking Website
+<img width="1875" height="952" alt="image" src="https://github.com/user-attachments/assets/cd6552e2-39f9-4077-9c31-9d5a3e712ad9" />
+<img width="1895" height="957" alt="image" src="https://github.com/user-attachments/assets/ceae8278-3fdb-4071-967d-b8492e05c5a6" />
 
 ## Description:
 
 Welcome to HOLIDAZE, a vacation booking website that's looks like it's right from a vintage postcard! Here you can be a viewer, customer and a venue manager. You can view venues, log in, register and place booking requests and create, edit and delete a booking as a manager. This is an **SPA** application built with **React**, **Vite**, **Tailwind** & **Zustand**. It features bookings, calendar, and checkout using the Noroff **API**. The project is built using modern JavaScript practices and deployed to Netlify.
 
-# Link:
+# Link: 
+https://vacation-booking-holidaze.netlify.app/
 
 # Table of Contents
 
@@ -26,7 +29,7 @@ Welcome to HOLIDAZE, a vacation booking website that's looks like it's right fro
 
 Before you begin, ensure you have the following installed on your system:
 
-- **Node.js**: v20.11.1 or higher
+- **Node.js**: v22.11.1 or higher
 
 - **npm**: v10.9.0 or higher
 
@@ -145,6 +148,19 @@ npm run build
 - **Development Tools:**
   - ESLint – Linting for cleaner code
   - Prettier – Automatic code formatting
+- **Routing**
+  - React Router DOM
+
+- **Forms & Validation**
+  - React Hook Form
+  - Yup
+  - @hookform/resolvers
+
+- **UI & UX Enhancements**
+  - Lucide React (icons)
+  - React Toastify (notifications)
+  - React Day Picker (date selection)
+  - @glidejs/glide (carousel/slider)
 
 ### License:
 
