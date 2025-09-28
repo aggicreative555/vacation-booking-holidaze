@@ -14,10 +14,10 @@ export const useVenueStore = create((set, get) => ({
       const response = await apiClient(`/holidaze/venues`, {});
       const venues = Array.isArray(response?.data) ? response.data : [];
 
-      set({ venues, isLoading: false});
+      set({ venues, isLoading: false });
     } catch (error) {
       console.error('Failed to fetch venues from API', error);
-      set({ venues: [], isLoading: false, isError:true });
+      set({ venues: [], isLoading: false, isError: true });
     }
   },
 
@@ -91,14 +91,14 @@ export const useVenueStore = create((set, get) => ({
       set({ isLoading: false });
       return responses.filter((v) => v !== null);
     } catch (error) {
-      console.error("Failed to fetch venues by IDs:", error);
+      console.error('Failed to fetch venues by IDs:', error);
       set({ isLoading: false, isError: true });
       return [];
     }
   },
 
   addVenue: (newVenue) => {
-    set((state) => ({ 
+    set((state) => ({
       venues: [newVenue, ...state.venues],
       userVenues: [newVenue, ...state.userVenues],
     }));
@@ -106,13 +106,13 @@ export const useVenueStore = create((set, get) => ({
 
   updateVenue: (updatedVenue) => {
     set((state) => ({
-      venues: state.venues.map((v) => 
-      v.id === updatedVenue.id ? updatedVenue : v
-    ),
-      userVenues: state.userVenues.map((v) => 
-      v.id === updatedVenue.id ? updatedVenue : v 
-    ),
-    }))
+      venues: state.venues.map((v) =>
+        v.id === updatedVenue.id ? updatedVenue : v
+      ),
+      userVenues: state.userVenues.map((v) =>
+        v.id === updatedVenue.id ? updatedVenue : v
+      ),
+    }));
   },
 
   removeFromVenues: async (id) => {

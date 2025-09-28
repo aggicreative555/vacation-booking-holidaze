@@ -3,7 +3,7 @@
 
 @theme {
   --font-garamond: 'EB Garamond', 'serif';
-  --color-crimson: #780000 ;
+  --color-crimson: #780000;
 }
 
 .calendar {
@@ -17,11 +17,11 @@
 
 /* Caption (month + nav) */
 .calendar .rdp-caption {
-  @apply flex items-center justify-between mb-4; 
+  @apply flex items-center justify-between mb-4;
 }
 
 .calendar .rdp-caption_label {
-  @apply text-sm font-semibold text-brown-400; 
+  @apply text-sm font-semibold text-brown-400;
 }
 
 /* Navigation buttons */

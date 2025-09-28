@@ -44,7 +44,7 @@ function CreateVenueForm({ onClose }) {
         true
       );
 
-      addVenue(response?.data ?? response );
+      addVenue(response?.data ?? response);
       console.log('Created venue:', response?.data ?? response);
 
       await new Promise((res) => setTimeout(res, 1500));
@@ -57,7 +57,8 @@ function CreateVenueForm({ onClose }) {
       await new Promise((res) => setTimeout(res, 1500));
     } catch (error) {
       console.error('Error creating venue:', error);
-      const apiMessage = error?.data?.errors?.[0]?.message || error?.errors?.[0]?.message;
+      const apiMessage =
+        error?.data?.errors?.[0]?.message || error?.errors?.[0]?.message;
       const errorMessage =
         `${apiMessage}. Please try again.` ||
         'Something went wrong when creating your venue. Please try again later.';
@@ -69,9 +70,11 @@ function CreateVenueForm({ onClose }) {
 
   return (
     <>
-      <div className='flex flex-col justify-center items-center my-8 mx-4'>
-        <h1 className="text-4xl uppercase font-chonburi
-          w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson">
+      <div className="flex flex-col justify-center items-center my-8 mx-4">
+        <h1
+          className="text-4xl uppercase font-chonburi
+          w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson"
+        >
           Create venue
         </h1>
         <span className="mt-4 h-[1px] w-1/2 bg-brown-200"></span>
@@ -89,7 +92,9 @@ function CreateVenueForm({ onClose }) {
             {...register('name')}
             className="input-base text-left text-dark font-normal"
           />
-          {errors.name && <p className="error-message">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="error-message">{errors.name.message}</p>
+          )}
         </label>
 
         {/* Description */}
@@ -100,11 +105,13 @@ function CreateVenueForm({ onClose }) {
             {...register('description')}
             className="input-base text-left font-normal text-dark"
           />
-          {errors.description && <p className="error-message">{errors.description.message}</p>}
+          {errors.description && (
+            <p className="error-message">{errors.description.message}</p>
+          )}
         </label>
 
         {/* Price and Max Guests */}
-        <div className='flex flex-row gap-12'>
+        <div className="flex flex-row gap-12">
           <label className="label-base group relative">
             Price
             <input
@@ -115,7 +122,9 @@ function CreateVenueForm({ onClose }) {
             <span className="absolute right-3 bottom-1/5 -translate-y-1/2 text-brown-200 font-normal text-lg">
               NOK
             </span>
-            {errors.price && <p className="error-message">{errors.price.message}</p>}
+            {errors.price && (
+              <p className="error-message">{errors.price.message}</p>
+            )}
           </label>
 
           <label className="label-base group">
@@ -125,20 +134,31 @@ function CreateVenueForm({ onClose }) {
               {...register('maxGuests')}
               className="input-base text-left font-normal text-dark"
             />
-            {errors.maxGuests && <p className="error-message">{errors.maxGuests.message}</p>}
+            {errors.maxGuests && (
+              <p className="error-message">{errors.maxGuests.message}</p>
+            )}
           </label>
         </div>
 
         {/* Images */}
-        <div className='flex flex-col justify-center items-center'>
-          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>Images</p>
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+            Images
+          </p>
           {fields.map((field, index) => (
-            <div key={field.id} className="border-1 border-brown-200 px-6 py-8 w-full">
+            <div
+              key={field.id}
+              className="border-1 border-brown-200 px-6 py-8 w-full"
+            >
               {errors.media?.[index]?.url && (
-                <p className="error-message">{errors.media[index].url.message}</p>
+                <p className="error-message">
+                  {errors.media[index].url.message}
+                </p>
               )}
               {errors.media?.[index]?.alt && (
-                <p className="error-message">{errors.media[index].alt.message}</p>
+                <p className="error-message">
+                  {errors.media[index].alt.message}
+                </p>
               )}
               <input
                 {...register(`media.${index}.url`)}
@@ -153,7 +173,7 @@ function CreateVenueForm({ onClose }) {
               <button
                 type="button"
                 disabled={fields.length <= 1}
-                title='Remove image'
+                title="Remove image"
                 onClick={() => remove(index)}
                 className={`place-self-end btn-s p-2 mx-4 rounded-full border-brown-300 mt-8 ${fields.length <= 1 ? 'opacity-50 cursor-not-allowed' : 'text-brown-300'}`}
               >
@@ -172,8 +192,10 @@ function CreateVenueForm({ onClose }) {
         </div>
 
         {/* Amenities */}
-        <div className='flex flex-col justify-center items-start'>
-          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>Amenities</p>
+        <div className="flex flex-col justify-center items-start">
+          <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+            Amenities
+          </p>
           <div className="border-1 border-brown-200 px-6 py-8 w-full">
             <div className="flex flex-wrap flex-col gap-4 font- uppercase checked:bg-brown-300">
               {['wifi', 'parking', 'breakfast', 'pets'].map((amenity) => (
@@ -182,7 +204,9 @@ function CreateVenueForm({ onClose }) {
                   name={`meta.${amenity}`}
                   control={control}
                   render={({ field }) => (
-                    <label className={`flex flex-row gap-2 text-base font-garamond uppercase w-full mt-2 ${field.value ? 'text-black-400' : 'text-brown-200'}`}>
+                    <label
+                      className={`flex flex-row gap-2 text-base font-garamond uppercase w-full mt-2 ${field.value ? 'text-black-400' : 'text-brown-200'}`}
+                    >
                       <input
                         type="checkbox"
                         checked={!!field.value}
@@ -198,8 +222,10 @@ function CreateVenueForm({ onClose }) {
         </div>
 
         {/* Location */}
-        <div className='flex flex-col justify-center items-start'>
-          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>Location</p>
+        <div className="flex flex-col justify-center items-start">
+          <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+            Location
+          </p>
           <div className="border-1 border-brown-200 px-6 py-8 w-full">
             <label className="label-base group">
               Continent
@@ -208,7 +234,9 @@ function CreateVenueForm({ onClose }) {
                 {...register('location.continent')}
                 className="input-base text-left font-normal text-dark"
               />
-              {errors.continent && <p className="error-message">{errors.continent.message}</p>}
+              {errors.continent && (
+                <p className="error-message">{errors.continent.message}</p>
+              )}
             </label>
             <label className="label-base group">
               Country
@@ -217,7 +245,9 @@ function CreateVenueForm({ onClose }) {
                 {...register('location.country')}
                 className="input-base text-left font-normal text-dark"
               />
-              {errors.country && <p className="error-message">{errors.country.message}</p>}
+              {errors.country && (
+                <p className="error-message">{errors.country.message}</p>
+              )}
             </label>
             <label className="label-base group">
               City
@@ -226,7 +256,9 @@ function CreateVenueForm({ onClose }) {
                 {...register('location.city')}
                 className="input-base text-left font-normal text-dark"
               />
-              {errors.city && <p className="error-message">{errors.city.message}</p>}
+              {errors.city && (
+                <p className="error-message">{errors.city.message}</p>
+              )}
             </label>
             <label className="label-base group">
               Address
@@ -235,7 +267,9 @@ function CreateVenueForm({ onClose }) {
                 {...register('location.address')}
                 className="input-base text-left font-normal text-dark"
               />
-              {errors.address && <p className="error-message">{errors.address.message}</p>}
+              {errors.address && (
+                <p className="error-message">{errors.address.message}</p>
+              )}
             </label>
             <label className="label-base group">
               Zip Code
@@ -244,7 +278,9 @@ function CreateVenueForm({ onClose }) {
                 {...register('location.zip')}
                 className="input-base text-left font-normal text-dark"
               />
-              {errors.zip && <p className="error-message">{errors.zip.message}</p>}
+              {errors.zip && (
+                <p className="error-message">{errors.zip.message}</p>
+              )}
             </label>
           </div>
         </div>
@@ -260,7 +296,6 @@ function CreateVenueForm({ onClose }) {
       </form>
     </>
   );
-
 }
 
 export default CreateVenueForm;

@@ -1,5 +1,5 @@
 .dot {
-    animation: bounce 1s infinite;
+  animation: bounce 1s infinite;
 }
 
 .dot-1 {
@@ -13,12 +13,12 @@
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;     
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;             
+  display: none;
 }
 
 .marquee-container {
@@ -36,10 +36,13 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
-
 
 .marquee-container:hover .marquee {
   animation-play-state: paused;

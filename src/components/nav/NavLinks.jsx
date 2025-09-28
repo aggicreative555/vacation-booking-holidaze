@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react';
 
 function NavLinks() {
   const { user } = useAuthStore();
-  const fetchBookingsByUser = useBookingStore((state) => state.fetchBookingsByUser);
+  const fetchBookingsByUser = useBookingStore(
+    (state) => state.fetchBookingsByUser
+  );
   const bookings = useBookingStore((state) => state.userBookings);
   const itemCount = bookings.length;
   const [animate, setAnimate] = useState(false);

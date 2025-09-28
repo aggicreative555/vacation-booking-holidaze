@@ -38,18 +38,18 @@ export const apiClient = async (
   }
 
   const response = await fetch(`${API_BASE}${endpoint}`, config);
-  
+
   let data = null;
   try {
     const contentType = response.headers.get('content-type');
-    if(contentType && contentType.includes('application/json')) {
+    if (contentType && contentType.includes('application/json')) {
       data = await response.json();
     }
   } catch (e) {
-    console.warn('Failed to parse JSON', e)
+    console.warn('Failed to parse JSON', e);
     data = null;
   }
-  
+
   if (!response.ok) {
     const error = new Error('API request failed. Try again');
     error.status = response.status;

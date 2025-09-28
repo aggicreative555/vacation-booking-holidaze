@@ -22,8 +22,9 @@ const SearchBar = ({ data = [], onResults }) => {
       return;
     }
 
-    const results = data.filter((item) => 
-    item?.name.toLowerCase().includes(debouncedQuery.toLowerCase()));
+    const results = data.filter((item) =>
+      item?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+    );
 
     setSuggestions(results.slice(0, 3));
     onResults?.(results);
@@ -33,11 +34,10 @@ const SearchBar = ({ data = [], onResults }) => {
       errorToast.current = true;
       setTimeout(() => (errorToast.current = false), 1000);
     }
-    
-}, [debouncedQuery, data, onResults]);
+  }, [debouncedQuery, data, onResults]);
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
+  useEffect(() => {
+    const handleClickOutside = (event) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target))
         setIsFocused(false);
     };
@@ -52,8 +52,8 @@ useEffect(() => {
     setQuery(name);
     setSuggestions([]);
 
-    const selected = data.filter(
-      (item) => item?.name.toLowerCase().includes(name.toLowerCase())
+    const selected = data.filter((item) =>
+      item?.name.toLowerCase().includes(name.toLowerCase())
     );
 
     onResults?.(selected);
@@ -73,7 +73,7 @@ useEffect(() => {
         aria-label="Search venues"
         onFocus={() => setIsFocused(true)}
       />
-      <Search className='group-hover:scale-110 transition-all duration-300'/>
+      <Search className="group-hover:scale-110 transition-all duration-300" />
       {isFocused && suggestions.length > 0 && (
         <ul className="text-sm absolute left-0 right-0 top-14 mt-1 pt-2 pb-5 bg-white border-b-[1px] border-gray-300 font-caslon font-light italic z-10 max-h-60 overflow-y-auto transition-all duration-300 ease-in-out">
           {suggestions.map((item) => (

@@ -58,7 +58,7 @@ function RegisterForm() {
 
   return (
     <>
-       <div className='w-fit min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12'>
+      <div className="w-fit min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12">
         <h1 className="uppercase font-chonburi text-center break-word py-6 w-fit h-fit text-buoy text-4xl md:text-8xl">
           Register
         </h1>
@@ -69,12 +69,12 @@ function RegisterForm() {
         })}
         className={`flex flex-col gap-6 md:w-[800px] max-w-[700px] mt-10 ${isSubmitting ? 'opacity-50 pointer-events-none' : ''}`}
       >
-          <div className="flex items-center p-2 w-full mb-7">
-            <UserToggle register={register} setValue={setValue}/>
-          </div>
-          {errors.venueManager && (
-            <p className="error-message">{errors.venueManager.message}</p>
-          )}
+        <div className="flex items-center p-2 w-full mb-7">
+          <UserToggle register={register} setValue={setValue} />
+        </div>
+        {errors.venueManager && (
+          <p className="error-message">{errors.venueManager.message}</p>
+        )}
         <label className="label-base group">
           User name
           <input

@@ -17,14 +17,19 @@ function StarRating({ venue: propVenue }) {
     propVenue || storeVenue?.find((v) => String(v.id) === String(id));
 
   if (isLoading && !venueToUse) {
-    return <p className="text-base font-garamond italic text-crimson">Loading rating...</p>;
+    return (
+      <p className="text-base font-garamond italic text-crimson">
+        Loading rating...
+      </p>
+    );
   }
 
   if (!venueToUse) {
     return (
       <div>
-        <Stars rating={0}/>
-      </div>)
+        <Stars rating={0} />
+      </div>
+    );
   }
 
   const currentRate = venueToUse.rating ?? 0;

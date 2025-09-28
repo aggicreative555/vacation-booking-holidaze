@@ -29,7 +29,6 @@ function Profile() {
     }
   }, [user, fetchBookingsByUser]);
 
-
   if (!user) {
     return (
       <main>
@@ -65,7 +64,7 @@ function Profile() {
         <button
           className="absolute btn-l aspect-square flex items-center md:right-1/3 md:-bottom-1/5 right-1/10 justify-center p-3 rounded-full"
           onClick={() => setIsProfileModalOpen(true)}
-          title='Edit profile'
+          title="Edit profile"
         >
           <Pencil size={16} />
         </button>
@@ -80,39 +79,44 @@ function Profile() {
         </Modal>
       </div>
       <div className="flex mx-auto flex-col items-center md:mt-14 mt-20 lg:w-[1500px] px-6 md:px-6 lg:px-0">
-        <div className='flex flex-col gap-2 items-center'>
-          <span className='text-xl text-brown-300 uppercase font-garamond'>Hi I'm</span>
+        <div className="flex flex-col gap-2 items-center">
+          <span className="text-xl text-brown-300 uppercase font-garamond">
+            Hi I'm
+          </span>
           <p className="uppercase font-chonburi text-3xl w-full text-crimson text-center max-w-[400px] md:max-w-[500px]">
-          {user?.name}
+            {user?.name}
           </p>
           <p className="text-center text-xl font-garamond italic text-dark">
             {user?.bio || 'Write a few words about yourself...'}
           </p>
-
         </div>
-        <div className='flex md:flex-row flex-col-reverse justify-center items-center w-full md:justify-between md:items-end mt-4'>
-          <h2 className='text-2xl uppercase text-brown-300 w-full'>My Bookings</h2>
+        <div className="flex md:flex-row flex-col-reverse justify-center items-center w-full md:justify-between md:items-end mt-4">
+          <h2 className="text-2xl uppercase text-brown-300 w-full">
+            My Bookings
+          </h2>
           {user?.venueManager ? (
             <>
               <button
-                  className="btn-l btn-primary md:w-[500px] mb-10 md:mb-0"
-                  onClick={() => setIsCreateModalOpen(true)}
-                >
-                  Create a new venue
-                </button>
-                <Modal
-                  isOpen={isCreateModalOpen}
-                  onClose={() => setIsCreateModalOpen(false)}
-                >
-                  <CreateVenueForm onClose={() => setIsCreateModalOpen(false)} />
-                </Modal>
+                className="btn-l btn-primary md:w-[500px] mb-10 md:mb-0"
+                onClick={() => setIsCreateModalOpen(true)}
+              >
+                Create a new venue
+              </button>
+              <Modal
+                isOpen={isCreateModalOpen}
+                onClose={() => setIsCreateModalOpen(false)}
+              >
+                <CreateVenueForm onClose={() => setIsCreateModalOpen(false)} />
+              </Modal>
             </>
           ) : (
-            <button className="btn-l btn-secondary w-full max-w-[400px] mb-10 md:mb-0" onClick={() => clearBookings()}>
+            <button
+              className="btn-l btn-secondary w-full max-w-[400px] mb-10 md:mb-0"
+              onClick={() => clearBookings()}
+            >
               Clear all bookings
             </button>
-
-          )} 
+          )}
         </div>
         <div className="flex flex-col md:gap-6 items-center border-[1px] w-full md:px-12 py-7 border-brown-100 my-4 mx-4">
           {user?.venueManager ? (

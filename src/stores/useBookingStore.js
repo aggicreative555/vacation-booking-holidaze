@@ -21,7 +21,6 @@ const useBookingStore = create(
           );
 
           set({ bookings: response?.data ?? response });
-          
         } catch (error) {
           console.error('Failed to fetch bookings from API', error);
         }
@@ -60,8 +59,8 @@ const useBookingStore = create(
           );
 
           if (name) {
-            await get().fetchBookingsByUser(name)
-          } 
+            await get().fetchBookingsByUser(name);
+          }
 
           showToast.bookingAdded(venue?.id, venue?.name || 'Booking');
         } catch (error) {

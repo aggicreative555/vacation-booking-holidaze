@@ -68,7 +68,7 @@ function LoginForm() {
 
   return (
     <>
-      <div className='w-fit md:min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12'>
+      <div className="w-fit md:min-w-[588px] bg-marine h-fit px-20 py-6 flex justify-center align-center mb-12">
         <h1 className="uppercase font-chonburi text-center break-word py-6 w-fit h-fit text-buoy text-4xl md:text-8xl">
           Log in
         </h1>

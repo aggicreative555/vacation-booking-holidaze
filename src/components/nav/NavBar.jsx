@@ -9,9 +9,7 @@ export function NavBar() {
   return (
     <>
       <nav className="container mx-auto flex justify-between items-center px-6 md:px-12 transition-all duration-150 py-4">
-        <div
-          className="p-1 relative transition-all duration-300 ease-in-out mb-2"
-        >
+        <div className="p-1 relative transition-all duration-300 ease-in-out mb-2">
           <img
             src="/assets/logos/holidaze-logotype.svg"
             alt="Holidaze logo"

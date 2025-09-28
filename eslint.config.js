@@ -36,7 +36,7 @@ export default [
       ...prettier.rules,
       'react/jsx-uses-react': 'off', // Not needed with JSX transform
       'react/react-in-jsx-scope': 'off', // Not needed with JSX transform
-      "react/prop-types": "off",
+      'react/prop-types': 'off',
       'no-unused-vars': ['error', { varsIgnorePattern: '^_|^use[A-Z]' }],
     },
   },

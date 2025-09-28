@@ -3,16 +3,14 @@
 @import '@glidejs/glide/dist/css/glide.core.min.css';
 @import '@glidejs/glide/dist/css/glide.theme.min.css';
 
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-
 body {
-  @apply bg-light font-garamond
+  @apply bg-light font-garamond;
 }
 
 /* remove browser icon appearence */
@@ -26,26 +24,25 @@ input[type='search']::-webkit-search-results-decoration {
 
 /* frame cutout */
 
-
 @theme {
   --font-garamond: 'Garamond', 'serif';
   --font-imfell: 'IM Fell English', 'serif';
   --font-chonburi: 'Chonburi', 'serif';
-  --color-marine: #003049 ;
-  --color-crimson: #780000 ;
-  --color-sand-300: #F9B34A ;
-  --color-sand-200: #FAC777 ;
-  --color-sand-100: #FDF0D5 ;
-  --color-lamp: #4A6552 ;
-  --color-buoy: #DB502F ;
-  --color-dark: #0F0B01 ;
-  --color-light: #FFFDF8 ;
-  --color-brown-100: #DEDBD7 ;
-  --color-brown-200: #AEA59B ;
-  --color-brown-300: #7D6E5F ;
-  --color-brown-400: #6C5C4B ;
-  --color-brown-500: #5C4A37 ;
-  --color-brown-600: #2E251C ;
+  --color-marine: #003049;
+  --color-crimson: #780000;
+  --color-sand-300: #f9b34a;
+  --color-sand-200: #fac777;
+  --color-sand-100: #fdf0d5;
+  --color-lamp: #4a6552;
+  --color-buoy: #db502f;
+  --color-dark: #0f0b01;
+  --color-light: #fffdf8;
+  --color-brown-100: #dedbd7;
+  --color-brown-200: #aea59b;
+  --color-brown-300: #7d6e5f;
+  --color-brown-400: #6c5c4b;
+  --color-brown-500: #5c4a37;
+  --color-brown-600: #2e251c;
 }
 
 @layer components {

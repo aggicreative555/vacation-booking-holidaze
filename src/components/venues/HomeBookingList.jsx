@@ -61,7 +61,9 @@ function HomeBookingList({ bookings = [], venueIds = [] }) {
 
               {/* Content */}
               <div className="w-full flex flex-col justify-center items-center flex-1 md:h-full border-1 group-hover:border-2 transition-all duration-300 border-brown-400 px-6 py-4 group-hover:tracking-wider">
-                <p className="text-xl italic text-center font-imfell">Stay at</p>
+                <p className="text-xl italic text-center font-imfell">
+                  Stay at
+                </p>
                 <h2 className="text-2xl md:text-4xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2 ">
                   {booking?.name}
                 </h2>
@@ -71,7 +73,9 @@ function HomeBookingList({ bookings = [], venueIds = [] }) {
                 </p>
                 <div className="flex flex-row justify-center items-center p-2 mt-2 border-brown-200 border-1">
                   <p className="text-xl font-chonburi">{booking?.price} NOK</p>
-                  <span className="text-xs uppercase font-garamond">/ night</span>
+                  <span className="text-xs uppercase font-garamond">
+                    / night
+                  </span>
                 </div>
               </div>
             </Link>

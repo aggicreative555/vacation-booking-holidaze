@@ -17,8 +17,8 @@ function EditProfileForm({ user, onClose }) {
     defaultValues: {
       bio: user?.bio ?? '',
       avatar: {
-        url: user?.avatar?.url ||  '',
-        alt: user?.avatar?.alt ?? 'User avatar picture' ,
+        url: user?.avatar?.url || '',
+        alt: user?.avatar?.alt ?? 'User avatar picture',
       },
       banner: {
         url: user?.banner?.url || '',
@@ -50,10 +50,10 @@ function EditProfileForm({ user, onClose }) {
       await new Promise((res) => setTimeout(res, 2000));
       showToast.profileUpdated();
       if (onClose) onClose();
-
     } catch (error) {
       console.error('Error updating profile:', error);
-      const apiMessage = error?.data?.errors?.[0]?.message || error?.errors?.[0]?.message;
+      const apiMessage =
+        error?.data?.errors?.[0]?.message || error?.errors?.[0]?.message;
       const errorMessage =
         `${apiMessage}. Please try again.` ||
         'Something went wrong when updating your profile. Please try again later.';
@@ -65,9 +65,11 @@ function EditProfileForm({ user, onClose }) {
 
   return (
     <>
-      <div className='flex flex-col justify-center items-center my-8 mx-4'>
-        <h1 className="text-4xl uppercase font-chonburi
-          w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson">
+      <div className="flex flex-col justify-center items-center my-8 mx-4">
+        <h1
+          className="text-4xl uppercase font-chonburi
+          w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson"
+        >
           Update profile
         </h1>
         <span className="mt-4 h-[1px] w-1/2 bg-brown-200"></span>
@@ -87,8 +89,10 @@ function EditProfileForm({ user, onClose }) {
         </label>
         {/* Banner */}
         <div>
-          <div className='flex flex-col justify-center items-start'>
-            <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>banner image</p>
+          <div className="flex flex-col justify-center items-start">
+            <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+              banner image
+            </p>
             <div className="border-1 border-brown-200 px-6 py-8 w-full">
               {errors.banner?.url && (
                 <p className="error-message">{errors.banner.url.message}</p>
@@ -106,14 +110,15 @@ function EditProfileForm({ user, onClose }) {
                 placeholder="Image alt text"
                 className="input-base text-left text-dark font-normal"
               />
-              </div>
             </div>
           </div>
+        </div>
         {/* Avatar */}
-        <div className='flex flex-col justify-center items-start'>
-          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>avatar image</p>
+        <div className="flex flex-col justify-center items-start">
+          <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+            avatar image
+          </p>
           <div className="border-1 border-brown-200 px-6 py-8 w-full">
-          
             {errors.avatar?.url && (
               <p className="error-message">{errors.avatar.url.message}</p>
             )}
@@ -134,7 +139,7 @@ function EditProfileForm({ user, onClose }) {
         </div>
         <button
           type="submit"
-          className="mt-12 btn-l btn-primary font-normal disabled:bg-brown-100 disabled:text-brown-200" 
+          className="mt-12 btn-l btn-primary font-normal disabled:bg-brown-100 disabled:text-brown-200"
           disabled={isSubmitting}
         >
           {' '}

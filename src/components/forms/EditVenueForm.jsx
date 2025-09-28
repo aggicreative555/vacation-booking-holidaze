@@ -32,15 +32,14 @@ function EditVenueForm({ venue, onClose }) {
   useEffect(() => {
     if (venue) {
       reset({
-          ...venue,
-          meta: {
-          wifi: !!venue?.meta?.wifi ||  false,
+        ...venue,
+        meta: {
+          wifi: !!venue?.meta?.wifi || false,
           parking: !!venue?.meta?.parking || false,
           breakfast: !!venue?.meta?.breakfast || false,
           pets: !!venue?.meta?.pets || false,
         },
-      })
-
+      });
     }
   }, [venue, reset]);
 
@@ -58,7 +57,7 @@ function EditVenueForm({ venue, onClose }) {
         true
       );
 
-      updateVenue(response?.data ?? response)
+      updateVenue(response?.data ?? response);
 
       await new Promise((res) => setTimeout(res, 1500));
       toast.dismiss(toastId);
@@ -69,7 +68,7 @@ function EditVenueForm({ venue, onClose }) {
       await new Promise((res) => setTimeout(res, 1500));
     } catch (error) {
       console.error('Error updating venue:', error);
-      const apiMessage = error?.data?.errors?.[0]?.message || error.message ;
+      const apiMessage = error?.data?.errors?.[0]?.message || error.message;
       const errorMessage =
         `${apiMessage}. Please try again.` ||
         'Something went wrong when updating your venue. Please try again later.';
@@ -81,9 +80,11 @@ function EditVenueForm({ venue, onClose }) {
 
   return (
     <>
-      <div className='flex flex-col justify-center items-center my-8 mx-4'>
-        <h1 className="text-4xl uppercase font-chonburi
-        w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson">
+      <div className="flex flex-col justify-center items-center my-8 mx-4">
+        <h1
+          className="text-4xl uppercase font-chonburi
+        w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson"
+        >
           Update venue
         </h1>
         <span className="mt-4 h-[1px] w-1/2 bg-brown-200"></span>
@@ -114,7 +115,7 @@ function EditVenueForm({ venue, onClose }) {
             <p className="error-message">{errors.description.message}</p>
           )}
         </label>
-        <div className='flex flex-row gap-12'>
+        <div className="flex flex-row gap-12">
           <label className="label-base group relative">
             Price
             <input
@@ -142,12 +143,15 @@ function EditVenueForm({ venue, onClose }) {
           </label>
         </div>
         {/* Image */}
-        <div className='flex flex-col justify-center items-center' >
-          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>Location</p>
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+            Location
+          </p>
           {fields.map((field, index) => (
             <div
               key={field.id}
-              className="border-1 border-brown-200 px-6 py-8 w-full">
+              className="border-1 border-brown-200 px-6 py-8 w-full"
+            >
               {errors.media?.[index]?.url && (
                 <p className="error-message">
                   {errors.media[index].url.message}
@@ -170,12 +174,12 @@ function EditVenueForm({ venue, onClose }) {
               />
               <button
                 type="button"
-                title='Remove image'
+                title="Remove image"
                 disabled={fields.length <= 1}
                 onClick={() => remove(index)}
                 className={`place-self-end btn-s p-2 mx-4 rounded-full border-brown-300 text-brown-300 mt-8 ${fields.length <= 1 ? 'opacity-50 cursor-not-allowed' : 'text-brown-300'}`}
               >
-               <Trash2/>
+                <Trash2 />
               </button>
             </div>
           ))}
@@ -189,33 +193,39 @@ function EditVenueForm({ venue, onClose }) {
           </button>
         </div>
         {/* Amenities */}
-        <div className='flex flex-col justify-center items-start' >
-          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>Amenities</p>
+        <div className="flex flex-col justify-center items-start">
+          <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+            Amenities
+          </p>
           <div className="border-1 border-brown-200 px-6 py-8 w-full">
             <div className="flex flex-wrap flex-col gap-4 font- uppercase checked:bg-brown-300">
               {['wifi', 'parking', 'breakfast', 'pets'].map((amenity) => (
                 <Controller
-                      name={`meta.${amenity}`}
-                      control={control}
-                      render={({ field }) => (
-                        <label key={amenity} className={`flex flex-row gap-2 text-base font-garamond uppercase w-full mt-2 ${field?.value ? "text-black-400" : "text-brown-200"}`}>
-                          <input 
-                          type="checkbox"
-                          checked={!!field.value}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                          />
-                        {amenity}
-                        </label>
-                      )}
-                    />
+                  name={`meta.${amenity}`}
+                  control={control}
+                  render={({ field }) => (
+                    <label
+                      key={amenity}
+                      className={`flex flex-row gap-2 text-base font-garamond uppercase w-full mt-2 ${field?.value ? 'text-black-400' : 'text-brown-200'}`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={!!field.value}
+                        onChange={(e) => field.onChange(e.target.checked)}
+                      />
+                      {amenity}
+                    </label>
+                  )}
+                />
               ))}
             </div>
           </div>
-
         </div>
         {/* Location */}
-        <div className='flex flex-col justify-center items-start' >
-          <p className='text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full'>location</p>
+        <div className="flex flex-col justify-center items-start">
+          <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2 text-left w-full">
+            location
+          </p>
           <div className="border-1 border-brown-200 px-6 py-8 w-full">
             <label className="label-base group">
               Continent
@@ -266,7 +276,7 @@ function EditVenueForm({ venue, onClose }) {
               <input
                 placeholder="4550"
                 {...register('location.zip')}
-                className="input-base input-base text-left font-normal text-dark"
+                className="input-base text-left font-normal text-dark"
               />
               {errors.zip && (
                 <p className="error-message">{errors.zip.message}</p>

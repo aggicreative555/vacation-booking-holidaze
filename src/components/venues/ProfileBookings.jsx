@@ -7,12 +7,20 @@ function ProfileBookings() {
 
   if (!userBookings || userBookings.length === 0) {
     return (
-      <div className='flex flex-col gap-6'>
-        <div className='max-w-[500] flex items-center justify-center gap-2 md:my-20 my-10'>
-          <p className='text-center font-imfell italic text-crimson text-xl'>You have not booked any venues yet</p>
-          <span className='text-center font-imfell italic text-crimson text-xl dot dot-1'>.</span>
-          <span className='text-center font-imfell italic text-crimson text-xl dot dot-2'>.</span>
-          <span className='text-center font-imfell italic text-crimson text-xl dot dot-3'>.</span>
+      <div className="flex flex-col gap-6">
+        <div className="max-w-[500] flex items-center justify-center gap-2 md:my-20 my-10">
+          <p className="text-center font-imfell italic text-crimson text-xl">
+            You have not booked any venues yet
+          </p>
+          <span className="text-center font-imfell italic text-crimson text-xl dot dot-1">
+            .
+          </span>
+          <span className="text-center font-imfell italic text-crimson text-xl dot dot-2">
+            .
+          </span>
+          <span className="text-center font-imfell italic text-crimson text-xl dot dot-3">
+            .
+          </span>
         </div>
         <Link to="/bookings" className="btn-l btn-primary">
           Explore venues
@@ -31,7 +39,8 @@ function ProfileBookings() {
           >
             <Link
               to={`/booking/${booking?.venue?.id}`}
-              className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full">
+              className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full"
+            >
               <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] p-2 overflow-hidden">
                 <img
                   className="object-cover h-full w-full border-2 border-marine group-hover:scale-110 transition-all duration-300"
@@ -44,12 +53,12 @@ function ProfileBookings() {
                   <h2 className="text-2xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2">
                     {booking?.venue?.name}
                   </h2>
-                  <p className='flex flex-row text-xs uppercase font-garamond'>
-                    <MapPin size={16}/>
+                  <p className="flex flex-row text-xs uppercase font-garamond">
+                    <MapPin size={16} />
                     {booking?.venue?.location?.country}
                   </p>
-                  < div className='flex flex-col justify-center items-center p-2 mt-2 border-brown-200 border-1 w-full md:mb-4'>
-                    <div className='flex flex-row justify-center items-center w-fit'>
+                  <div className="flex flex-col justify-center items-center p-2 mt-2 border-brown-200 border-1 w-full md:mb-4">
+                    <div className="flex flex-row justify-center items-center w-fit">
                       <p className="text-2xl font-chonburi w-fit">
                         {booking?.venue?.price} NOK
                       </p>
@@ -58,9 +67,11 @@ function ProfileBookings() {
                       </span>
                     </div>
                   </div>
-                  <div className='flex flex-row gap-6 mt-5'>
-                    <Link to={`/booking/${booking?.venue?.id}`}
-                    className='btn-s btn-primary'>
+                  <div className="flex flex-row gap-6 mt-5">
+                    <Link
+                      to={`/booking/${booking?.venue?.id}`}
+                      className="btn-s btn-primary"
+                    >
                       View Booking
                     </Link>
                     <button
@@ -69,10 +80,10 @@ function ProfileBookings() {
                         e.preventDefault();
                         e.stopPropagation();
                         removeFromBookings(booking.id, booking.name);
-                      }}>
-                      <Trash2/>
+                      }}
+                    >
+                      <Trash2 />
                     </button>
-
                   </div>
                 </div>
               </div>
