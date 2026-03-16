@@ -10,31 +10,22 @@ const SearchBar = ({ data = [], onResults }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
   const wrapperRef = useRef(null);
-  const errorToast = useRef(false);
 
-  // dismiss error on empty search field
-  toast.dismiss(showToast.error);
+  useEffect(() => {
+    // dismiss error on empty search field
+    toast.dismiss(showToast.error);
+  }, []);
 
   useEffect(() => {
     if (!debouncedQuery) {
-      onResults?.(data);
+      toast.dismiss(showToast.error);
+      onResults?.('');
       setSuggestions([]);
       return;
     }
 
-    const results = data.filter((item) =>
-      item?.name.toLowerCase().includes(debouncedQuery.toLowerCase())
-    );
-
-    setSuggestions(results.slice(0, 3));
-    onResults?.(results);
-
-    if (results.length === 0 && !errorToast.current) {
-      showToast.error('No venues match your search. Please try again');
-      errorToast.current = true;
-      setTimeout(() => (errorToast.current = false), 1000);
-    }
-  }, [debouncedQuery, data, onResults]);
+    onResults?.(debouncedQuery);
+  }, [debouncedQuery, onResults]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -51,18 +42,13 @@ const SearchBar = ({ data = [], onResults }) => {
   const handleSuggestions = (name) => {
     setQuery(name);
     setSuggestions([]);
-
-    const selected = data.filter((item) =>
-      item?.name.toLowerCase().includes(name.toLowerCase())
-    );
-
-    onResults?.(selected);
+    onResults?.(name);
   };
 
   return (
     <div
       ref={wrapperRef}
-      className="w-full flex justify-between items-center max-w-[500px] mx-auto px-2 py-4 relative z-10 border-b border-dark hover:border-b-2 focus:border-none group transition-all duration-300 ease-in-out"
+      className="bg-light w-full flex justify-between items-center max-w-[500px] mx-auto px-2 py-4 relative z-10 border-b border-dark hover:border-b-2 focus:border-none group transition-all duration-300 ease-in-out"
     >
       <input
         type="search"

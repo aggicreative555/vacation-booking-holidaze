@@ -24,7 +24,7 @@ const guestOptions = [
   { key: 10, label: '10 or more' },
 ];
 
-function BookingsFilter({ venues, onFilter }) {
+function BookingsFilter({ onFilter }) {
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [selectedContinents, setSelectedContinents] = useState([]);
   const [selectedGuests, setSelectedGuests] = useState(null);
@@ -47,51 +47,30 @@ function BookingsFilter({ venues, onFilter }) {
   };
 
   useEffect(() => {
-    let filtered = [...venues];
+    onFilter({
+      amenities: selectedAmenities,
+      continents: selectedContinents,
+      guests: selectedGuests,
+    });
+  }, [selectedAmenities, selectedContinents, selectedGuests, onFilter]);
 
-    if (selectedAmenities.length > 0) {
-      filtered = filtered.filter((venue) =>
-        selectedAmenities.every((amenity) => venue?.meta?.[amenity])
-      );
-    }
 
-    if (selectedContinents.length > 0) {
-      filtered = filtered.filter((venue) => {
-        const continent = (venue?.location?.continent || '')
-          .toLowerCase()
-          .trim();
-        return selectedContinents.some((c) => continent.includes(c));
-      });
-    }
-
-    if (selectedGuests) {
-      const guestLimit = Number(selectedGuests);
-
-      filtered = filtered.filter((venue) => {
-        const max = Number(venue?.maxGuests); // ensure numeric
-        if (isNaN(max)) return false; // skip invalid maxGuests
-        if (guestLimit === 10) return max >= 10; // 10 or more
-        return max >= guestLimit; // allow venues that can accommodate at least the selected guests
-      });
-    }
-    onFilter(filtered);
-  }, [venues, selectedAmenities, selectedContinents, selectedGuests, onFilter]);
 
   return (
-    <div className="relative z-0 bg-light transition-all duration-700 ease-in-out">
+    <div className="relative z-0 bg-light transition-all duration-700 ease-out">
       <button
         aria-label="Toggle menu"
-        className="cursor-pointer m-3 flex gap-[10px] flex-row w-fit text-2xl items-center my-4 mx-2 font-garamond uppercase text-brown-300 tracking-wider group-hover:text-dark group-hover:tracking-widest transition-all duration-300"
+        className="bg-light cursor-pointer m-3 flex gap-[10px] flex-row w-fit text-2xl items-center my-4 mx-2 font-garamond uppercase text-brown-300 tracking-wider group-hover:text-dark group-hover:tracking-widest transition-all duration-300"
         onClick={() => setMenuOpen(!menuOpen)}
       >
         Filters
         <SlidersHorizontal className="text-brown-400 group-hover:text-dark transition-all duration-300" />
       </button>
       <div
-        className={`transform transition-all duration-700 ease-in-out origin-top ${
+        className={`overflow-hidden transition-all duration-700 ease-in-out  ${
           menuOpen
-            ? 'h-fit translate-y-0 opacity-100 pointer-events-auto'
-            : 'translate-y-30 opacity-0 max-h-0 pointer-events-none'
+            ? 'max-h-[500px] pointer-events-auto'
+            : 'max-h-0'
         }`}
       >
         <div className="w-full border-brown-100 border-[1px] flex md:flex-row flex-col gap-14 px-[46px] py-7 transition-all duration-300">

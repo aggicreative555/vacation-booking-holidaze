@@ -16,6 +16,15 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
+  useEffect(() => {
+    const maxPage = Math.ceil(bookings.length / itemsPerPage);
+
+    if (currentPage > maxPage && maxPage > 0) {
+      window.history.replaceState(null, '', '?page=1');
+    }
+
+  }, [bookings, currentPage, itemsPerPage]);
+
   if (!bookings.length)
     return (
       <div className="max-w-[500] flex items-center justify-center gap-2 my-80">

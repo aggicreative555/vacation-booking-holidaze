@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import SearchBar from '../components/search/SearchBar';
 import BookingList from '../components/venues/BookingList';
 import BookingsFilter from '../components/filters/BookingsFilter';
@@ -11,15 +11,81 @@ const Bookings = () => {
   const [venueImages, setVenueImages] = useState([]);
   const [isContentReady, setisContentReady] = useState(false);
 
-  const [filteredBookings, setFilteredBookings] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState({
+    amenities: [],
+    continents: [],
+    guests: null,
+  });
+
+  const handleFilter = useCallback((nextFilters) => {
+    setFilters(nextFilters);
+
+  }, []);
+
+
 
   useEffect(() => {
     fetchVenue();
   }, [fetchVenue]);
 
-  useEffect(() => {
-    setFilteredBookings(venues);
-  }, [venues]);
+  const filteredBookings = useMemo(() => {
+    if (!Array.isArray(venues)) return [];
+
+    let result = [...venues];
+
+    //Remove faulty name
+    result = result.filter((venue) => {
+      const name = venue?.name?.trim();
+      const image = venue?.media?.[0]?.url;
+
+      if (!image || !name) return false;
+      const firstThree = name.slice(0,3).toLowerCase();
+      if (
+        firstThree.length === 3 &&
+        firstThree[0] === firstThree[1] &&
+        firstThree[1] === firstThree[2]
+      ) {
+        return false;
+      }
+
+      return true;
+    })
+
+    // Amenities
+    if (filters.amenities.length > 0) {
+      result = result.filter((venue) =>
+        filters.amenities.every((a) => venue?.meta?.[a])
+      );
+    }
+
+    // Continents
+    if (filters.continents.length > 0) {
+      result = result.filter((venue) => {
+        const continent = venue?.location?.continent
+          ?.toLowerCase()
+          ?.trim();
+
+        if (!continent) return false;
+
+        return filters.continents.some((c) =>
+          continent.includes(c)
+        );
+      });
+    }
+
+    // Guests
+    if (filters.guests) {
+      const guestLimit = Number(filters.guests);
+      result = result.filter((venue) => {
+        const max = Number(venue?.maxGuests);
+        if (isNaN(max)) return false;
+        return guestLimit === 10 ? max >= 10 : max >= guestLimit;
+      });
+    }
+
+    return result;
+  }, [venues, filters]);
 
   useEffect(() => {
     const venueIds = [
@@ -36,15 +102,16 @@ const Bookings = () => {
     fetchImages();
   }, [fetchVenuesByIds]);
 
-  const handleFilterResults = useCallback((results) => {
-    setFilteredBookings(results);
-  }, []);
 
-  const handleSearchResults = useCallback((results) => {
-    setFilteredBookings(results);
-  }, []);
+  const visibleBookings = useMemo(() => {
+    if (!searchQuery) return filteredBookings;
 
-  const sortedBookings = [...filteredBookings].sort((a, b) => {
+    return filteredBookings.filter((venue) =>
+      venue?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [filteredBookings, searchQuery]);
+
+  const sortedBookings = [...visibleBookings].sort((a, b) => {
     const timeA = a.created ? new Date(a.created).getTime() : 0;
     const timeB = b.created ? new Date(b.created).getTime() : 0;
     return timeB - timeA; // newest first
@@ -56,6 +123,10 @@ const Bookings = () => {
       return () => clearTimeout(timer);
     }
   }, [isLoading, isError]);
+
+  console.log("Filtered:", filteredBookings.length);
+  console.log("Visible:", visibleBookings.length);
+  console.log("Sorted:", sortedBookings.length);
 
   if (isLoading || !isContentReady) {
     return (
@@ -97,9 +168,9 @@ const Bookings = () => {
     <main className="container mx-auto w-full transition-all duration-300">
       <HeroCarousel bookings={venueImages} height="h-[400px]" content={false} />
       <div className="max-w-[1500px] px-8">
-        <SearchBar data={venues} onResults={handleSearchResults} />
+        <SearchBar data={venues} onResults={setSearchQuery} />
         <div className="px-6 py-4 mb-6 group transition-all duration-700">
-          <BookingsFilter venues={venues} onFilter={handleFilterResults} />
+          <BookingsFilter onFilter={handleFilter} />
         </div>
         <BookingList bookings={sortedBookings} />
       </div>
