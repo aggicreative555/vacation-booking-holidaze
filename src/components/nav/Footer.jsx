@@ -13,7 +13,7 @@ const Footer = () => {
         </div>
       </div>
       <nav>
-        <ul className="flex flex-col gap-4 lg:flex-col lg:gap-6  mb-10 md:mb-20 items-center mt-5 md:mt-10 transition-all duration-300 ease-in-out">
+        <ul className="flex flex-col gap-4 lg:flex-col lg:gap-6  mb-10 md:mb-20 items-center mt-2 transition-all duration-300 ease-in-out">
           <NavLinks />
         </ul>
       </nav>

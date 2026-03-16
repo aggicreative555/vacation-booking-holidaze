@@ -34,17 +34,17 @@ function ProfileVenues() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
         {userVenues.map((venue) => (
           <div
             key={venue.id}
-            className="flex flex-col bg-sand-100 text-brown-300 p-2 w-fit max-w-[800px] h-[500px] transition-all ease-in-out duration-300 group"
+            className="flex flex-col bg-sand-100 text-brown-300 p-2 w-fit  md:w-fit max-w-[800px] h-[500px] transition-all ease-in-out duration-300 group"
           >
             <Link
               to={`/booking/${venue?.id}`}
-              className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full relative"
+              className="cursor-pointer flex flex-col items-start w-[350px] md:w-fit justify-start h-full relative"
             >
-              <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] p-2 overflow-hidden">
+              <div className="flex justify-center items-center border-3 border-brown-300 md:w-full w-[350px] h-[216px] p-2 overflow-hidden">
                 <img
                   className="object-cover h-full w-full border-2 border-marine group-hover:scale-110 transition-all duration-300"
                   src={venue?.media?.[0]?.url}

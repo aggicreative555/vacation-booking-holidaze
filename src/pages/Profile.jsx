@@ -45,8 +45,8 @@ function Profile() {
   }
 
   return (
-    <main className="">
-      <div className="relative w-full">
+    <main className="flex mx-auto w-full flex-col">
+      <div className="relative">
         <div className="w-full h-auto group overflow-hidden max-h-80 flex md:max-h-96 justify-center items-center ">
           <img
             src={user?.banner?.url}
@@ -78,7 +78,7 @@ function Profile() {
           />
         </Modal>
       </div>
-      <div className="flex mx-auto flex-col items-center md:mt-14 mt-20 lg:w-[1500px] px-6 md:px-6 lg:px-0">
+      <div className="flex md:mx-20 mx-auto flex-col items-center md:mt-14 mt-20 lg-max-w-[1500px] px-6 md:px-6 lg:px-0">
         <div className="flex flex-col gap-2 items-center">
           <span className="text-xl text-brown-300 uppercase font-garamond">
             Hi I'm
@@ -90,7 +90,7 @@ function Profile() {
             {user?.bio || 'Write a few words about yourself...'}
           </p>
         </div>
-        <div className="flex md:flex-row md:max-w-[1500px] flex-col-reverse justify-center items-center w-full md:justify-between md:items-end mt-4">
+        <div className="flex md:flex-row lg:max-w-[1500px] flex-col-reverse justify-center items-center w-full md:justify-between md:items-end mt-4 px-20">
           <h2 className="text-2xl uppercase text-brown-300 w-full">
             My Bookings
           </h2>
@@ -118,7 +118,7 @@ function Profile() {
             </button>
           )}
         </div>
-        <div className="flex flex-col md:gap-6 items-center border-[1px] w-full md:px-12 py-7 border-brown-100 my-4 mx-4 md:max-w-[1500px]">
+        <div className="flex flex-col md:gap-6 items-center border-[1px] w-full py-7 border-brown-100 my-4 lg:max-w-[1500px]">
           {user?.venueManager ? (
             <>
               <ProfileVenues />

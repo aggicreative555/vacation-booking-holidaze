@@ -9,7 +9,7 @@ import { useAuthStore } from '../../stores/useAuthStore';
 import Modal from '../modal/Modal';
 import EditVenueForm from '../forms/EditVenueForm';
 import { showToast } from '../../utils/toast';
-import { ArrowLeft, Check, Minus, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, Check, Minus, Plus, Trash2, X } from 'lucide-react';
 import CalendarPicker from '../calendar/CalendarPicker';
 import ConfirmBooking from '../modal/ConfirmBooking';
 
@@ -148,7 +148,7 @@ function SingleVenue() {
   return (
     <>
       <div className="flex items-start flex-col max-w-[1550px] transition-all duration-500 ease-in-out bg-sand-100 h-fit">
-        <div className="relative w-full h-fit md:border-[40px] border-[20px] border-sand-100 flex flex-col">
+        <div className="relative w-full max-h-[600px] md:border-[40px] border-[20px] border-sand-100 flex flex-col">
           <div className="bg-sand-100 absolute rounded-full h-[10%] w-auto aspect-square -left-[2%] -top-[3%] z-10 " />
           <div className="bg-sand-100 absolute rounded-full h-[10%] w-auto aspect-square -right-[2%] -top-[3%] z-10 " />
           <div className="bg-sand-100 absolute rounded-full h-[10%] w-auto aspect-square -left-[2%] -bottom-[3%] z-10 " />
@@ -163,89 +163,96 @@ function SingleVenue() {
         </div>
         <div className="flex flex-col md:flex-row gap-10 container mx-auto px-8 lg:px-8 py-4 justify-center items-center relative">
           <div className="flex flex-col gap-1 h-full items-center justify-center lg:justify-between lg:gap-4">
-            <div className="flex flex-row md:flex-col items-center justify-start h-full w-fit">
+            <div className="flex flex-col md:flex-row items-center justify-start h-full w-full">
               <button
-                className="p-2"
+                className="p-2 w-full text-xl font-imfell flex gap-2 hover:-translate-x-2 cursor-pointer transition-all duration-300"
                 onClick={() => {
                   navigate(-1);
                 }}
               >
-                <ArrowLeft className=" cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300" />
+                <ArrowLeft className="cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300" />
+                Go Back
               </button>
               <p className="text-xl italic text-center font-imfell">Stay at</p>
             </div>
+            <StarRating />
             <div className="flex flex-col gap-2 mb-4 jusitfy-center items-center w-[344px] md:w-[700px]">
               <div className="flex flex-row justify-between flex-wrap ">
                 <h1 className="md:text-6xl text-4xl w-[320px] md:w-[700px] text-center font-chonburi uppercase text-marine line-clamp-3 mb-2 hover:trakcing-wider">
                   {singleVenue?.name}
                 </h1>
               </div>
-              <StarRating />
-              <p className="text-center text-lg font-garamond italic text-brown-400 mt-4 w-full md-w-[500px]">
+              <p className="text-center text-3xl font-garamond text-brown-400 mt-4 w-full md-w-[500px] p-4">
                 {singleVenue.description}
               </p>
             </div>
-            <div className="flex flex-col md:flex-row w-[344px] justify-between items-between md:w-[1250px]">
-              <div className="flex flex-col py-5 md:w-[520px] w-[344px] ">
-                <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2">
-                  Location
-                </p>
-                <div className="border-1 border-brown-200 px-6 py-8 w-full">
-                  <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
-                    {singleVenue.location?.city || 'Bergen'}
+            <div className="flex flex-col-reverse lg:flex-row justify-between items-between w-full md:max-w-[1250px]">
+              <div className='flex flex-col w-full justify-between mt-5 mb-10 lg:items-stretch items-center'>
+                <div className="flex flex-col py-5 w-full h-full">
+                  <p className="text-2xl uppercase text-brown-400 font-bold font-garamond tracking-wide pt-4 pb-2">
+                    Location
                   </p>
-                  <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
-                    {singleVenue.location?.address || 'Streetname 123'}
-                  </p>
-                  <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
-                    {singleVenue.location?.continent || 'Europe'}
-                  </p>
-                  <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
-                    {singleVenue.location?.country || 'Norway'}
-                  </p>
+                  <div className="border-2 outline-1 outline-offset-1 border-brown-200 px-6 py-8 w-full gap-1 text-xs mt-2 flex flex-col flex-1">
+                    <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
+                      {singleVenue.location?.city || 'Bergen'}
+                    </p>
+                    <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
+                      {singleVenue.location?.address || 'Streetname 123'}
+                    </p>
+                    <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
+                      {singleVenue.location?.continent || 'Europe'}
+                    </p>
+                    <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
+                      {singleVenue.location?.country || 'Norway'}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-2xl uppercase text-brown-400 font-garamond tracking-wide pt-4 pb-2">
-                  Amenities
-                </p>
-                <div className="border-1 border-brown-200 px-6 py-8 w-full gap-1 text-xs mt-2 flex flex-col">
-                  {Object.entries(singleVenue.meta).map(([key, value]) => (
-                    <div>
-                      <span
-                        key={key}
-                        className={`text-base font-garamond uppercase border-b-[1px] border-brown-300 w-full flex-row flex mt-2 ${value ? 'text-brown-400' : 'text-brown-200'}`}
-                      >
-                        {key}
-                        {value && (
-                          <span className="ml-2 text-buoy">
-                            <Check />
-                          </span>
-                        )}
-                      </span>
-                    </div>
-                  ))}
+                <div className="flex flex-col py-5 flex-1 min-w-0 h-full">
+                  <p className="text-2xl uppercase text-brown-400 font-bold font-garamond tracking-wide pt-4 pb-2">
+                    Amenities
+                  </p>
+                  <div className="border-2 outline-1 outline-offset-1 border-brown-200 px-6 py-8 w-full gap-1 text-xs mt-2 flex flex-col flex-1">
+                    {Object.entries(singleVenue.meta).map(([key, value]) => (
+                      <div>
+                        <span
+                          key={key}
+                          className={`text-base font-garamond uppercase border-b-[1px] border-brown-300 w-full flex-row flex mt-2 ${value ? 'text-brown-400' : 'text-brown-200'}`}
+                        >
+                          {value ? 
+                            <span className="mr-2 text-buoy">
+                              <Check />
+                            </span> :
+                            <span className="mr-2 text-buoy">
+                              <X/>
+                            </span>
+                          }
+                          {key}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-
-              <div className="flex flex-col items-center justify-between py-5 px-4 md:w-fit h-auto pb-12 w-[344px]">
-                <div className="flex flex-row md:gap-4 gap-0">
-                  <div className="flex flex-col gap-2 px-6 py-4 justify-center items-center">
-                    <p className="font-garamond text-xl uppercase text-brown-300">
+              <div className="flex flex-col items-center pt-5 px-4 md:w-full h-auto w-ful border-b-[1px] pl-10">
+                <div className="flex flex-row md:gap-4 gap-0 justify-start w-full">
+                  <div className="flex flex-col gap-2 py-9 justify-center items-center">
+                    <p className="font-garamond text-xl uppercase text-brown-300 font-bold">
                       Guests
                     </p>
-                    <div className="btn-l p-4 md:p-8 pointer-events-none rounded-full border-brown-300 text-lg font-button text-brown-300">
+                    <div className="w-[90px] flex items-center justify-center border-2 outline-1 mt-2 outline-offset-1 aspect-square pointer-events-none border-brown-300 font-garamond uppercase text-xl font-semibold transition-all duration-100 ease-in-out ">
                       Max {singleVenue.maxGuests}
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2 px-6 py-4 justify-center items-center">
-                    <p className="font-garamond text-xl uppercase text-brown-300">
+                  <div className="flex flex-col gap-2 py-9 justify-center items-center">
+                    <p className="font-garamond text-xl uppercase text-brown-300 font-bold">
                       bookings
                     </p>
-                    <div className="btn-l px-8 py-4 md:p-8 pointer-events-none rounded-full border-brown-300 text-lg font-button text-brown-300">
+                    <div className="w-[90px] flex items-center justify-center border-2 outline-1 mt-2 outline-offset-1 aspect-square pointer-events-none border-brown-300 font-garamond uppercase text-xl font-semibold transition-all duration-100 ease-in-out ">
                       {singleVenue._count.bookings}
                     </div>
                   </div>
                 </div>
-                <div className="w-[344px] flex flex-row md:w-fit justify-center items-center gap-2 border-b-[1px] border-brown-300 mt-12">
+                <div className="w-[344px] flex flex-row md:w-fit justify-start items-center gap-2 border-b-[1px] border-brown-300 mt-45">
                   {/* NOT LOGGED IN */}
                 </div>
                 {!user && (
@@ -363,15 +370,15 @@ function SingleVenue() {
                 {/* Venue manager (edit venue) */}
                 {user?.venueManager &&
                   singleVenue?.owner?.name === user?.name && (
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-start justify-start">
                       <p className="text-4xl cursor-default uppercase font-chonburi text-marine">
                         {singleVenue.price} nok
                       </p>
                       <p className="text-base text-brown-400 uppercase font-garamond">
                         / night
                       </p>
-                      <div className="flex justify-center items-center mt-8 flex-col w-full">
-                        <div className="flex gap-6 flex-row justify-between  items-center *:w-full">
+                      <div className="flex justify-center items-center mt-4 flex-col w-full">
+                        <div className="flex gap-6 flex-row justify-between items-center *:w-full">
                           <button
                             className="btn-l btn-primary w-full min-w-[250px]"
                             onClick={() => setEditIsOpen(true)}

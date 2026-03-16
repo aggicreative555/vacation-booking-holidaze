@@ -107,7 +107,9 @@ function EditVenueForm({ venue, onClose }) {
         <label className="label-base group">
           Description
           <input
-            type="text"
+            type="textarea"
+            rows={10}
+            columns={10}
             {...register('description')}
             className="input-base text-left font-normal text-dark"
           />

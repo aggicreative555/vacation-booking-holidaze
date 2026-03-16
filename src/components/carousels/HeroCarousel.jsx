@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const HeroCarousel = ({
   bookings = [],
-  height = 'h-[800px]',
+  height = 'h-[600px]',
   content = true,
 }) => {
   const sliderRef = useRef(null);
@@ -33,7 +33,7 @@ const HeroCarousel = ({
       <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -left-[2%] -bottom-[3%] z-10 " />
       <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -right-[2%] -bottom-[3%] z-10 " />
       <div
-        className={`w-full md:max-h-[800px] max-h-[600px] overflow-hidden ${height}`}
+        className={`w-full max-h-[600px] overflow-hidden ${height}`}
       >
         <div className="glide h-full" ref={sliderRef}>
           <div className="glide__track h-full " data-glide-el="track">

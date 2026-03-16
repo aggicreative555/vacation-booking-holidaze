@@ -67,7 +67,7 @@ input[type='search']::-webkit-search-results-decoration {
   }
 
   .input-base {
-    @apply flex flex-col p-4 justify-center w-full border-b-[1px] m-4 border-brown-300 focus:border-dark focus:border-b-2 hover:border-b-dark hover:border-b-2 text-dark transition-all duration-300 text-xl;
+    @apply flex flex-col h-fit p-4 justify-center w-full border-b-[1px] m-4 border-brown-300 focus:border-dark focus:border-b-2 hover:border-b-dark hover:border-b-2 text-dark transition-all duration-300 text-xl;
   }
 
   .error-message {

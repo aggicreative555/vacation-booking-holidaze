@@ -31,11 +31,11 @@ function ProfileBookings() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative place-items-center w-full transition-all ease-in-out duration-300">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 relative place-items-center transition-all ease-in-out duration-300">
         {userBookings.map((booking) => (
           <div
             key={booking.id}
-            className="flex flex-col bg-sand-100 text-brown-300 p-2 w-fit max-w-[800px] h-[500px] transition-all ease-in-out duration-300 group"
+            className="flex flex-col bg-sand-100 text-brown-300 p- max-w-[800px] h-[500px] transition-all ease-in-out duration-300 group"
           >
             <Link
               to={`/booking/${booking?.venue?.id}`}
