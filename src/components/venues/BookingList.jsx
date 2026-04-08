@@ -48,22 +48,23 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
         {currentProducts.map((booking) => {
           return (
             <div
-              className="flex flex-col bg-sand-100 text-brown-300 p-2 w-fit max-w-[800px] h-[500px] md:h-[776px] transition-all ease-in-out duration-300 group"
+              className="flex flex-col bg-sand-100 text-brown-300 p-2 max-w-[800px] w-full h-[500px] md:h-[776px] transition-all ease-in-out duration-300 group"
               key={booking.id}
             >
               <Link
                 to={`/booking/${booking?.id}`}
-                className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full"
+                onClick={() => window.scrollTo(0,0)} 
+                className="cursor-pointer flex flex-col items-start w-full justify-start h-full"
               >
-                <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] md:h-[440px] p-2 overflow-hidden ">
+                <div className="flex justify-center items-center border-3 border-brown-300 w-full h-[400px] p-2 overflow-hidden ">
                   <img
-                    className="object-cover h-full w-full border-2 border-marine group-hover:scale-110 transition-all duration-300"
+                    className="object-cover scale-110 h-full w-full border-2 border-marine group-hover:scale-120 transition-all duration-300"
                     src={booking?.media?.[0]?.url}
                     alt={booking?.media?.[0]?.alt || 'Venue image'}
                   />
                 </div>
                 <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
-                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:border-2 transition-all duration-300 group-hover:tracking-wider">
+                  <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:outline-2 transition-all duration-300">
                     <p className="text-xl italic text-center font-imfell">
                       Stay at
                     </p>
@@ -74,7 +75,7 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
                       <MapPin size={16} />
                       {booking?.location?.country}
                     </p>
-                    <div className="flex flex-col justify-center items-center p-2 mt-2 border-brown-200 border-1 w-full md:mb-4">
+                    <div className="flex flex-col sm:mb-4 justify-center items-center p-2 mt-2 border-brown-200 border-1 w-full md:mb-4">
                       <div className="flex flex-row justify-between">
                         <div className="flex flex-col justify-between">
                           <p className=" text-base text-brown font-garamond max-w-[200px] line-clamp-2 h-[100px] overflow-hidden hidden md:block ">

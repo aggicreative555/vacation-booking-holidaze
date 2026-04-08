@@ -81,6 +81,7 @@ const HeroCarousel = ({
           </p>
           <Link
             to="/bookings"
+            onClick={() => window.scrollTo(0,0)} 
             className="btn-l btn-primary text-light w-[300px]"
           >
             {' '}

@@ -18,7 +18,7 @@ export function NavBar() {
         </div>
         <button
           aria-label="Toggle menu"
-          className="m-3 flex gap-[6px] flex-col items-end min-md:hidden w-fit"
+          className="m-3 cursor-pointer flex gap-[6px] flex-col items-end min-md:hidden w-fit"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <span

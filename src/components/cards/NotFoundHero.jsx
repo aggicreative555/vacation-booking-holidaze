@@ -42,6 +42,7 @@ const NotFoundHero = ({
           </p>
           <Link
             to="/"
+            onClick={() => window.scrollTo(0,0)} 
             className="btn-l btn-secondary md:w-[400px]"
           >
         Go to home page

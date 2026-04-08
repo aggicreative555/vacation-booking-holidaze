@@ -48,6 +48,7 @@ function HomeBookingList({ bookings = [], venueIds = [] }) {
           >
             <Link
               to={`/booking/${booking.id}`}
+              onClick={() => window.scrollTo(0,0)} 
               className="cursor-pointer flex flex-col md:flex-row gap-4 items-center justify-center w-full"
             >
               {/* Image */}
@@ -60,7 +61,7 @@ function HomeBookingList({ bookings = [], venueIds = [] }) {
               </div>
 
               {/* Content */}
-              <div className="w-full flex flex-col justify-center items-center flex-1 md:h-full border-1 group-hover:border-2 transition-all duration-300 border-brown-400 px-6 py-4 group-hover:tracking-wider">
+              <div className="w-full flex flex-col justify-center items-center flex-1 md:h-full border-1 group-hover:outline-2 transition-all duration-300 border-brown-400 px-6 py-4">
                 <p className="text-xl italic text-center font-imfell">
                   Stay at
                 </p>

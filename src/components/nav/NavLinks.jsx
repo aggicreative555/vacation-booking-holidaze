@@ -55,6 +55,7 @@ function NavLinks() {
         <li key={to} className="relative">
           <NavLink
             to={to}
+            onClick={() => window.scrollTo(0,0)} 
             className={({ isActive }) =>
               `block my-1 font-garamond text-base uppercase text-black transition-all duration-50 ease-in-out ${
                 isActive

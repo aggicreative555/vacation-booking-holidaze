@@ -47,19 +47,19 @@ input[type='search']::-webkit-search-results-decoration {
 
 @layer components {
   .btn-l {
-    @apply flex items-center justify-center px-[54px] py-4 my-1 border-2 bg-light border-dark outline-dark outline-1 outline-offset-2 font-garamond uppercase text-xl font-semibold transition-all duration-100 ease-in-out hover:font-bold hover:border-4 hover:tracking-wider cursor-pointer;
+    @apply flex items-center justify-center px-[54px] py-4 my-1 border-2 bg-light border-dark outline-dark outline-1 outline-offset-2 font-garamond uppercase text-xl font-bold transition-all duration-100 ease-in-out hover:outline-4 cursor-pointer;
   }
 
   .btn-primary {
-    @apply bg-marine text-light hover:border-4 hover:font-medium cursor-pointer;
+    @apply bg-marine text-light hover:outline-4 hover:font-bold cursor-pointer;
   }
 
   .btn-secondary {
-    @apply bg-light text-marine border-marine hover:border-4 hover:font-medium cursor-pointer;
+    @apply bg-light text-marine border-marine hover:outline-4 hover:font-medium cursor-pointer;
   }
 
   .btn-s {
-    @apply flex items-center justify-center px-[54px] py-4 border-2 border-dark outline-dark outline-1 outline-offset-2 font-garamond uppercase font-semibold text-xs transition-all duration-100 ease-in-out hover:font-bold cursor-pointer;
+    @apply flex items-center justify-center px-[24px] py-4 border-2 border-dark outline-dark outline-1 outline-offset-2 font-garamond uppercase font-semibold text-xs transition-all duration-100 ease-in-out hover:font-bold cursor-pointer;
   }
 
   .label-base {

@@ -22,7 +22,10 @@ function ProfileBookings() {
             .
           </span>
         </div>
-        <Link to="/bookings" className="btn-l btn-primary">
+        <Link 
+        to="/bookings" 
+        onClick={() => window.scrollTo(0,0)} 
+        className="btn-l btn-primary">
           Explore venues
         </Link>
       </div>
@@ -39,6 +42,7 @@ function ProfileBookings() {
           >
             <Link
               to={`/booking/${booking?.venue?.id}`}
+              onClick={() => window.scrollTo(0,0)} 
               className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full"
             >
               <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] p-2 overflow-hidden">
@@ -49,7 +53,7 @@ function ProfileBookings() {
                 />
               </div>
               <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
-                <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:border-2 transition-all duration-300 group-hover:tracking-wider">
+                <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:outline-2 transition-all duration-300 group-hover:tracking-wider">
                   <h2 className="text-2xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2">
                     {booking?.venue?.name}
                   </h2>
@@ -70,6 +74,7 @@ function ProfileBookings() {
                   <div className="flex flex-row gap-6 mt-5">
                     <Link
                       to={`/booking/${booking?.venue?.id}`}
+                      onClick={() => window.scrollTo(0,0)} 
                       className="btn-s btn-primary"
                     >
                       View Booking

@@ -36,7 +36,7 @@ function Profile() {
           <h1 className="uppercase font-garamond w-full text-center max-w-[400px] md:max-w-[500px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
             You must be logged in to view this page
           </h1>
-          <Link to="/login" className="btn-l btn-primary">
+          <Link to="/login" onClick={() => window.scrollTo(0,0)} className="btn-l btn-primary">
             Log In
           </Link>
         </div>
@@ -54,7 +54,7 @@ function Profile() {
             className="transition-transform duration-300 ease-in-out object-cover aspect-auto w-full"
           />
         </div>
-        <div className="absolute lg:top-3/3 lg:left-3/9 top-3/4 left-1/2 -translate-y-1/2 -translate-x-1/2 md:w-[256px] w-[174px]  border-black md:border-[24px] border-[12px] group overflow-hidden md:h-[320px] h-[218px] justify-center items-center rounded-full">
+        <div className="absolute top-4/5 md:top-2/3 left-1/2 -translate-y-1/2 -translate-x-1/2 md:w-[256px] w-[174px]  border-black md:border-[24px] border-[12px] group overflow-hidden md:h-[320px] h-[218px] justify-center items-center rounded-full transition-all duration-200">
           <img
             src={user?.avatar?.url}
             alt={user?.avatar?.alt}
@@ -62,7 +62,7 @@ function Profile() {
           />
         </div>
         <button
-          className="absolute btn-l aspect-square flex items-center md:right-1/3 md:-bottom-1/5 right-1/10 justify-center p-3 rounded-full"
+          className="absolute btn-l aspect-square flex items-center md:right-1/3 md:-bottom-1/5 right-1/4 -bottom-2/8 justify-center p-3 rounded-full transition-all duration-200"
           onClick={() => setIsProfileModalOpen(true)}
           title="Edit profile"
         >
@@ -83,7 +83,7 @@ function Profile() {
           <span className="text-xl text-brown-300 uppercase font-garamond">
             Hi I'm
           </span>
-          <p className="uppercase font-chonburi text-3xl w-full text-crimson text-center max-w-[400px] md:max-w-[500px]">
+          <p className="uppercase font-chonburi text-3xl w-full text-crimson text-center max-w-[400px] md:max-w-[500px] break-words">
             {user?.name}
           </p>
           <p className="text-center text-xl font-garamond italic text-dark">
@@ -97,10 +97,10 @@ function Profile() {
           {user?.venueManager ? (
             <>
               <button
-                className="btn-l btn-primary md:w-[500px] mb-10 md:mb-0"
+                className="btn-l btn-primary md:w-[500px] sm:mb-10 sm:my-4"
                 onClick={() => setIsCreateModalOpen(true)}
               >
-                Create a new venue
+                Create venue
               </button>
               <Modal
                 isOpen={isCreateModalOpen}
@@ -111,7 +111,7 @@ function Profile() {
             </>
           ) : (
             <button
-              className="btn-l btn-secondary w-full max-w-[400px] mb-10 md:mb-0"
+              className="btn-l btn-secondary w-fit mb-10 md:text-nowrap md:mb-0"
               onClick={() => clearBookings()}
             >
               Clear all bookings

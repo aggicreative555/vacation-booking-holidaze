@@ -67,9 +67,10 @@ function CardXl({ venueId }) {
     <div className="flex flex-col md:flex-row bg-lamp text-light p-4 w-full max-w-[1200px] mx-auto md:h-fit transition-all ease-in-out duration-300 group">
       <Link
         to={`/booking/${venue.id}`}
+        onClick={() => window.scrollTo(0,0)} 
         className="cursor-pointer flex flex-col md:flex-row gap-6 sm:w-full md:w-full items-center justify-center"
       >
-        <div className="flex justify-center items-center border-3 border-brown-200 w-full md:w-[500px] p-2 md:h-fit overflow-hidden">
+        <div className="flex justify-center items-center border-3 border-white w-full md:w-[500px] p-2 md:h-fit overflow-hidden">
           <img
             className="object-cover h-[400px] w-full border-2 border-brown-100  group-hover:scale-110 transition-all duration-300"
             src={venue?.media?.[0]?.url}
@@ -77,14 +78,14 @@ function CardXl({ venueId }) {
           />
         </div>
 
-        <div className="flex flex-col justify-center items-center flex-1 border-1 border-brown-200 group-hover:border-3 transition-all duation-300 md:h-full md:px-8 px-6 py-6 gap-4">
+        <div className="flex flex-col justify-center items-center flex-1 border-1 border-brown-200 group-hover:outline-3 transition-all duation-300 md:h-full md:px-8 px-6 py-6 gap-4">
           <p className="text-2xl italic text-brown-100  text-center font-imfell">
             Stay at
           </p>
-          <h2 className="text-4xl md:text-6xl text-center font-chonburi uppercase text-light mb-4 group-hover:tracking-widest transition-all duration-300">
+          <h2 className="text-4xl md:text-6xl text-center font-chonburi uppercase text-light mb-4 transition-all duration-300">
             {venue?.name}
           </h2>
-          <p className="flex flex-row text-sm md:text-base text-center tracking-wider text-brown-100 font-garamond capitalize line-clamp-4 gap-2 items-center">
+          <p className="flex flex-row text-sm md:text-base text-center text-brown-100 font-garamond capitalize line-clamp-4 gap-2 items-center">
             <MapPin size={20} />
             {venue?.description}
           </p>

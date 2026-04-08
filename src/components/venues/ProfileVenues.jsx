@@ -42,6 +42,7 @@ function ProfileVenues() {
           >
             <Link
               to={`/booking/${venue?.id}`}
+              onClick={() => window.scrollTo(0,0)} 
               className="cursor-pointer flex flex-col items-start w-[350px] md:w-fit justify-start h-full relative"
             >
               <div className="flex justify-center items-center border-3 border-brown-300 md:w-full w-[350px] h-[216px] p-2 overflow-hidden">
@@ -63,7 +64,7 @@ function ProfileVenues() {
                 <Pencil size={16} />
               </button>
               <div className="pt-4 flex justify-start items-start flex-col relative w-full flex-1">
-                <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6 group-hover:border-2 transition-all duration-300 group-hover:tracking-wide">
+                <div className="sm:min-w-[302px] w-full flex flex-col justify-center items-center flex-1 border-1 border-brown-400 px-6  group-hover:outline-2 transition-all duration-200">
                   <h2 className="text-2xl text-center font-chonburi uppercase text-marine line-clamp-2 mb-2">
                     {venue?.name}
                   </h2>
@@ -128,13 +129,13 @@ function ProfileVenues() {
             onClose={() => setSelectedVenueId(null)}
           >
             <div className="flex flex-col justify-center items-center my-8 mx-4">
-              <div className="flex flex-row gap-2 justify-center items-center mb-8">
-                <p className="text-base text-brown-300 font-garamond tracking-wide uppercase ">
+              <div className="flex flex-col justify-center items-center mb-8">
+                <p className="text-base text-brown-300 py-2 font-garamond tracking-wide uppercase w-fit text-nowrap ">
                   Bookings for: {''}
                 </p>
                 <h1
                   className="text-4xl uppercase font-chonburi
-                w-full text-center break-word max-w-[400px] md:max-w-[450px] text-crimson"
+                w-full text-center break-word text-crimson"
                 >
                   {userVenues.find((v) => v.id === selectedVenueId)?.name}
                 </h1>
