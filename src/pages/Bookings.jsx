@@ -130,20 +130,23 @@ const Bookings = () => {
 
   if (isLoading || !isContentReady) {
     return (
-      <div className="max-w-[500] flex items-center justify-center gap-2 my-80">
-        <p className="text-center font-imfell italic text-crimson text-xl">
-          Loading all venues. Please wait
-        </p>
-        <span className="text-center font-imfell italic text-crimson text-xl dot dot-1">
-          .
-        </span>
-        <span className="text-center font-imfell italic text-crimson text-xl dot dot-2">
-          .
-        </span>
-        <span className="text-center font-imfell italic text-crimson text-xl dot dot-3">
-          .
-        </span>
-      </div>
+      <main className="container mx-auto w-full transition-all duration-300">
+        <HeroCarousel bookings={venueImages} height="h-[400px]" content={false} />
+        <div className="max-w-[500] flex items-start justify-center gap-2 mb-30 md:my-40">
+          <p className="text-center font-imfell italic text-crimson text-xl">
+            Loading all venues. Please wait
+          </p>
+          <span className="text-center font-imfell italic text-crimson text-xl dot dot-1">
+            .
+          </span>
+          <span className="text-center font-imfell italic text-crimson text-xl dot dot-2">
+            .
+          </span>
+          <span className="text-center font-imfell italic text-crimson text-xl dot dot-3">
+            .
+          </span>
+        </div>
+      </main>
     );
   }
   if (isError)

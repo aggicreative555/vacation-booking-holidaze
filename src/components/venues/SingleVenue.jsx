@@ -95,16 +95,10 @@ function SingleVenue() {
   };
 
   useEffect(() => {
-    if (!singleVenue || singleVenue.id !== id) {
+    if (id) {
       fetchVenueById(id);
     }
-  }, [id, singleVenue, fetchVenueById]);
-
-  useEffect(() => {
-    if (user) {
-      fetchBookingsByUser(user.name);
-    }
-  }, [user, fetchBookingsByUser]);
+  }, [id, fetchVenueById]);
 
   if (isLoading) {
     return (
@@ -162,10 +156,10 @@ function SingleVenue() {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-10 container mx-auto px-8 lg:px-8 py-4 justify-center items-center relative">
-          <div className="flex flex-col gap-1 h-full items-center justify-center lg:justify-between lg:gap-4">
-            <div className="flex flex-col md:flex-row items-center justify-start h-full w-full">
+          <div className="flex flex-col gap-1 h-full items-center justify-center lg:gap-4">
+            <div className="relative flex flex-col md:flex-row items-center justify-start h-full w-full">
               <button
-                className="p-2 w-full text-xl font-imfell flex gap-2 hover:-translate-x-2 cursor-pointer transition-all duration-300"
+                className="p-2 w-fit text-xl font-imfell flex gap-2 hover:-translate-x-2 cursor-pointer transition-all duration-300"
                 onClick={() => {
                   navigate(-1);
                 }}
@@ -173,7 +167,7 @@ function SingleVenue() {
                 <ArrowLeft className="cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300" />
                 Go Back
               </button>
-              <p className="text-xl italic text-center font-imfell">Stay at</p>
+              <p className="md:absolute md:left-[46%] text-xl italic text-center font-imfell w-fit">Stay at</p>
             </div>
             <StarRating />
             <div className="flex flex-col gap-2 mb-4 jusitfy-center items-center w-[344px] md:w-[700px]">
@@ -186,13 +180,13 @@ function SingleVenue() {
                 {singleVenue.description}
               </p>
             </div>
-            <div className="flex flex-col-reverse lg:flex-row justify-between items-between w-full md:max-w-[1250px]">
+            <div className="flex flex-col-reverse lg:flex-row justify-between items-between w-full h-fit md:max-w-[1250px]">
               <div className='flex flex-col w-full justify-between mt-5 mb-10 lg:items-stretch items-center'>
-                <div className="flex flex-col py-5 w-full h-full">
+                <div className="flex flex-col py-5 w-full">
                   <p className="text-2xl uppercase text-brown-400 font-bold font-garamond tracking-wide pt-4 pb-2">
                     Location
                   </p>
-                  <div className="border-2 outline-1 outline-offset-1 border-brown-200 px-6 py-8 w-full gap-1 text-xs mt-2 flex flex-col flex-1">
+                  <div className="border-2 outline-1 outline-offset-1 border-brown-200 px-6 py-8 w-full gap-1 text-xs mt-2 flex flex-col">
                     <p className="tracking-wide text-base font-garamond uppercase text-brown-400 border-b-[1px] border-brown-300 w-full mt-2">
                       {singleVenue.location?.city || 'Bergen'}
                     </p>
@@ -207,11 +201,11 @@ function SingleVenue() {
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col py-5 flex-1 min-w-0 h-full">
+                <div className="flex flex-col py-5 flex-1 min-w-0 h-fit">
                   <p className="text-2xl uppercase text-brown-400 font-bold font-garamond tracking-wide pt-4 pb-2">
                     Amenities
                   </p>
-                  <div className="border-2 outline-1 outline-offset-1 border-brown-200 px-6 py-8 w-full gap-1 text-xs mt-2 flex flex-col flex-1">
+                  <div className="border-2 outline-1 outline-offset-1 border-brown-200 px-6 py-8 w-full gap-1 text-xs mt-2 flex flex-col">
                     {Object.entries(singleVenue.meta).map(([key, value]) => (
                       <div>
                         <span
@@ -219,7 +213,7 @@ function SingleVenue() {
                           className={`text-base font-garamond uppercase border-b-[1px] border-brown-300 w-full flex-row flex mt-2 ${value ? 'text-brown-400' : 'text-brown-200'}`}
                         >
                           {value ? 
-                            <span className="mr-2 text-buoy">
+                            <span className="mr-2 text-emerald-700">
                               <Check />
                             </span> :
                             <span className="mr-2 text-buoy">
@@ -233,9 +227,9 @@ function SingleVenue() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center pt-5 px-4 md:w-full h-auto w-ful border-b-[1px] pl-10">
-                <div className="flex flex-row md:gap-4 gap-0 justify-start w-full">
-                  <div className="flex flex-col gap-2 py-9 justify-center items-center">
+              <div className="flex flex-col items-center pt-5 px-4 md:w-full border-b-[1px] md:border-0 md:pl-10">
+                <div className="flex flex-row md:gap-4 justify-center md:justify-start w-full">
+                  <div className="flex flex-col gap-2 py-2 justify-center items-center">
                     <p className="font-garamond text-xl uppercase text-brown-300 font-bold">
                       Guests
                     </p>
@@ -243,7 +237,7 @@ function SingleVenue() {
                       Max {singleVenue.maxGuests}
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2 py-9 justify-center items-center">
+                  <div className="flex flex-col gap-2 md:py-9 justify-center items-center">
                     <p className="font-garamond text-xl uppercase text-brown-300 font-bold">
                       bookings
                     </p>
@@ -252,21 +246,22 @@ function SingleVenue() {
                     </div>
                   </div>
                 </div>
-                <div className="w-[344px] flex flex-row md:w-fit justify-start items-center gap-2 border-b-[1px] border-brown-300 mt-45">
+                <div className="w-[344px] flex flex-row md:w-fit justify-start items-center gap-2 border-b-[1px] border-brown-300 mt-10 md:mt-0">
                   {/* NOT LOGGED IN */}
                 </div>
                 {!user && (
                   <>
-                    <p className="text-4xl cursor-default uppercase font-chonburi text-marine">
+                    <p className="text-4xl pt-5 text-center md:text-left md:w-full cursor-default uppercase font-chonburi text-marine">
                       {singleVenue.price} nok
                     </p>
-                    <p className="text-base text-brown-400 uppercase font-garamond">
+                    <p className="text-base md:w-full text-brown-400 uppercase font-garamond">
                       / night
                     </p>
                     <div className="flex justify-center items-center mt-8 flex-col w-full">
                       <Link
-                        className="max-w-[300px] btn-l btn-primary w-full"
+                        className="max-w-[300px] mb-10 btn-l btn-primary w-full"
                         to="/login"
+                        onClick={() => window.scrollTo(0,0)} 
                       >
                         Log in to book
                       </Link>
@@ -276,7 +271,7 @@ function SingleVenue() {
 
                 {/* CUSTOMER BOOKING FLOW */}
                 {user && !user.venueManager && (
-                  <div className="flex gap-6 flex-col max-w-[500px] justify-between w-full">
+                  <div className="flex gap-6 flex-col max-w-[500px] justify-between w-full mb-20">
                     <div className="my-4 gap-6 flex items-center justify-center flex-col ">
                       <p className="font-garamond text-xl uppercase text-brown-300">
                         Schedule a date
@@ -292,7 +287,7 @@ function SingleVenue() {
                         <button
                           onClick={decrementGuests}
                           disabled={guests <= 1}
-                          className="btn-l p-2 h-fit rounded-full"
+                          className="btn-l p-2 h-fit rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Minus size={16} />
                         </button>
@@ -305,25 +300,32 @@ function SingleVenue() {
                         />
                         <button
                           onClick={incrementGuests}
-                          disabled={guests >= singleVenue.maxGuests}
-                          className="btn-l p-2 h-fit rounded-full"
+                          disabled={
+                            guests >= singleVenue.maxGuests ||
+                            !selectedRange?.from || 
+                            !selectedRange?.to
+                          }
+                          className="btn-l p-2 h-fit rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Plus size={16} />
                         </button>
                       </div>
+                      {(!selectedRange?.from || !selectedRange?.to) && (
+                          <p className='font-garamond italic text-crimson text-sm'> Please select a date before adding guests.</p>
+                      )}
                     </div>
                     <div className="flex flex-col items-center justify-center">
                       <span className="text-base text-brown-400 uppercase font-garamond">
                         Total
                       </span>
-                      <p className="text-4xl cursor-default uppercase font-chonburi text-marine">
+                      <p className="text-4xl pt-5 text-center md:text-left w-full cursor-default uppercase font-chonburi text-marine">
                         {calculatedPrice} NOK
                       </p>
                       <div className="flex flex-row gap-1">
                         <div className="text-base text-brown-400 uppercase font-garamond">
                           {singleVenue.price} NOK
                         </div>
-                        <p className="text-base text-brown-400 uppercase font-garamond">
+                        <p className="text-base w-full text-center md:text-left text-brown-400 uppercase font-garamond">
                           / night
                         </p>
                         <p className="text-base text-brown-400 lowercase font-garamond">
@@ -331,7 +333,7 @@ function SingleVenue() {
                         </p>
                       </div>
                       <button
-                        className={`btn-l w-full mt-8 ${
+                        className={`btn-l w-full mt-8 mb-10 ${
                           !canBook || alreadyBooked
                             ? 'bg-brown-100 text-brown-200 border-brown-300 cursor-not-allowed'
                             : 'btn-primary'
@@ -371,22 +373,22 @@ function SingleVenue() {
                 {user?.venueManager &&
                   singleVenue?.owner?.name === user?.name && (
                     <div className="flex flex-col items-start justify-start">
-                      <p className="text-4xl cursor-default uppercase font-chonburi text-marine">
+                      <p className="text-4xl pt-5 w-full text-center md:text-left cursor-default uppercase font-chonburi text-marine">
                         {singleVenue.price} nok
                       </p>
-                      <p className="text-base text-brown-400 uppercase font-garamond">
+                      <p className="text-base w-full text-center md:text-left text-brown-400 uppercase font-garamond">
                         / night
                       </p>
                       <div className="flex justify-center items-center mt-4 flex-col w-full">
                         <div className="flex gap-6 flex-row justify-between items-center *:w-full">
                           <button
-                            className="btn-l btn-primary w-full min-w-[250px]"
+                            className="btn-l btn-primary w-full text-nowrap"
                             onClick={() => setEditIsOpen(true)}
                           >
                             Edit Venue
                           </button>
                           <button
-                            className="btn-l p-2 h-fit rounded-full"
+                            className="btn-l p-2 h-fit rounded-full mb-10"
                             onClick={(e) => {
                               e.stopPropagation();
                               removeFromBookings(booking.id, booking.name);
