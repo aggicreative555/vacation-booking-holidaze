@@ -48,7 +48,7 @@ function HomeBookingList({ bookings = [], venueIds = [] }) {
           >
             <Link
               to={`/booking/${booking.id}`}
-              onClick={() => window.scrollTo(0,0)} 
+              onClick={() => window.scrollTo(0, 0)}
               className="cursor-pointer flex flex-col md:flex-row gap-4 items-center justify-center w-full"
             >
               {/* Image */}

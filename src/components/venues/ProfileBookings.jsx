@@ -22,10 +22,11 @@ function ProfileBookings() {
             .
           </span>
         </div>
-        <Link 
-        to="/bookings" 
-        onClick={() => window.scrollTo(0,0)} 
-        className="btn-l btn-primary">
+        <Link
+          to="/bookings"
+          onClick={() => window.scrollTo(0, 0)}
+          className="btn-l btn-primary"
+        >
           Explore venues
         </Link>
       </div>
@@ -42,7 +43,7 @@ function ProfileBookings() {
           >
             <Link
               to={`/booking/${booking?.venue?.id}`}
-              onClick={() => window.scrollTo(0,0)} 
+              onClick={() => window.scrollTo(0, 0)}
               className="cursor-pointer flex flex-col items-start w-[350px] justify-start h-full"
             >
               <div className="flex justify-center items-center border-3 border-brown-300 w-[350px] h-[216px] p-2 overflow-hidden">
@@ -74,7 +75,7 @@ function ProfileBookings() {
                   <div className="flex flex-row gap-6 mt-5">
                     <Link
                       to={`/booking/${booking?.venue?.id}`}
-                      onClick={() => window.scrollTo(0,0)} 
+                      onClick={() => window.scrollTo(0, 0)}
                       className="btn-s btn-primary"
                     >
                       View Booking

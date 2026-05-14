@@ -22,7 +22,6 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
     if (currentPage > maxPage && maxPage > 0) {
       window.history.replaceState(null, '', '?page=1');
     }
-
   }, [bookings, currentPage, itemsPerPage]);
 
   if (!bookings.length)
@@ -53,7 +52,7 @@ function BookingList({ bookings = [], itemsPerPage = 6 }) {
             >
               <Link
                 to={`/booking/${booking?.id}`}
-                onClick={() => window.scrollTo(0,0)} 
+                onClick={() => window.scrollTo(0, 0)}
                 className="cursor-pointer flex flex-col items-start w-full justify-start h-full"
               >
                 <div className="flex justify-center items-center border-3 border-brown-300 w-full h-[400px] p-2 overflow-hidden ">

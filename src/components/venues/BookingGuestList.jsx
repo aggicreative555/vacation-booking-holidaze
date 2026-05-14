@@ -64,49 +64,49 @@ function BookingGuestList({ venueId }) {
 
   return (
     <div className="bg-light overflow-x-auto w-full pb-8 px-10 flex justify-center items-center">
-        <table className="w-fit">
-          <thead className=" font-garamond font-semibold text-2xl uppercase pb-5 text-left">
-            <tr>
-              <th className="pr-8 py-2 text-left text-brown-300  tracking-wide font-garamond uppercase">
-                Customer
-              </th>
-              <th className="pr-8 py-2 text-left text-brown-300  tracking-wide font-garamond uppercase">
-                Date
-              </th>
-              <th className="pr-8 py-2 text-left text-brown-300  tracking-wide font-garamond uppercase">
-                Guests
-              </th>
+      <table className="w-fit">
+        <thead className=" font-garamond font-semibold text-2xl uppercase pb-5 text-left">
+          <tr>
+            <th className="pr-8 py-2 text-left text-brown-300  tracking-wide font-garamond uppercase">
+              Customer
+            </th>
+            <th className="pr-8 py-2 text-left text-brown-300  tracking-wide font-garamond uppercase">
+              Date
+            </th>
+            <th className="pr-8 py-2 text-left text-brown-300  tracking-wide font-garamond uppercase">
+              Guests
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {singleVenue.bookings.map((booking) => (
+            <tr
+              key={booking.id}
+              className="border-t border-gray-300 font-caslon uppercase pt-5 tracking-wider text-left"
+            >
+              <td className="pr-8 py-2 text-left text-dark  tracking-wide font-garamond uppercase">
+                {booking.customer?.name}
+              </td>
+              <td className="pr-8 py-2 text-left text-dark  tracking-wide font-garamond uppercase">
+                <span>
+                  {booking.dateFrom
+                    ? new Date(booking.dateFrom).toLocaleDateString()
+                    : '01/01/2025'}
+                </span>
+                <span> - </span>
+                <span>
+                  {booking.dateTo
+                    ? new Date(booking.dateTo).toLocaleDateString()
+                    : '01/01/2025'}
+                </span>
+              </td>
+              <td className="pr-8 py-2 text-left text-dark  tracking-wide font-garamond uppercase">
+                {booking?.guests}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {singleVenue.bookings.map((booking) => (
-              <tr
-                key={booking.id}
-                className="border-t border-gray-300 font-caslon uppercase pt-5 tracking-wider text-left"
-              >
-                <td className="pr-8 py-2 text-left text-dark  tracking-wide font-garamond uppercase">
-                  {booking.customer?.name}
-                </td>
-                <td className="pr-8 py-2 text-left text-dark  tracking-wide font-garamond uppercase">
-                  <span>
-                    {booking.dateFrom
-                      ? new Date(booking.dateFrom).toLocaleDateString()
-                      : '01/01/2025'}
-                  </span>
-                  <span> - </span>
-                  <span>
-                    {booking.dateTo
-                      ? new Date(booking.dateTo).toLocaleDateString()
-                      : '01/01/2025'}
-                  </span>
-                </td>
-                <td className="pr-8 py-2 text-left text-dark  tracking-wide font-garamond uppercase">
-                  {booking?.guests}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

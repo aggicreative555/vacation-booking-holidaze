@@ -54,8 +54,6 @@ function BookingsFilter({ onFilter }) {
     });
   }, [selectedAmenities, selectedContinents, selectedGuests, onFilter]);
 
-
-
   return (
     <div className="relative z-0 bg-light transition-all duration-700 ease-out">
       <button
@@ -68,9 +66,7 @@ function BookingsFilter({ onFilter }) {
       </button>
       <div
         className={`overflow-hidden transition-all duration-700 ease-in-out  ${
-          menuOpen
-            ? 'max-h-[500px] pointer-events-auto'
-            : 'max-h-0'
+          menuOpen ? 'max-h-[500px] pointer-events-auto' : 'max-h-0'
         }`}
       >
         <div className="w-full border-brown-100 border-[1px] flex md:flex-row flex-col gap-14 px-[46px] py-7 transition-all duration-300">

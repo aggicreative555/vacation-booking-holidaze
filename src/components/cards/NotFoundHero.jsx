@@ -15,7 +15,9 @@ const NotFoundHero = ({
       <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -right-[2%] -bottom-[3%] z-10" />
 
       {/* SVG Container */}
-      <div className={`w-full md:max-h-[800px] max-h-[600px] overflow-hidden ${height}`}>
+      <div
+        className={`w-full md:max-h-[800px] max-h-[600px] overflow-hidden ${height}`}
+      >
         <div className="h-full w-full">
           <img
             src={svgSrc}
@@ -24,12 +26,12 @@ const NotFoundHero = ({
           />
         </div>
       </div>
-       <img
-              src='/assets/not-found/buoy.svg'
-              alt="Buoy ring"
-              className="absolute top-2/3 md:top-1/2 -right-1/4 -translate-x-1/2 -translate-y-1/2 w-[40%] pointer-events-none animate-spin [animation-duration:15s]"
-              style={{ zIndex: 1 }}
-        />
+      <img
+        src="/assets/not-found/buoy.svg"
+        alt="Buoy ring"
+        className="absolute top-2/3 md:top-1/2 -right-1/4 -translate-x-1/2 -translate-y-1/2 w-[40%] pointer-events-none animate-spin [animation-duration:15s]"
+        style={{ zIndex: 1 }}
+      />
 
       {/* Content */}
       {content && (
@@ -38,14 +40,16 @@ const NotFoundHero = ({
             Need a life buoy?
           </h1>
           <p className="font-imfell text-2xl text-light md:w-[500px] w-[300px]">
-            Don't worry if you've been swimming along our webpage and didn't find what you're looking for. Take the buoy and go back to the home page. 
+            Don't worry if you've been swimming along our webpage and didn't
+            find what you're looking for. Take the buoy and go back to the home
+            page.
           </p>
           <Link
             to="/"
-            onClick={() => window.scrollTo(0,0)} 
+            onClick={() => window.scrollTo(0, 0)}
             className="btn-l btn-secondary md:w-[400px]"
           >
-        Go to home page
+            Go to home page
           </Link>
         </div>
       )}

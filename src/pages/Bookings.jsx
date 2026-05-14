@@ -20,10 +20,7 @@ const Bookings = () => {
 
   const handleFilter = useCallback((nextFilters) => {
     setFilters(nextFilters);
-
   }, []);
-
-
 
   useEffect(() => {
     fetchVenue();
@@ -40,7 +37,7 @@ const Bookings = () => {
       const image = venue?.media?.[0]?.url;
 
       if (!image || !name) return false;
-      const firstThree = name.slice(0,3).toLowerCase();
+      const firstThree = name.slice(0, 3).toLowerCase();
       if (
         firstThree.length === 3 &&
         firstThree[0] === firstThree[1] &&
@@ -50,7 +47,7 @@ const Bookings = () => {
       }
 
       return true;
-    })
+    });
 
     // Amenities
     if (filters.amenities.length > 0) {
@@ -62,15 +59,11 @@ const Bookings = () => {
     // Continents
     if (filters.continents.length > 0) {
       result = result.filter((venue) => {
-        const continent = venue?.location?.continent
-          ?.toLowerCase()
-          ?.trim();
+        const continent = venue?.location?.continent?.toLowerCase()?.trim();
 
         if (!continent) return false;
 
-        return filters.continents.some((c) =>
-          continent.includes(c)
-        );
+        return filters.continents.some((c) => continent.includes(c));
       });
     }
 
@@ -102,7 +95,6 @@ const Bookings = () => {
     fetchImages();
   }, [fetchVenuesByIds]);
 
-
   const visibleBookings = useMemo(() => {
     if (!searchQuery) return filteredBookings;
 
@@ -124,14 +116,18 @@ const Bookings = () => {
     }
   }, [isLoading, isError]);
 
-  console.log("Filtered:", filteredBookings.length);
-  console.log("Visible:", visibleBookings.length);
-  console.log("Sorted:", sortedBookings.length);
+  console.log('Filtered:', filteredBookings.length);
+  console.log('Visible:', visibleBookings.length);
+  console.log('Sorted:', sortedBookings.length);
 
   if (isLoading || !isContentReady) {
     return (
       <main className="container mx-auto w-full transition-all duration-300">
-        <HeroCarousel bookings={venueImages} height="h-[400px]" content={false} />
+        <HeroCarousel
+          bookings={venueImages}
+          height="h-[400px]"
+          content={false}
+        />
         <div className="max-w-[500] flex items-start justify-center gap-2 mb-30 md:my-40">
           <p className="text-center font-imfell italic text-crimson text-xl">
             Loading all venues. Please wait

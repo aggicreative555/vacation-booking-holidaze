@@ -1,11 +1,11 @@
-import NotFoundHero from "../components/cards/NotFoundHero";
+import NotFoundHero from '../components/cards/NotFoundHero';
 
 function NotFound() {
   return (
     <main>
-      <NotFoundHero/>
+      <NotFoundHero />
     </main>
   );
-};
+}
 
 export default NotFound;

@@ -32,9 +32,7 @@ const HeroCarousel = ({
       <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -right-[2%] -top-[3%] z-10 " />
       <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -left-[2%] -bottom-[3%] z-10 " />
       <div className="bg-light absolute rounded-full h-[10%] w-auto aspect-square -right-[2%] -bottom-[3%] z-10 " />
-      <div
-        className={`w-full max-h-[600px] overflow-hidden ${height}`}
-      >
+      <div className={`w-full max-h-[600px] overflow-hidden ${height}`}>
         <div className="glide h-full" ref={sliderRef}>
           <div className="glide__track h-full " data-glide-el="track">
             <ul className="glide__slides h-full">
@@ -81,7 +79,7 @@ const HeroCarousel = ({
           </p>
           <Link
             to="/bookings"
-            onClick={() => window.scrollTo(0,0)} 
+            onClick={() => window.scrollTo(0, 0)}
             className="btn-l btn-primary text-light w-[300px]"
           >
             {' '}

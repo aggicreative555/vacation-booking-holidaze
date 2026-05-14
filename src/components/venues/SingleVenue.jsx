@@ -167,7 +167,9 @@ function SingleVenue() {
                 <ArrowLeft className="cursor-pointer text-brown-300 hover:-translate-x-2 transition-all duration-300" />
                 Go Back
               </button>
-              <p className="md:absolute md:left-[46%] text-xl italic text-center font-imfell w-fit">Stay at</p>
+              <p className="md:absolute md:left-[46%] text-xl italic text-center font-imfell w-fit">
+                Stay at
+              </p>
             </div>
             <StarRating />
             <div className="flex flex-col gap-2 mb-4 jusitfy-center items-center w-[344px] md:w-[700px]">
@@ -181,7 +183,7 @@ function SingleVenue() {
               </p>
             </div>
             <div className="flex flex-col-reverse lg:flex-row justify-between items-between w-full h-fit md:max-w-[1250px]">
-              <div className='flex flex-col w-full justify-between mt-5 mb-10 lg:items-stretch items-center'>
+              <div className="flex flex-col w-full justify-between mt-5 mb-10 lg:items-stretch items-center">
                 <div className="flex flex-col py-5 w-full">
                   <p className="text-2xl uppercase text-brown-400 font-bold font-garamond tracking-wide pt-4 pb-2">
                     Location
@@ -212,14 +214,15 @@ function SingleVenue() {
                           key={key}
                           className={`text-base font-garamond uppercase border-b-[1px] border-brown-300 w-full flex-row flex mt-2 ${value ? 'text-brown-400' : 'text-brown-200'}`}
                         >
-                          {value ? 
+                          {value ? (
                             <span className="mr-2 text-emerald-700">
                               <Check />
-                            </span> :
-                            <span className="mr-2 text-buoy">
-                              <X/>
                             </span>
-                          }
+                          ) : (
+                            <span className="mr-2 text-buoy">
+                              <X />
+                            </span>
+                          )}
                           {key}
                         </span>
                       </div>
@@ -261,7 +264,7 @@ function SingleVenue() {
                       <Link
                         className="max-w-[300px] mb-10 btn-l btn-primary w-full"
                         to="/login"
-                        onClick={() => window.scrollTo(0,0)} 
+                        onClick={() => window.scrollTo(0, 0)}
                       >
                         Log in to book
                       </Link>
@@ -302,7 +305,7 @@ function SingleVenue() {
                           onClick={incrementGuests}
                           disabled={
                             guests >= singleVenue.maxGuests ||
-                            !selectedRange?.from || 
+                            !selectedRange?.from ||
                             !selectedRange?.to
                           }
                           className="btn-l p-2 h-fit rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
@@ -311,7 +314,10 @@ function SingleVenue() {
                         </button>
                       </div>
                       {(!selectedRange?.from || !selectedRange?.to) && (
-                          <p className='font-garamond italic text-crimson text-sm'> Please select a date before adding guests.</p>
+                        <p className="font-garamond italic text-crimson text-sm">
+                          {' '}
+                          Please select a date before adding guests.
+                        </p>
                       )}
                     </div>
                     <div className="flex flex-col items-center justify-center">

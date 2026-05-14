@@ -42,7 +42,7 @@ function ProfileVenues() {
           >
             <Link
               to={`/booking/${venue?.id}`}
-              onClick={() => window.scrollTo(0,0)} 
+              onClick={() => window.scrollTo(0, 0)}
               className="cursor-pointer flex flex-col items-start w-[350px] md:w-fit justify-start h-full relative"
             >
               <div className="flex justify-center items-center border-3 border-brown-300 md:w-full w-[350px] h-[216px] p-2 overflow-hidden">

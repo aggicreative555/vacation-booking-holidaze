@@ -36,7 +36,11 @@ function Profile() {
           <h1 className="uppercase font-garamond w-full text-center max-w-[400px] md:max-w-[500px] mb-4 mt-8 text-red-800 text-3xl md:text-5xl">
             You must be logged in to view this page
           </h1>
-          <Link to="/login" onClick={() => window.scrollTo(0,0)} className="btn-l btn-primary">
+          <Link
+            to="/login"
+            onClick={() => window.scrollTo(0, 0)}
+            className="btn-l btn-primary"
+          >
             Log In
           </Link>
         </div>

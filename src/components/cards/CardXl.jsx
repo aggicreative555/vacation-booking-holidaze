@@ -67,7 +67,7 @@ function CardXl({ venueId }) {
     <div className="flex flex-col md:flex-row bg-lamp text-light p-4 w-full max-w-[1200px] mx-auto md:h-fit transition-all ease-in-out duration-300 group">
       <Link
         to={`/booking/${venue.id}`}
-        onClick={() => window.scrollTo(0,0)} 
+        onClick={() => window.scrollTo(0, 0)}
         className="cursor-pointer flex flex-col md:flex-row gap-6 sm:w-full md:w-full items-center justify-center"
       >
         <div className="flex justify-center items-center border-3 border-white w-full md:w-[500px] p-2 md:h-fit overflow-hidden">
